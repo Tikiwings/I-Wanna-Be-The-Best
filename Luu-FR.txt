@@ -1,0 +1,3 @@
+1. The system shall provide a list of instructions that describes the controls involved in operating the system.
+2. The system shall provide ten major decision points throughout the duration of the game.
+3. The system shall provide a progression system, where users will be able to track their progress and acheivements throughout the course of the story.
