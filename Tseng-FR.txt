@@ -1,0 +1,5 @@
+The system shall provides a Cal Poly themed game.
+
+The system shall provides different endings in the game.
+
+The system shall provides a storyline in the game.
