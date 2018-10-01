@@ -1,0 +1,4 @@
+﻿User Stories
+As a PC gamer, I want an options menu to size the window of the game, so I can customize the game to suit my computer screen.
+As a player, I want some random elements, so the game stays interesting.
+As a player, I want goals to pursue, so that I motivated to play the game.
