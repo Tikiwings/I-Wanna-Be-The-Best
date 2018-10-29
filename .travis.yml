@@ -7,7 +7,7 @@ addons:
   sonarcloud:
     organization: "tikiwings-github" # the key of the org you chose at step #3
     token:
-      secure: fff1687acecaed6c103871a465f2b48cef60f0c0  # encrypted value of your token
+      secure: $SONAR_TOKEN  # encrypted value of your token
 script:
   # other script steps might be done before running the actual analysis
   - sonar-scanner
