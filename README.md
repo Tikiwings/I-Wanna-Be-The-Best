@@ -10,4 +10,4 @@
 | Story (Including Scenes Creation) | Donnie | Not in progress | <ul><li>[ ] Done</li></ul> |
 | Story (Including Scenes Creation) | Thinh | Not in progress | <ul><li>[ ] Done</li></ul> |
 | Story (Including Scenes Creation) | John | Not in progress | <ul><li>[ ] Done</li></ul> |
-| Transition between Scene | Daniel | Not in progress | <ul><li>[ ] Done</li></ul> |
+| Transition between Scene | Daniel | In progress | <ul><li>[ ] Done</li></ul> |
