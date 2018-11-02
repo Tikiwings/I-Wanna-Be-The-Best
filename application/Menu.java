@@ -64,7 +64,7 @@ public class Menu {
 
 	public VBox mMenu(Stage primaryStage){
 		/* for background */
-		Image image = new Image("bg.png");
+		Image image = new Image("mainMenu.png");
 		ImageView menuImage = new ImageView();
 		menuImage.setImage(image);
 
@@ -95,12 +95,6 @@ public class Menu {
     	grid.setHgap(10);
     	grid.setVgap(10);
 
-    	 /* Initializing title text */
-    	Text space = new Text(" ");
-    	Text title = new Text("I Wanna Be The Best");
-    	title.setFont(Font.font("Tahoma", FontWeight.NORMAL, 30));
-    	space.setFont(Font.font("Tahoma", FontWeight.NORMAL, 120));
-
     	/* Initializing buttons */
 		Button startButton = new Button();
 		Button loadButton = new Button();
@@ -112,8 +106,6 @@ public class Menu {
 		setButton(exitButton, "ExitPressed.png", "ExitNormal.png");
 
         /* Add buttons and text to the grid */
-		titleGrid.add(space, 0, 0); // This is to place the title lower on the screen
-		titleGrid.add(title, 1, 0);
         grid.add(startButton, 1, 1);
         grid.add(loadButton, 2, 1);
         grid.add(optionButton, 1, 2);
@@ -159,16 +151,24 @@ public class Menu {
     }
 
     public VBox loadMenu(Stage primaryStage){
+		/* for background */
+		Image image = new Image("bg.png");
+		ImageView menuImage = new ImageView();
+		menuImage.setImage(image);
+
+		/* To stack buttons and text over image */
+		StackPane stackPane = new StackPane();
+
     	VBox vBox = new VBox();
     	vBox.setAlignment(Pos.CENTER);
 
         Button btn = new Button();
         btn.setText("Load");
 
-        vBox.getChildren().addAll(btn);
+        stackPane.getChildren().addAll(menuImage, btn);
+        vBox.getChildren().addAll(stackPane);
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
-
             @Override
             public void handle(ActionEvent event) {
             	btn.getScene().setRoot(mMenu(primaryStage));
