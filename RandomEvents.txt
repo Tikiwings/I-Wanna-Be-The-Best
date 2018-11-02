@@ -1,0 +1,3 @@
+4,StartPressed.png,StartNormal.png,OptionsPressed.png,OptionsNormal.png,LoadPressed.png,LoadNormal.png,ExitPressed.png,ExitNormal.png,Bike Crash
+4,StartPressed.png,StartNormal.png,OptionsPressed.png,OptionsNormal.png,LoadPressed.png,LoadNormal.png,ExitPressed.png,ExitNormal.png,You got sick!
+4,StartPressed.png,StartNormal.png,OptionsPressed.png,OptionsNormal.png,LoadPressed.png,LoadNormal.png,ExitPressed.png,ExitNormal.png,You want to go downtown
