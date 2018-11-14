@@ -18,5 +18,22 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
+		
+		//Use this section to test player methods
+		/*Player me = new Player();
+		Player me2 = new Player("Coding Wizard");
+		
+		System.out.println(me.getPlayerInfo());
+		System.out.println(me2.getPlayerInfo());
+		
+		me.adjCha(12);
+		me.adjInt(15);
+		me.adjScore(1337);
+		me.adjHP(-70);
+		
+		me2.adjMP(1000);
+		
+		System.out.println(me.getPlayerInfo());
+		System.out.println(me2.getPlayerInfo());*/
 	}
 }
