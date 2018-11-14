@@ -12,7 +12,8 @@
 /StartPressed.png
 /TutorialNormal.png
 /TutorialPressed.png
+/application/
 /bg.png
 /mainMenu.png
 /tm.PNG
-/application/
+*.class

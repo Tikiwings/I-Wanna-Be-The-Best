@@ -1,1 +1,16 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+#optionButton {
+	-fx-font: 15px Tahoma;
+	-fx-text-fill: #FFFFFF;
+	-fx-border-width: 0px;
+	-fx-background-color: #035642; 
+    -fx-background-radius: 0;
+}
+
+#optionButton:hover {
+	-fx-text-fill: #000000;
+}
+
+#optionButton:pressed {
+	-fx-text-fill: #576965;
+}

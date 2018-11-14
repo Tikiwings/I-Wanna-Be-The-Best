@@ -1,8 +1,9 @@
 package application;
 
-import javafx.animation.AnimationTimer;
+import java.util.*;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -14,20 +15,20 @@ public class GameManager {
 	private int screenWidth = 640, screenHeight = 360;
 	private double scrollSpeed = 1;
 	
-	private TypingScene[] allTypingScenes;
+	private List<TypingScene> mainStoryTypingScenes;
+	private TypingScene currentTypingScene = null;
 	private int currentTypingSceneIndex = -1;
 	
-	// Space key listener
-	private boolean spaceKeyPressed = false;
+	private boolean firstSetup = true;
 	
-	
+	// Player properties
+	private Stats stats;
+		
 	public GameManager(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		
-		// Set allTypingScenes
-		setAllTypingScenes();
 	}
 	
+	// Game Settings
 	public void setScreenSize(int screenWidth, int screenHeight) {
 		this.screenWidth = screenWidth;
 		this.screenHeight = screenHeight;
@@ -37,73 +38,76 @@ public class GameManager {
 		this.scrollSpeed = scrollSpeed;
 	}
 	
-	// Private Methods
-	private void setAllTypingScenes() {
-		// Initialize how many scenes
-		allTypingScenes = new TypingScene[2];
-		
-		// Initialize what scene to include and in what order
-		allTypingScenes[0] = new FirstScene();
-		allTypingScenes[1] = new SecondScene();
-	}
-	
 	public void startGame() {
 		// Show next (first) typingScene
         showNextTypingScene();
 	}
 	
-	private void showNextTypingScene() {
-		// Check if run out of TypingScene
-		if(currentTypingSceneIndex+1 >= allTypingScenes.length) {
+	public void setMainStoryTypingScenes(List<TypingScene> mainStoryTypingScenes) {
+		this.mainStoryTypingScenes = mainStoryTypingScenes;
+	}
+	
+	public void showNextTypingScene() {
+		if (++currentTypingSceneIndex >= mainStoryTypingScenes.size()) {
 			System.out.println("Warning: run out of TypingScene to play");
 			return;
 		}
 		
-		// Get current TypingScene
-		TypingScene thisTypingScene = allTypingScenes[++currentTypingSceneIndex];
+		showNextTypingScene(mainStoryTypingScenes.get(currentTypingSceneIndex));
+	}
+	
+	private void showNextTypingScene(TypingScene typingScene) {
+		currentTypingScene = typingScene;
 		
-		if(currentTypingSceneIndex == 0) {
+		if (firstSetup) {
 			// First time, init scene
-			
-			// Init scene
-			Scene scene = new Scene(thisTypingScene.init_scene(screenWidth, screenHeight), screenWidth, screenHeight, Color.WHITE);
+			Scene scene = new Scene(typingScene.init_scene(screenWidth, screenHeight), screenWidth, screenHeight, Color.WHITE);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	        primaryStage.setScene(scene);
-	        
+	       
 	        // Listen to key
 	        listenToKey(scene);
 	        
 	        // Show stage
 	        primaryStage.show();
+	        
+	        firstSetup = false;
 		} else {
 			// Not first time, only change the root of the scene
-			primaryStage.getScene().setRoot(thisTypingScene.init_scene(screenWidth, screenHeight));
+			primaryStage.getScene().setRoot(typingScene.init_scene(screenWidth, screenHeight));
 		}
 		
         
         // Play scene text
-        if(thisTypingScene.playText(scrollSpeed) == false) showNextTypingScene();
+        typingScene.playText(scrollSpeed);
 	}
 	
 	private void listenToKey(Scene scene) {
-		scene.setOnKeyPressed(event -> {
-            if(event.getCode() == KeyCode.SPACE) spaceKeyPressed = true;
-        });
-		
-        scene.setOnKeyReleased(event -> {
-        	if(event.getCode() == KeyCode.SPACE) spaceKeyPressed = false;
-        });
-
-        new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                if(spaceKeyPressed) {
-                    spaceKeyPressed = false; // So no longer trigger multiple times when only pressed once
- 
-                    if(allTypingScenes[currentTypingSceneIndex].playText(scrollSpeed) == false) {
-                    	showNextTypingScene();
-                    }
-                }
+		scene.addEventFilter(KeyEvent.KEY_PRESSED, event->{
+            if (event.getCode() == KeyCode.SPACE) {
+            	currentTypingScene.playText(scrollSpeed);
+            	event.consume();
             }
-        }.start();
+        });
 	}
+	
+	// Player Stats
+	public void setPlayerInitialStats(Stats stats) {
+		this.stats = stats;
+	}
+	
+	public void updateStats(Stats statsChange) {
+		stats.hp = stats.hp+statsChange.hp > 0 ? stats.hp+statsChange.hp : 0;
+		stats.mp = stats.mp+statsChange.mp > 0 ? stats.mp+statsChange.mp : 0;
+		stats.intelligence = stats.intelligence+statsChange.intelligence > 0 ? stats.intelligence+statsChange.intelligence : 0;
+		stats.charisma = stats.charisma+statsChange.charisma > 0 ? stats.charisma+statsChange.charisma : 0;
+		
+		System.out.println("Stats Display:");
+		System.out.println("hp: " + stats.hp);
+		System.out.println("mp: " + stats.mp);
+		System.out.println("intelligence: " + stats.intelligence);
+		System.out.println("charisma: " + stats.charisma);
+		System.out.println();
+	}
+	
 }

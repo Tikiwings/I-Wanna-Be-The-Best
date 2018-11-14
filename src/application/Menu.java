@@ -1,5 +1,6 @@
 package application;
 
+import java.util.*;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -119,6 +120,16 @@ public class Menu {
             @Override
             public void handle(ActionEvent event) {
         		gameManager.setScrollSpeed(scrollSpeed);
+        		
+        		// Example (only 2 TypingScenes is this example)
+        		TypingSceneFactoryExample typingSceneFactory = new TypingSceneFactoryExample(gameManager);
+        		List<TypingScene> mainStoryTypingScenesArrayList = typingSceneFactory.getTypingSceneArrayList();
+        		
+        		// Player initial stats
+        		Stats stats = new Stats(100, 100, 100, 100); // hp, mp, intelligence, charisma in order
+        		
+        		gameManager.setMainStoryTypingScenes(mainStoryTypingScenesArrayList);
+        		gameManager.setPlayerInitialStats(stats);
         		gameManager.startGame(); // Probably change it to show the game menu instead
             }
         });
