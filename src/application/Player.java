@@ -97,6 +97,7 @@ public class Player {
 	{
 		return score;
 	}
+	
 	public void adjHP(int offset)
 	{
 		this.HP += offset;
