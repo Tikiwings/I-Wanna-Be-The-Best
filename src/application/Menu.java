@@ -222,6 +222,10 @@ public class Menu {
     	volumeSlider.setMin(0);
     	volumeSlider.setMax(100);
     	volumeSlider.setBlockIncrement(1);
+    	
+    	/* sets the slider position on startup */
+		volumeSlider.setValue(volume);
+		scrollSpeedSlider.setValue(scrollSpeed);
 
     	/* back button setup */
         Button backBtn = new Button();
