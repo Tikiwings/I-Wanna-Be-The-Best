@@ -27,16 +27,16 @@ public class RandomEvents {
 				wordScan.useDelimiter(",");
 				
 				numTexts = wordScan.nextInt();
-				System.out.println(numTexts);
+				//System.out.println(numTexts);
 				strArray = new String[numTexts];
 				for(int i = 0; i < numTexts; i++) {
 					strArray[i] = wordScan.next();
-					System.out.println(strArray[i]);
+					//System.out.println(strArray[i]);
 				}
 				typeSc.setStrArray(strArray);
 				
 				numButtons = wordScan.nextInt();
-				System.out.println(numButtons);
+				//System.out.println(numButtons);
 				typeSc.setOptionsNum(numButtons);
 				if(numButtons > 0) {
 					typeSc.setOption1(wordScan.next(), 

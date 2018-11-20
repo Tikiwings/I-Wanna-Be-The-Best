@@ -7,7 +7,9 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -53,7 +55,7 @@ public class TypingScene {
 		text = new Text();
 		text.setTextAlignment(TextAlignment.CENTER);
 		text.wrappingWidthProperty().set(screenWidth - 200 > 150 ? screenWidth - 200 : screenWidth);
-		text.setStyle("-fx-font: 15px Tahoma; -fx-fill: #FFFFFF");
+		text.setStyle("-fx-font: 15px Tahoma; -fx-fill: #FFFFFF;");
 		
 		displayPane.setCenter(text);
 		displayPane.setMinHeight(displayHeight);
@@ -62,7 +64,8 @@ public class TypingScene {
 
 		// Set options
 		double totalOptionsHeight = screenHeight - displayHeight;
-		double optionHeight = totalOptionsHeight/(totalOptionsNum+1.5);
+		double statsHeight = 80;
+		double optionHeight = (totalOptionsHeight-statsHeight)/totalOptionsNum;
 		
 		if(totalOptionsNum >= 1) {
 			Button option1Button = new Button();
@@ -80,9 +83,16 @@ public class TypingScene {
 			root.getChildren().add(option3Pane);
 		}
 		
-		HBox emptyBox = new HBox();
-		emptyBox.setMinHeight(optionHeight*1.5);
-		root.getChildren().add(emptyBox);
+		// Stats text
+		Label stats_label = new Label();
+		stats_label.setStyle("-fx-font: 15px Tahoma; -fx-text-fill: #FFFFFF; -fx-padding: 20px;");
+		stats_label.setText(gameManager.stats.toString());
+		
+		HBox stats_box = new HBox();
+		stats_box.setMinHeight(statsHeight);
+		stats_box.setAlignment(Pos.BOTTOM_LEFT);
+		stats_box.getChildren().add(stats_label);
+		root.getChildren().add(stats_box);
 		        
         return root;
 	}
@@ -174,7 +184,6 @@ public class TypingScene {
 		option1Button.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("Option1 Update Stats");
 				gameManager.updateStats(option1Stats);
 				
 				gameManager.showNextTypingScene();
@@ -194,7 +203,6 @@ public class TypingScene {
 		option2Button.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("Option2 Update Stats");
 				gameManager.updateStats(option2Stats);
 				
 				gameManager.showNextTypingScene();
@@ -214,7 +222,6 @@ public class TypingScene {
 		option3Button.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("Option3 Update Stats");
 				gameManager.updateStats(option3Stats);
 				
 				gameManager.showNextTypingScene();

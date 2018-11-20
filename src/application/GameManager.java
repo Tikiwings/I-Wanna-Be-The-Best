@@ -22,7 +22,7 @@ public class GameManager {
 	private boolean firstSetup = true;
 	
 	// Player properties
-	private Stats stats;
+	public Stats stats;
 		
 	public GameManager(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -102,12 +102,12 @@ public class GameManager {
 		stats.intelligence = stats.intelligence+statsChange.intelligence > 0 ? stats.intelligence+statsChange.intelligence : 0;
 		stats.charisma = stats.charisma+statsChange.charisma > 0 ? stats.charisma+statsChange.charisma : 0;
 		
-		System.out.println("Stats Display:");
-		System.out.println("hp: " + stats.hp);
-		System.out.println("mp: " + stats.mp);
-		System.out.println("intelligence: " + stats.intelligence);
-		System.out.println("charisma: " + stats.charisma);
-		System.out.println();
+//		System.out.println("Stats Display:");
+//		System.out.println("hp: " + stats.hp);
+//		System.out.println("mp: " + stats.mp);
+//		System.out.println("intelligence: " + stats.intelligence);
+//		System.out.println("charisma: " + stats.charisma);
+//		System.out.println();
 	}
 	
 }
