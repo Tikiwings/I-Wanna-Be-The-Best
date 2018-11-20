@@ -122,8 +122,8 @@ public class Menu {
         		gameManager.setScrollSpeed(scrollSpeed);
         		
         		// Example (only 2 TypingScenes is this example)
-        		TypingSceneFactoryExample typingSceneFactory = new TypingSceneFactoryExample(gameManager);
-        		List<TypingScene> mainStoryTypingScenesArrayList = typingSceneFactory.getTypingSceneArrayList();
+        		Events events = new Events();
+        		ArrayList<TypingScene> mainStoryTypingScenesArrayList = events.getEventsArrayList(gameManager);
         		
         		// Player initial stats
         		Stats stats = new Stats(100, 100, 100, 100); // hp, mp, intelligence, charisma in order
