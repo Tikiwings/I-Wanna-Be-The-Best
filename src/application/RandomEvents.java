@@ -24,7 +24,7 @@ public class RandomEvents {
 			while(lineScan.hasNext()) {
 				typeSc = new TypingScene(GameManager);
 				wordScan = new Scanner(lineScan.next());
-				wordScan.useDelimiter(",");
+				wordScan.useDelimiter(";");
 				
 				numTexts = wordScan.nextInt();
 				//System.out.println(numTexts);
