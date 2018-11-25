@@ -10,7 +10,7 @@ public class RandomEvents {
 	
 	private ArrayList<TypingScene> list;
 	private ArrayList<Integer> randomList = new ArrayList<Integer>();
-	
+
 	public void initRandomEvents(GameManager GameManager){
 		Scanner lineScan;
 		list = new ArrayList <TypingScene>();
@@ -35,7 +35,7 @@ public class RandomEvents {
 				typeSc.setStrArray(strArray);
 				
 				numButtons = wordScan.nextInt();
-			
+
 				typeSc.setOptionsNum(numButtons);
 				if(numButtons > 0) {
 					typeSc.setOption1(wordScan.next(), 
