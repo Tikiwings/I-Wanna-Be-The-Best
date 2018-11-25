@@ -53,6 +53,9 @@ public class GameManager {
 			return;
 		}
 		
+		// Reset
+		mainStoryTypingScenes.get(currentTypingSceneIndex).strIndex = 0;
+		
 		showNextTypingScene(mainStoryTypingScenes.get(currentTypingSceneIndex));
 	}
 	

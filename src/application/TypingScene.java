@@ -22,16 +22,16 @@ public class TypingScene {
 	protected GameManager gameManager;
 	
 	private Text text = null;
-	protected String[] strArray = null;
+	private String[] strArray = null;
 	
 	// Current string index
-	protected int strIndex = 0;
+	public int strIndex = 0;
 	
 	// Play text timeline
-	protected Timeline textTimeline = null;
+	private Timeline textTimeline = null;
 	
 	// Options
-	protected double totalOptionsNum = 0;
+	private double totalOptionsNum = 0;
 	
 	private String option1Title = "Empty", option2Title = "Empty", option3Title = "Empty";
 	private Stats option1Stats, option2Stats, option3Stats;
