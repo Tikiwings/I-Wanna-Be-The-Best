@@ -13,7 +13,7 @@ package application;
 public class Player {
 	
 	private String myClass;
-	private int score;
+	private Integer score;
 	private Stats playerStats;
 	
 	public Player()
@@ -77,28 +77,35 @@ public class Player {
 		score = 0;
 	}
 	
+	
+	public Player(String classChoice, Stats loadedStats, Integer score) {
+		myClass = classChoice;
+		playerStats = loadedStats;
+		this.score = score;
+	}
+	
 	// Getters
 	public String getCurClass()
 	{
 		return myClass;
 	}
-	public int getInt()
+	public Integer getInt()
 	{
 		return playerStats.intelligence;
 	}
-	public int getChar()
+	public Integer getChar()
 	{
 		return playerStats.charisma;
 	}
-	public int getHP()
+	public Integer getHP()
 	{
 		return playerStats.hp;
 	}
-	public int getMP()
+	public Integer getMP()
 	{
 		return playerStats.mp;
 	}
-	public int getScore()
+	public Integer getScore()
 	{
 		return score;
 	}

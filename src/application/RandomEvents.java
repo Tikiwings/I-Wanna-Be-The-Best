@@ -68,15 +68,16 @@ public class RandomEvents {
 	}
 	
 	public int NonRepeatRandNum() {
-		int listSize = list.size();
 		int randNum;
+		int attempts = 0;
 		Random rand = new Random();
-		if(listSize == list.size()) {
-			randomList.clear();
-		}
-		randNum = rand.nextInt(listSize);
+		randNum = rand.nextInt(list.size());
 		while(randomList.contains(randNum)) {
-			randNum = rand.nextInt(listSize);
+			randNum = rand.nextInt(list.size());
+			attempts++;
+			if(attempts == list.size()) {
+				randomList.clear();
+			}
 		}
 		randomList.add(randNum);
 		return randNum;

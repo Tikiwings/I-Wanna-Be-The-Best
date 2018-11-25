@@ -23,9 +23,16 @@ public class GameManager {
 	
 	// Player properties
 	public Player player;
+
+	protected List<Integer> randEventOrder;
 		
 	public GameManager(Stage primaryStage) {
 		this.primaryStage = primaryStage;
+	}
+	
+	public void setCurSceneIndex(Integer currentTypingSceneIndex) {
+		System.out.println(currentTypingSceneIndex);
+		this.currentTypingSceneIndex = currentTypingSceneIndex - 1;
 	}
 	
 	// Game Settings
@@ -88,12 +95,19 @@ public class GameManager {
             	currentTypingScene.playText(scrollSpeed);
             	event.consume();
             }
+            else if (event.getCode() == KeyCode.S) {
+            	saveFile();
+            }
         });
 	}
 	
 	// Player Stats
 	public void setPlayerInitialStats(String classChoice) {
 		this.player = new Player(classChoice);
+	}
+	
+	public void loadPlayerStats(Player player) {
+		this.player = player;
 	}
 	
 	public void updateStats(Stats statsChange) {
@@ -113,6 +127,10 @@ public class GameManager {
 //		System.out.println("intelligence: " + stats.intelligence);
 //		System.out.println("charisma: " + stats.charisma);
 //		System.out.println();
+	}
+	
+	private void saveFile() {
+		Save.saveProgress(player, randEventOrder, currentTypingSceneIndex);
 	}
 	
 }

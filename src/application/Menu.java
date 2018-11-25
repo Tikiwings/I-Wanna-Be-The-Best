@@ -1,6 +1,17 @@
 package application;
 
+import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
+
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -121,12 +132,15 @@ public class Menu {
         		
         		// Example (only 2 TypingScenes is this example)
         		Events events = new Events();
+        		
         		ArrayList<TypingScene> mainStoryTypingScenesArrayList = events.getEventsArrayList(gameManager);
+        		
         		
         		// Player initial stats
         		// Stats stats = new Stats(100, 100, 100, 100); // hp, mp, intelligence, charisma in order
         		//Player player = new Player(stats);
-        		gameManager.setPlayerInitialStats("Brogrammer");
+        		gameManager.randEventOrder = events.getRandEventOrder();
+        		gameManager.setPlayerInitialStats("Brogrammer"); // TODO: create prompt for what class the user wants
         		gameManager.setMainStoryTypingScenes(mainStoryTypingScenesArrayList);	
         		gameManager.startGame(); // Probably change it to show the game menu instead
             }
@@ -160,7 +174,6 @@ public class Menu {
     }
 
     public VBox loadMenu(Stage primaryStage){
-		/* for background */
 		Image image = new Image("resources/images/bg.png");
 		ImageView menuImage = new ImageView();
 		menuImage.setImage(image);
@@ -180,7 +193,53 @@ public class Menu {
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	btn.getScene().setRoot(mMenu(primaryStage));
+        		try {
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+						| UnsupportedLookAndFeelException e1) {
+					e1.printStackTrace();
+				}
+
+                JFileChooser chooser = new JFileChooser();
+                if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                	File file = chooser.getSelectedFile();
+                    if (file == null) {
+                    	System.err.println("File is null");
+                        return;
+                    }
+
+                    String fileName = chooser.getSelectedFile().getAbsolutePath();
+                    //System.out.println(fileName);
+                    // TODO:
+                    // read the file, get stats, current event, and the random list of events
+                    // format:
+                    // class
+                    // int
+                    // char
+                    // hp
+                    // mp
+                    // score
+                    // index of event
+                    // list of events, stored line by line
+                    Load loadedSave = new Load();
+                    loadedSave.loadSaveFile(fileName);
+                    
+                    GameManager gameManager = new GameManager(primaryStage);
+                    Events events = new Events();
+            		
+            		ArrayList<TypingScene> mainStoryTypingScenesArrayList = events.LoadEventsArrayList(gameManager, loadedSave.getRandOrderList());
+            		
+            		gameManager.randEventOrder = loadedSave.getRandOrderList();
+            		gameManager.setPlayerInitialStats(loadedSave.getPlayer().getCurClass());
+            		gameManager.setCurSceneIndex(loadedSave.getIndex());
+            		gameManager.setMainStoryTypingScenes(mainStoryTypingScenesArrayList);	
+            		gameManager.startGame();
+                    
+                }
+                else {
+                	System.err.println("User did not choose file");
+                }
+            	//btn.getScene().setRoot(mMenu(primaryStage));
             }
         });
 

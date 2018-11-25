@@ -89,6 +89,7 @@ public class TypingScene {
 		Label stats_label = new Label();
 		stats_label.setStyle("-fx-font: 15px Tahoma; -fx-text-fill: #FFFFFF; -fx-padding: 20px;");
 		stats_label.setText(gameManager.player.getStatStr());
+		// TODO: save button here
 		
 		HBox stats_box = new HBox();
 		stats_box.setMinHeight(statsHeight);
