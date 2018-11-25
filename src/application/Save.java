@@ -6,11 +6,19 @@ import java.io.FileWriter;
 import java.util.List;
 
 import javax.swing.JFileChooser;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class Save {
 
 	// saves the current game's state to a file
 	public static void saveProgress(Player player, List<Integer> randEventOrder, Integer currentTypingSceneIndex) {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e1) {
+			e1.printStackTrace();
+		}
 	    JFileChooser chooser = new JFileChooser();
 	    chooser.setCurrentDirectory(new File(chooser.getCurrentDirectory().toString()));
 	    int retrival = chooser.showSaveDialog(null);
