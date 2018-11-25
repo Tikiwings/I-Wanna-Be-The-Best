@@ -209,7 +209,7 @@ public class Menu {
             		ArrayList<TypingScene> mainStoryTypingScenesArrayList = events.loadEventsArrayList(gameManager, loadedSave.getRandOrderList());
             		
             		gameManager.randEventOrder = loadedSave.getRandOrderList();
-            		gameManager.setPlayerInitialStats(loadedSave.getPlayer().getCurClass());
+            		gameManager.loadPlayerStats(loadedSave.getPlayer());
             		gameManager.setCurSceneIndex(loadedSave.getIndex());
             		gameManager.setMainStoryTypingScenes(mainStoryTypingScenesArrayList);	
             		gameManager.startGame();
