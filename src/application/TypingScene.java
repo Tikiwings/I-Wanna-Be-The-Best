@@ -103,7 +103,6 @@ public class TypingScene {
 	// Return false when running out of strings (possibly means should go to next scene)
 	public boolean playText(double scrollSpeed) {		
 		// check if has previous string playing
-		System.out.println(Arrays.toString(strArray));
 		if(textTimeline != null) {
 			// Show entire string immediately
 			text.setText(strArray[strIndex-1]);

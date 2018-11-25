@@ -31,7 +31,6 @@ public class GameManager {
 	}
 	
 	public void setCurSceneIndex(Integer currentTypingSceneIndex) {
-		System.out.println(currentTypingSceneIndex);
 		this.currentTypingSceneIndex = currentTypingSceneIndex - 1;
 	}
 	

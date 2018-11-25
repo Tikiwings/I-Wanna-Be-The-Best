@@ -28,6 +28,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class Menu {
@@ -183,22 +184,13 @@ public class Menu {
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-        		try {
-					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-						| UnsupportedLookAndFeelException e1) {
-					e1.printStackTrace();
-				}
-
-                JFileChooser chooser = new JFileChooser();
-                if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                	File file = chooser.getSelectedFile();
-                    if (file == null) {
-                    	System.err.println("File is null");
-                        return;
-                    }
-
-                    String fileName = chooser.getSelectedFile().getAbsolutePath();
+        		
+            	FileChooser fileChooser = new FileChooser();
+            	fileChooser.setTitle("Open Save File");
+            	File file = fileChooser.showOpenDialog(primaryStage);
+            	
+                if (file != null) {
+                    String fileName = file.getAbsolutePath();
                     Load loadedSave = new Load();
                     loadedSave.loadSaveFile(fileName);
                     
@@ -211,7 +203,7 @@ public class Menu {
             		gameManager.loadPlayerStats(loadedSave.getPlayer());
             		gameManager.setCurSceneIndex(loadedSave.getIndex());
             		gameManager.setMainStoryTypingScenes(mainStoryTypingScenesArrayList);	
-            		gameManager.startGame();
+            		gameManager.showNextTypingScene();
                     
                 }
                 else {

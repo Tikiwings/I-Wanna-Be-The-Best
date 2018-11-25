@@ -25,30 +25,30 @@ public class Load {
 			int lineCounter = 0;
 			
 			// parses the file
-			while(lineScan.hasNext()) {
+			while(lineScan.hasNextLine()) {
 				if (lineCounter == 0) {
-					playerClass = lineScan.next().replace("\n", "");
+					playerClass = lineScan.nextLine().replace("\n", "");
 				}
 				else if (lineCounter == 1) {
-					intel = Integer.parseInt(lineScan.next().replace("\n", ""));
+					intel = Integer.parseInt(lineScan.nextLine().replace("\n", ""));
 				}
 				else if (lineCounter == 2) {
-					charis = Integer.parseInt(lineScan.next().replace("\n", ""));
+					charis = Integer.parseInt(lineScan.nextLine().replace("\n", ""));
 				}
 				else if (lineCounter == 3) {
-					hp = Integer.parseInt(lineScan.next().replace("\n", ""));
+					hp = Integer.parseInt(lineScan.nextLine().replace("\n", ""));
 				}
 				else if (lineCounter == 4) {
-					mp = Integer.parseInt(lineScan.next().replace("\n", ""));
+					mp = Integer.parseInt(lineScan.nextLine().replace("\n", ""));
 				}
 				else if (lineCounter == 5) {
-					score = Integer.parseInt(lineScan.next().replace("\n", ""));
+					score = Integer.parseInt(lineScan.nextLine().replace("\n", ""));
 				}
 				else if (lineCounter == 6) {
-					curIndex = Integer.parseInt(lineScan.next().replace("\n", ""));
+					curIndex = Integer.parseInt(lineScan.nextLine().replace("\n", ""));
 				}
 				else {
-					Integer curInt = Integer.parseInt(lineScan.next().replace("\n", ""));
+					Integer curInt = Integer.parseInt(lineScan.nextLine().replace("\n", ""));
 					randOrderList.add(curInt);
 				}
 				lineCounter++;
