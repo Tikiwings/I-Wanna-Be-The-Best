@@ -1,5 +1,7 @@
 package application;
 
+import java.util.Arrays;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -86,7 +88,7 @@ public class TypingScene {
 		// Stats text
 		Label stats_label = new Label();
 		stats_label.setStyle("-fx-font: 15px Tahoma; -fx-text-fill: #FFFFFF; -fx-padding: 20px;");
-		stats_label.setText(gameManager.stats.toString());
+		stats_label.setText(gameManager.player.getStatStr());
 		
 		HBox stats_box = new HBox();
 		stats_box.setMinHeight(statsHeight);
@@ -100,6 +102,7 @@ public class TypingScene {
 	// Return false when running out of strings (possibly means should go to next scene)
 	public boolean playText(double scrollSpeed) {		
 		// check if has previous string playing
+		System.out.println(Arrays.toString(strArray));
 		if(textTimeline != null) {
 			// Show entire string immediately
 			text.setText(strArray[strIndex-1]);

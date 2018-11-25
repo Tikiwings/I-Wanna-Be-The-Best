@@ -22,7 +22,7 @@ public class GameManager {
 	private boolean firstSetup = true;
 	
 	// Player properties
-	public Stats stats;
+	public Player player;
 		
 	public GameManager(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -62,7 +62,7 @@ public class GameManager {
 		if (firstSetup) {
 			// First time, init scene
 			Scene scene = new Scene(typingScene.init_scene(screenWidth, screenHeight), screenWidth, screenHeight, Color.WHITE);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/resources/css/application.css").toExternalForm());
 	        primaryStage.setScene(scene);
 	       
 	        // Listen to key
@@ -92,15 +92,20 @@ public class GameManager {
 	}
 	
 	// Player Stats
-	public void setPlayerInitialStats(Stats stats) {
-		this.stats = stats;
+	public void setPlayerInitialStats(String classChoice) {
+		this.player = new Player(classChoice);
 	}
 	
 	public void updateStats(Stats statsChange) {
-		stats.hp = stats.hp+statsChange.hp > 0 ? stats.hp+statsChange.hp : 0;
-		stats.mp = stats.mp+statsChange.mp > 0 ? stats.mp+statsChange.mp : 0;
-		stats.intelligence = stats.intelligence+statsChange.intelligence > 0 ? stats.intelligence+statsChange.intelligence : 0;
-		stats.charisma = stats.charisma+statsChange.charisma > 0 ? stats.charisma+statsChange.charisma : 0;
+//		stats.hp = stats.hp+statsChange.hp > 0 ? stats.hp+statsChange.hp : 0;
+//		stats.mp = stats.mp+statsChange.mp > 0 ? stats.mp+statsChange.mp : 0;
+//		stats.intelligence = stats.intelligence+statsChange.intelligence > 0 ? stats.intelligence+statsChange.intelligence : 0;
+//		stats.charisma = stats.charisma+statsChange.charisma > 0 ? stats.charisma+statsChange.charisma : 0;
+		
+		player.setHP(player.getHP() + statsChange.hp > 0 ? player.getHP() + statsChange.hp : 0);
+		player.setMP(player.getMP() + statsChange.mp > 0 ? player.getMP() + statsChange.mp : 0);
+		player.setInt(player.getInt() + statsChange.intelligence > 0 ? player.getInt() + statsChange.intelligence : 0);
+		player.setChar(player.getChar() + statsChange.charisma > 0 ? player.getChar() + statsChange.charisma : 0);
 		
 //		System.out.println("Stats Display:");
 //		System.out.println("hp: " + stats.hp);
