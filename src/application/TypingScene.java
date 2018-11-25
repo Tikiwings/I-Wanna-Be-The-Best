@@ -1,5 +1,7 @@
 package application;
 
+import java.util.Arrays;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -19,19 +21,19 @@ import javafx.util.Duration;
 
 public class TypingScene {
 
-	protected GameManager gameManager;
+	private GameManager gameManager;
 	
 	private Text text = null;
-	protected String[] strArray = null;
+	private String[] strArray = null;
 	
 	// Current string index
-	protected int strIndex = 0;
+	public int strIndex = 0;
 	
 	// Play text timeline
-	protected Timeline textTimeline = null;
+	private Timeline textTimeline = null;
 	
 	// Options
-	protected double totalOptionsNum = 0;
+	private double totalOptionsNum = 0;
 	
 	private String option1Title = "Empty", option2Title = "Empty", option3Title = "Empty";
 	private Stats option1Stats, option2Stats, option3Stats;
@@ -42,7 +44,7 @@ public class TypingScene {
 		this.gameManager = gameManager;
 	}
 	
-	public VBox init_scene(int screenWidth, int screenHeight){
+	public VBox init_scene(int screenWidth, int screenHeight) {
 		// Set VBox
         VBox root = new VBox();
         root.setStyle("-fx-background-color: #035642");
@@ -59,7 +61,7 @@ public class TypingScene {
 		
 		displayPane.setCenter(text);
 		displayPane.setMinHeight(displayHeight);
-		displayPane.setStyle("-fx-background-color: #035642; ");
+		displayPane.setStyle("-fx-background-color: #035642;");
 		root.getChildren().add(displayPane);
 
 		// Set options
@@ -86,7 +88,8 @@ public class TypingScene {
 		// Stats text
 		Label stats_label = new Label();
 		stats_label.setStyle("-fx-font: 15px Tahoma; -fx-text-fill: #FFFFFF; -fx-padding: 20px;");
-		stats_label.setText(gameManager.stats.toString());
+		stats_label.setText(gameManager.player.getStatStr());
+		// TODO: save button here
 		
 		HBox stats_box = new HBox();
 		stats_box.setMinHeight(statsHeight);

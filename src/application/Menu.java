@@ -1,12 +1,16 @@
 package application;
 
-import java.util.*;
-import javafx.application.Application;
+import java.io.File;
+import java.util.ArrayList;
+
+import javax.swing.JFileChooser;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,6 +28,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class Menu {
@@ -65,7 +70,7 @@ public class Menu {
 
 	public VBox mMenu(Stage primaryStage){
 		/* for background */
-		Image image = new Image("mainMenu.png");
+		Image image = new Image("resources/images/mainMenu.png");
 		ImageView menuImage = new ImageView();
 		menuImage.setImage(image);
 
@@ -101,10 +106,10 @@ public class Menu {
 		Button loadButton = new Button();
 		Button optionButton = new Button();
 		Button exitButton = new Button();
-		setButton(startButton, "StartPressed.png", "StartNormal.png");
-		setButton(optionButton, "OptionsPressed.png", "OptionsNormal.png");
-		setButton(loadButton, "LoadPressed.png", "LoadNormal.png");
-		setButton(exitButton, "ExitPressed.png", "ExitNormal.png");
+		setButton(startButton, "resources/images/StartPressed.png", "resources/images/StartNormal.png");
+		setButton(optionButton, "resources/images/OptionsPressed.png", "resources/images/OptionsNormal.png");
+		setButton(loadButton, "resources/images/LoadPressed.png", "resources/images/LoadNormal.png");
+		setButton(exitButton, "resources/images/ExitPressed.png", "resources/images/ExitNormal.png");
 
         /* Add buttons and text to the grid */
         grid.add(startButton, 1, 1);
@@ -123,13 +128,11 @@ public class Menu {
         		
         		// Example (only 2 TypingScenes is this example)
         		Events events = new Events();
+        		
         		ArrayList<TypingScene> mainStoryTypingScenesArrayList = events.getEventsArrayList(gameManager);
         		
-        		// Player initial stats
-        		Stats stats = new Stats(100, 100, 100, 100); // hp, mp, intelligence, charisma in order
-        		
-        		gameManager.setMainStoryTypingScenes(mainStoryTypingScenesArrayList);
-        		gameManager.setPlayerInitialStats(stats);
+        		gameManager.randEventOrder = events.getRandEventOrder();
+        		gameManager.setMainStoryTypingScenes(mainStoryTypingScenesArrayList);	
         		gameManager.startGame(); // Probably change it to show the game menu instead
             }
         });
@@ -162,8 +165,7 @@ public class Menu {
     }
 
     public VBox loadMenu(Stage primaryStage){
-		/* for background */
-		Image image = new Image("bg.png");
+		Image image = new Image("resources/images/bg.png");
 		ImageView menuImage = new ImageView();
 		menuImage.setImage(image);
 
@@ -182,7 +184,31 @@ public class Menu {
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	btn.getScene().setRoot(mMenu(primaryStage));
+        		
+            	FileChooser fileChooser = new FileChooser();
+            	fileChooser.setTitle("Open Save File");
+            	File file = fileChooser.showOpenDialog(primaryStage);
+            	
+                if (file != null) {
+                    String fileName = file.getAbsolutePath();
+                    Load loadedSave = new Load();
+                    loadedSave.loadSaveFile(fileName);
+                    
+                    GameManager gameManager = new GameManager(primaryStage);
+                    Events events = new Events();
+            		
+            		ArrayList<TypingScene> mainStoryTypingScenesArrayList = events.loadEventsArrayList(gameManager, loadedSave.getRandOrderList());
+            		
+            		gameManager.randEventOrder = loadedSave.getRandOrderList();
+            		gameManager.loadPlayerStats(loadedSave.getPlayer());
+            		gameManager.setCurSceneIndex(loadedSave.getIndex());
+            		gameManager.setMainStoryTypingScenes(mainStoryTypingScenesArrayList);	
+            		gameManager.showNextTypingScene();
+                    
+                }
+                else {
+                	System.err.println("User did not choose file");
+                }
             }
         });
 
@@ -191,7 +217,7 @@ public class Menu {
 
     public VBox optionMenu(Stage primaryStage){
 		/* for background */
-		Image image = new Image("bg.png");
+		Image image = new Image("resources/images/bg.png");
 		ImageView menuImage = new ImageView();
 		menuImage.setImage(image);
 
@@ -240,11 +266,11 @@ public class Menu {
 
     	/* back button setup */
         Button backBtn = new Button();
-        setButton(backBtn, "BackPressed.png", "BackNormal.png");
+        setButton(backBtn, "resources/images/BackPressed.png", "resources/images/BackNormal.png");
         Button saveBtn = new Button();
-        setButton(saveBtn, "SavePressed.png", "SaveNormal.png");
+        setButton(saveBtn, "resources/images/SavePressed.png", "resources/images/SaveNormal.png");
         Button TutBtn = new Button();
-        setButton(TutBtn, "TutorialPressed.png", "TutorialNormal.png");
+        setButton(TutBtn, "resources/images/TutorialPressed.png", "resources/images/TutorialNormal.png");
 
         /* add components to grid */
         grid.add(scrolTitle, 0, 0);
@@ -304,7 +330,7 @@ public class Menu {
 
     public VBox tutorialMenu(Stage primaryStage){
 		/* for background */
-		Image image = new Image("tm.png");
+		Image image = new Image("resources/images/tm.png");
 		ImageView menuImage = new ImageView();
 		menuImage.setImage(image);
 
@@ -322,7 +348,7 @@ public class Menu {
     	root.setBottom(buttonBox);
 
         Button btn = new Button();
-        setButton(btn, "BackPressed.png", "BackNormal.png");
+        setButton(btn, "resources/images/BackPressed.png", "resources/images/BackNormal.png");
 
         buttonBox.getChildren().add(btn);
         stackPane.getChildren().addAll(menuImage, root);

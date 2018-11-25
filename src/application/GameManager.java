@@ -22,10 +22,16 @@ public class GameManager {
 	private boolean firstSetup = true;
 	
 	// Player properties
-	public Stats stats;
+	public Player player;
+
+	protected List<Integer> randEventOrder;
 		
 	public GameManager(Stage primaryStage) {
 		this.primaryStage = primaryStage;
+	}
+	
+	public void setCurSceneIndex(Integer currentTypingSceneIndex) {
+		this.currentTypingSceneIndex = currentTypingSceneIndex - 1;
 	}
 	
 	// Game Settings
@@ -39,8 +45,22 @@ public class GameManager {
 	}
 	
 	public void startGame() {
-		// Show next (first) typingScene
-        showNextTypingScene();
+		firstSetup = false;
+		
+		// Show class selection screen
+		ClassSelection classSelection = new ClassSelection(this);
+		
+		Scene scene = new Scene(classSelection.init_scene(screenWidth, screenHeight), screenWidth, screenHeight, Color.WHITE);
+		scene.getStylesheets().add(getClass().getResource("/resources/css/application.css").toExternalForm());
+        primaryStage.setScene(scene);
+       
+        // Listen to key
+        listenToKey(scene);
+        
+        // Show stage
+        primaryStage.show();
+        
+        firstSetup = false;
 	}
 	
 	public void setMainStoryTypingScenes(List<TypingScene> mainStoryTypingScenes) {
@@ -53,6 +73,9 @@ public class GameManager {
 			return;
 		}
 		
+		// Reset
+		mainStoryTypingScenes.get(currentTypingSceneIndex).strIndex = 0;
+		
 		showNextTypingScene(mainStoryTypingScenes.get(currentTypingSceneIndex));
 	}
 	
@@ -62,7 +85,7 @@ public class GameManager {
 		if (firstSetup) {
 			// First time, init scene
 			Scene scene = new Scene(typingScene.init_scene(screenWidth, screenHeight), screenWidth, screenHeight, Color.WHITE);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/resources/css/application.css").toExternalForm());
 	        primaryStage.setScene(scene);
 	       
 	        // Listen to key
@@ -88,26 +111,30 @@ public class GameManager {
             	currentTypingScene.playText(scrollSpeed);
             	event.consume();
             }
+            else if (event.getCode() == KeyCode.S) {
+            	saveFile();
+            }
         });
 	}
 	
 	// Player Stats
-	public void setPlayerInitialStats(Stats stats) {
-		this.stats = stats;
+	public void setPlayerInitialStats(String classChoice) {
+		this.player = new Player(classChoice);
+	}
+	
+	public void loadPlayerStats(Player player) {
+		this.player = player;
 	}
 	
 	public void updateStats(Stats statsChange) {
-		stats.hp = stats.hp+statsChange.hp > 0 ? stats.hp+statsChange.hp : 0;
-		stats.mp = stats.mp+statsChange.mp > 0 ? stats.mp+statsChange.mp : 0;
-		stats.intelligence = stats.intelligence+statsChange.intelligence > 0 ? stats.intelligence+statsChange.intelligence : 0;
-		stats.charisma = stats.charisma+statsChange.charisma > 0 ? stats.charisma+statsChange.charisma : 0;
-		
-//		System.out.println("Stats Display:");
-//		System.out.println("hp: " + stats.hp);
-//		System.out.println("mp: " + stats.mp);
-//		System.out.println("intelligence: " + stats.intelligence);
-//		System.out.println("charisma: " + stats.charisma);
-//		System.out.println();
+		player.setHP(player.getHP() + statsChange.hp > 0 ? player.getHP() + statsChange.hp : 0);
+		player.setMP(player.getMP() + statsChange.mp > 0 ? player.getMP() + statsChange.mp : 0);
+		player.setInt(player.getInt() + statsChange.intelligence > 0 ? player.getInt() + statsChange.intelligence : 0);
+		player.setChar(player.getChar() + statsChange.charisma > 0 ? player.getChar() + statsChange.charisma : 0);
+	}
+	
+	private void saveFile() {
+		Save.saveProgress(player, randEventOrder, currentTypingSceneIndex);
 	}
 	
 }
