@@ -21,7 +21,7 @@ import javafx.util.Duration;
 
 public class TypingScene {
 
-	protected GameManager gameManager;
+	private GameManager gameManager;
 	
 	private Text text = null;
 	private String[] strArray = null;
@@ -44,7 +44,7 @@ public class TypingScene {
 		this.gameManager = gameManager;
 	}
 	
-	public VBox init_scene(int screenWidth, int screenHeight){
+	public VBox init_scene(int screenWidth, int screenHeight) {
 		// Set VBox
         VBox root = new VBox();
         root.setStyle("-fx-background-color: #035642");
@@ -61,7 +61,7 @@ public class TypingScene {
 		
 		displayPane.setCenter(text);
 		displayPane.setMinHeight(displayHeight);
-		displayPane.setStyle("-fx-background-color: #035642; ");
+		displayPane.setStyle("-fx-background-color: #035642;");
 		root.getChildren().add(displayPane);
 
 		// Set options

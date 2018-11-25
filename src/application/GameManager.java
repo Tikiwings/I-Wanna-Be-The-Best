@@ -46,8 +46,22 @@ public class GameManager {
 	}
 	
 	public void startGame() {
-		// Show next (first) typingScene
-        showNextTypingScene();
+		firstSetup = false;
+		
+		// Show class selection screen
+		ClassSelection classSelection = new ClassSelection(this);
+		
+		Scene scene = new Scene(classSelection.init_scene(screenWidth, screenHeight), screenWidth, screenHeight, Color.WHITE);
+		scene.getStylesheets().add(getClass().getResource("/resources/css/application.css").toExternalForm());
+        primaryStage.setScene(scene);
+       
+        // Listen to key
+        listenToKey(scene);
+        
+        // Show stage
+        primaryStage.show();
+        
+        firstSetup = false;
 	}
 	
 	public void setMainStoryTypingScenes(List<TypingScene> mainStoryTypingScenes) {

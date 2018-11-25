@@ -131,7 +131,6 @@ public class Menu {
         		ArrayList<TypingScene> mainStoryTypingScenesArrayList = events.getEventsArrayList(gameManager);
         		
         		gameManager.randEventOrder = events.getRandEventOrder();
-        		gameManager.setPlayerInitialStats("Brogrammer"); // TODO: create prompt for what class the user wants
         		gameManager.setMainStoryTypingScenes(mainStoryTypingScenesArrayList);	
         		gameManager.startGame(); // Probably change it to show the game menu instead
             }
