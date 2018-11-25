@@ -7,10 +7,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Load {
+	
+	// fields that hold the parsed save file information
 	private Player loadedPlayer;
 	private Integer curIndex;
 	private List<Integer> randOrderList;
 	
+	// loads a save file for the game
 	public void loadSaveFile(String filepath){
 		Scanner lineScan;
 		String playerClass = null;
@@ -19,11 +22,10 @@ public class Load {
 		
 		try {
 			lineScan = new Scanner(new File(filepath));
-			System.out.println(filepath);
-			//lineScan.useDelimiter("\n");
 			int lineCounter = 0;
+			
+			// parses the file
 			while(lineScan.hasNext()) {
-				System.out.println(lineCounter);
 				if (lineCounter == 0) {
 					playerClass = lineScan.next().replace("\n", "");
 				}
@@ -51,23 +53,30 @@ public class Load {
 				}
 				lineCounter++;
 			}
+			
 			lineScan.close();
 			
-			if (playerClass == null || 
-					intel == null ||
-					charis == null ||
-					hp == null ||
-					mp == null ||
-					score == null) {
-				System.err.println(playerClass);
-				System.err.println(intel);
-				System.err.println(charis);
-				System.err.println(hp);
-				System.err.println(mp);
-				System.err.println(score);
-				System.err.println("Missing a field in loaded file");
+			// checks for any errors
+			if (playerClass == null) {
+				System.err.println("Player's class is null as read from file");
+			}
+			else if (intel == null) {
+				System.err.println("Player's intelligence stat is null as read from file");
+			}
+			else if (charis == null) {
+				System.err.println("Player's charisma stat is null as read from file");
+			}
+			else if (hp == null) {
+				System.err.println("Player's HP stat is null as read from file");
+			}
+			else if (mp == null) {
+				System.err.println("Player's mp stat is null as read from file");
+			}
+			else if (score == null) {
+				System.err.println("Player's score stat is null as read from file");
 			}
 			
+			// creates the new player from the loaded file
 			Stats loadedStats = new Stats(hp, mp, intel, charis);
 			loadedPlayer = new Player(playerClass, loadedStats, score);
 		}

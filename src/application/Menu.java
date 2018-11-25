@@ -1,14 +1,9 @@
 package application;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -135,10 +130,6 @@ public class Menu {
         		
         		ArrayList<TypingScene> mainStoryTypingScenesArrayList = events.getEventsArrayList(gameManager);
         		
-        		
-        		// Player initial stats
-        		// Stats stats = new Stats(100, 100, 100, 100); // hp, mp, intelligence, charisma in order
-        		//Player player = new Player(stats);
         		gameManager.randEventOrder = events.getRandEventOrder();
         		gameManager.setPlayerInitialStats("Brogrammer"); // TODO: create prompt for what class the user wants
         		gameManager.setMainStoryTypingScenes(mainStoryTypingScenesArrayList);	
@@ -209,25 +200,13 @@ public class Menu {
                     }
 
                     String fileName = chooser.getSelectedFile().getAbsolutePath();
-                    //System.out.println(fileName);
-                    // TODO:
-                    // read the file, get stats, current event, and the random list of events
-                    // format:
-                    // class
-                    // int
-                    // char
-                    // hp
-                    // mp
-                    // score
-                    // index of event
-                    // list of events, stored line by line
                     Load loadedSave = new Load();
                     loadedSave.loadSaveFile(fileName);
                     
                     GameManager gameManager = new GameManager(primaryStage);
                     Events events = new Events();
             		
-            		ArrayList<TypingScene> mainStoryTypingScenesArrayList = events.LoadEventsArrayList(gameManager, loadedSave.getRandOrderList());
+            		ArrayList<TypingScene> mainStoryTypingScenesArrayList = events.loadEventsArrayList(gameManager, loadedSave.getRandOrderList());
             		
             		gameManager.randEventOrder = loadedSave.getRandOrderList();
             		gameManager.setPlayerInitialStats(loadedSave.getPlayer().getCurClass());
@@ -239,7 +218,6 @@ public class Menu {
                 else {
                 	System.err.println("User did not choose file");
                 }
-            	//btn.getScene().setRoot(mMenu(primaryStage));
             }
         });
 

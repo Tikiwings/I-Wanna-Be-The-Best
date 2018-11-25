@@ -15,7 +15,7 @@ public class RandomEvents {
 		Scanner lineScan;
 		list = new ArrayList <TypingScene>();
 		try {
-			lineScan = new Scanner(new File("RandomEvents.txt"));
+			lineScan = new Scanner(new File(System.getProperty("user.dir") + "/src/resources/events/RandomEvents.txt"));
 			lineScan.useDelimiter("\n");
 			Scanner wordScan;
 			int numTexts,numButtons;
@@ -27,16 +27,15 @@ public class RandomEvents {
 				wordScan.useDelimiter(";");
 				
 				numTexts = wordScan.nextInt();
-				//System.out.println(numTexts);
+
 				strArray = new String[numTexts];
 				for(int i = 0; i < numTexts; i++) {
 					strArray[i] = wordScan.next();
-					//System.out.println(strArray[i]);
 				}
 				typeSc.setStrArray(strArray);
 				
 				numButtons = wordScan.nextInt();
-				//System.out.println(numButtons);
+			
 				typeSc.setOptionsNum(numButtons);
 				if(numButtons > 0) {
 					typeSc.setOption1(wordScan.next(), 

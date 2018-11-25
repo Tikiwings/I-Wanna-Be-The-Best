@@ -111,22 +111,10 @@ public class GameManager {
 	}
 	
 	public void updateStats(Stats statsChange) {
-//		stats.hp = stats.hp+statsChange.hp > 0 ? stats.hp+statsChange.hp : 0;
-//		stats.mp = stats.mp+statsChange.mp > 0 ? stats.mp+statsChange.mp : 0;
-//		stats.intelligence = stats.intelligence+statsChange.intelligence > 0 ? stats.intelligence+statsChange.intelligence : 0;
-//		stats.charisma = stats.charisma+statsChange.charisma > 0 ? stats.charisma+statsChange.charisma : 0;
-		
 		player.setHP(player.getHP() + statsChange.hp > 0 ? player.getHP() + statsChange.hp : 0);
 		player.setMP(player.getMP() + statsChange.mp > 0 ? player.getMP() + statsChange.mp : 0);
 		player.setInt(player.getInt() + statsChange.intelligence > 0 ? player.getInt() + statsChange.intelligence : 0);
 		player.setChar(player.getChar() + statsChange.charisma > 0 ? player.getChar() + statsChange.charisma : 0);
-		
-//		System.out.println("Stats Display:");
-//		System.out.println("hp: " + stats.hp);
-//		System.out.println("mp: " + stats.mp);
-//		System.out.println("intelligence: " + stats.intelligence);
-//		System.out.println("charisma: " + stats.charisma);
-//		System.out.println();
 	}
 	
 	private void saveFile() {

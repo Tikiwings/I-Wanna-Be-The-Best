@@ -8,6 +8,7 @@ public class Events {
 	private ArrayList<TypingScene> list;
 	private ArrayList<Integer> randEventOrder = new ArrayList<>();
 	
+	// creates a random new game's event order
 	public ArrayList<TypingScene> getEventsArrayList(GameManager GameManager){
 		ArrayList<TypingScene> randList;
 		ArrayList<TypingScene> mainList;
@@ -34,11 +35,13 @@ public class Events {
 		return list;
 	}
 	
+	// returns the saved random order generated when first creating the new game
 	public List<Integer> getRandEventOrder(){
 		return randEventOrder;
 	}
 	
-	public ArrayList<TypingScene> LoadEventsArrayList(GameManager GameManager, List<Integer> randEventOrd){
+	// loads the event order using an existing order
+	public ArrayList<TypingScene> loadEventsArrayList(GameManager GameManager, List<Integer> randEventOrd){
 		ArrayList<TypingScene> randList;
 		ArrayList<TypingScene> mainList;
 		list = new ArrayList<TypingScene>();

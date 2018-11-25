@@ -16,39 +16,13 @@ public class Player {
 	private Integer score;
 	private Stats playerStats;
 	
+	// default
 	public Player()
 	{
 		this("Brogrammer");
 	}
 	
-//	public Player(String classChoice)
-//	{
-//		playerSetup(this, classChoice);
-//	}
-//	
-//	private void playerSetup(Player me, String classChoice)
-//	{
-//		me.myClass = classChoice;
-//		System.out.println(classChoice);
-//		switch (classChoice) {
-//			case "Coding Wizard":
-//				me.playerStats = new Stats(100, 100, 5, 1);
-//			case "Coding Monkey":
-//				me.playerStats = new Stats(100, 100, 4, 2);
-//			case "Brogrammer":
-//				me.playerStats = new Stats(100, 100, 3, 3);
-//			case "Athlete":
-//				me.playerStats = new Stats(100, 100, 2, 4);
-//			case "Network King":
-//				me.playerStats = new Stats(100, 100, 1, 5);
-//			case "Degenerate":
-//				me.playerStats = new Stats(100, 100, 1, 1);
-//			default:
-//				System.err.println("Class name given is not a valid class"); 
-//		}
-//		me.score = 0;
-//	}
-
+	// for creating a new player
 	public Player(String classChoice)
 	{
 		myClass = classChoice;
@@ -77,7 +51,7 @@ public class Player {
 		score = 0;
 	}
 	
-	
+	// for loading an existing player from a file
 	public Player(String classChoice, Stats loadedStats, Integer score) {
 		myClass = classChoice;
 		playerStats = loadedStats;
@@ -150,6 +124,7 @@ public class Player {
 		this.score += offset;
 	}
 	
+	// prints out and formats the player's information
 	public String getPlayerInfo()
 	{
 		return "Class: " + getCurClass() + "\n\t\tIntelligence: " + getInt() + "\n\t\tCharisma: "
@@ -157,6 +132,7 @@ public class Player {
 				+ getScore();
 	}
 	
+	// formats and prints out the stats
 	public String getStatStr()
 	{
 		return playerStats.toString();
