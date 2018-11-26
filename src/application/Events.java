@@ -29,8 +29,13 @@ public class Events {
 		
 		for(int i = 0; i < mainList.size(); i++) {
 			list.add(mainList.get(i));
-			list.add(randList.get(randEventOrder.get(i)));
+			if(i != mainList.size() - 1)
+			{
+				list.add(randList.get(randEventOrder.get(i)));
+			}
 		}
+		
+		//list.add(endEvent);
 		
 		return list;
 	}

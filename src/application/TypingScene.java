@@ -10,14 +10,17 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
+import javafx.stage.Stage;
 
 public class TypingScene {
 
@@ -184,6 +187,8 @@ public class TypingScene {
 		option1Button.setText(option1Title);
 		option1Button.setMinHeight(optionHeight);
 		option1Button.setId("optionButton");
+		if(totalOptionsNum != 1)
+		{
 		option1Button.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -192,6 +197,38 @@ public class TypingScene {
 				gameManager.showNextTypingScene();
 			}
 		});
+		}
+		else if( totalOptionsNum == 1)
+		{
+			option1Button.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					//gameManager.updateStats(option1Stats);
+					
+					//gameManager.showNextTypingScene();
+					//new Main().start(gameManager.primaryStage);
+					
+					// Show ending screen
+					EndingScreen end = new EndingScreen(gameManager);
+					
+					Scene scene = new Scene(end.init_scene(gameManager.getScreenWidth(), 
+							gameManager.getScreenHeight()), 
+							gameManager.getScreenWidth(), 
+							gameManager.getScreenHeight(), 
+							Color.WHITE);
+					
+					scene.getStylesheets().add(getClass().getResource("/resources/css/application.css").toExternalForm());
+			        gameManager.primaryStage.setScene(scene);
+			       
+			        // Listen to key
+			        //listenToKey(scene);
+			        
+			        // Show stage
+			        gameManager.primaryStage.show();
+			        
+				}
+			});
+		}
 		
 		BorderPane option1Pane = new BorderPane();
 		option1Pane.setCenter(option1Button);

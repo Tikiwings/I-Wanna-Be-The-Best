@@ -30,6 +30,16 @@ public class GameManager {
 		this.primaryStage = primaryStage;
 	}
 	
+	public int getScreenWidth()
+	{
+		return screenWidth;
+	}
+	
+	public int getScreenHeight()
+	{
+		return screenHeight;
+	}
+	
 	public void setCurSceneIndex(Integer currentTypingSceneIndex) {
 		this.currentTypingSceneIndex = currentTypingSceneIndex - 1;
 	}
