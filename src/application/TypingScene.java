@@ -185,6 +185,7 @@ public class TypingScene {
 	// Options
 	private BorderPane setOption1(Button option1Button, double optionHeight) {
 		option1Button.setText(option1Title);
+		option1Button.wrapTextProperty().setValue(true);
 		option1Button.setMinHeight(optionHeight);
 		option1Button.setId("optionButton");
 		
@@ -228,6 +229,7 @@ public class TypingScene {
 	
 	private BorderPane setOption2(Button option2Button, double optionHeight) {
 		option2Button.setText(option2Title);
+		option2Button.wrapTextProperty().setValue(true);
 		option2Button.setMinHeight(optionHeight);
 		option2Button.setId("optionButton");
 		option2Button.setOnAction(new EventHandler<ActionEvent>() {
@@ -247,6 +249,7 @@ public class TypingScene {
 	
 	private BorderPane setOption3(Button option3Button, double optionHeight) {
 		option3Button.setText(option3Title);
+		option3Button.wrapTextProperty().setValue(true);
 		option3Button.setMinHeight(optionHeight);
 		option3Button.setId("optionButton");
 		option3Button.setOnAction(new EventHandler<ActionEvent>() {
