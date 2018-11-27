@@ -9,12 +9,15 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -68,23 +71,26 @@ public class TypingScene {
 		root.getChildren().add(displayPane);
 
 		// Set options
-		double totalOptionsHeight = screenHeight - displayHeight;
 		double statsHeight = 80;
-		double optionHeight = (totalOptionsHeight-statsHeight)/totalOptionsNum;
+		double totalOptionsHeight = screenHeight - displayHeight - statsHeight;
+		double optionHeight = totalOptionsHeight/totalOptionsNum;
 		
 		if(totalOptionsNum >= 1) {
 			Button option1Button = new Button();
 			option1Pane = setOption1(option1Button, optionHeight);
+			option1Pane.setPadding(new Insets(0, 50, 0, 50));
 			root.getChildren().add(option1Pane);
 		}
 		if(totalOptionsNum >= 2) {
 			Button option2Button = new Button();
 			option2Pane = setOption2(option2Button, optionHeight);
+			option2Pane.setPadding(new Insets(0, 50, 0, 50));
 			root.getChildren().add(option2Pane);
 		}
 		if(totalOptionsNum >= 3) {
 			Button option3Button = new Button();
 			option3Pane = setOption3(option3Button, optionHeight);
+			option3Pane.setPadding(new Insets(0, 50, 0, 50));
 			root.getChildren().add(option3Pane);
 		}
 		
@@ -92,13 +98,13 @@ public class TypingScene {
 		Label stats_label = new Label();
 		stats_label.setStyle("-fx-font: 15px Tahoma; -fx-text-fill: #FFFFFF; -fx-padding: 20px;");
 		stats_label.setText(gameManager.player.getStatStr());
-		// TODO: save button here
 		
-		HBox stats_box = new HBox();
-		stats_box.setMinHeight(statsHeight);
+        HBox stats_box = new HBox();
 		stats_box.setAlignment(Pos.BOTTOM_LEFT);
-		stats_box.getChildren().add(stats_label);
+		stats_box.getChildren().addAll(stats_label);
 		root.getChildren().add(stats_box);
+		
+		// TODO: save button here
 		        
         return root;
 	}
