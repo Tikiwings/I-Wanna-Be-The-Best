@@ -1,3 +1,0 @@
-The system shall provide a difficulty system.
-The system shall provide a start screen menu.
-The system shall provide an in game menu.
