@@ -34,8 +34,13 @@ import javafx.stage.Stage;
 public class Menu {
 	int volume = 1;
 	int scrollSpeed = 1;
+	
+	private int screenWidth, screenHeight;
 
 	public void initMenu(Stage primaryStage, int screenWidth, int screenHeight, VBox menu){
+		this.screenWidth = screenWidth;
+		this.screenHeight = screenHeight;
+		
 		Scene home = new Scene(menu, screenWidth, screenHeight);
 		primaryStage.setTitle("I Wanna Be The Best");
     	primaryStage.setScene(home);
@@ -132,7 +137,8 @@ public class Menu {
         		ArrayList<TypingScene> mainStoryTypingScenesArrayList = events.getEventsArrayList(gameManager);
         		
         		gameManager.randEventOrder = events.getRandEventOrder();
-        		gameManager.setMainStoryTypingScenes(mainStoryTypingScenesArrayList);	
+        		gameManager.setMainStoryTypingScenes(mainStoryTypingScenesArrayList);
+        		gameManager.setScreenSize(screenWidth, screenHeight);
         		gameManager.startGame(); // Probably change it to show the game menu instead
             }
         });
@@ -202,7 +208,8 @@ public class Menu {
             		gameManager.randEventOrder = loadedSave.getRandOrderList();
             		gameManager.loadPlayerStats(loadedSave.getPlayer());
             		gameManager.setCurSceneIndex(loadedSave.getIndex());
-            		gameManager.setMainStoryTypingScenes(mainStoryTypingScenesArrayList);	
+            		gameManager.setMainStoryTypingScenes(mainStoryTypingScenesArrayList);
+            		gameManager.setScreenSize(screenWidth, screenHeight);
             		gameManager.showNextTypingScene();
                     
                 }
