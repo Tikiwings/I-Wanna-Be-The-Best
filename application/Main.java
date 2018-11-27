@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	final private int screenWidth = 640, screenHeight = 360;
+	final private int screenWidth = 960, screenHeight = 540;
 
 	@Override
 	public void start(Stage primaryStage) {

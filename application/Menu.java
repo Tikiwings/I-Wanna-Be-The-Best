@@ -1,11 +1,16 @@
 package application;
 
-import javafx.application.Application;
+import java.io.File;
+import java.util.ArrayList;
+
+import javax.swing.JFileChooser;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -23,13 +28,19 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class Menu {
 	int volume = 1;
 	int scrollSpeed = 1;
 
+	private int screenWidth, screenHeight;
+
 	public void initMenu(Stage primaryStage, int screenWidth, int screenHeight, VBox menu){
+		this.screenWidth = screenWidth;
+		this.screenHeight = screenHeight;
+
 		Scene home = new Scene(menu, screenWidth, screenHeight);
 		primaryStage.setTitle("I Wanna Be The Best");
     	primaryStage.setScene(home);
@@ -64,7 +75,7 @@ public class Menu {
 
 	public VBox mMenu(Stage primaryStage){
 		/* for background */
-		Image image = new Image("mainMenu.png");
+		Image image = new Image("resources/images/mainMenu.png");
 		ImageView menuImage = new ImageView();
 		menuImage.setImage(image);
 
@@ -100,16 +111,16 @@ public class Menu {
 		Button loadButton = new Button();
 		Button optionButton = new Button();
 		Button exitButton = new Button();
-		setButton(startButton, "StartPressed.png", "StartNormal.png");
-		setButton(optionButton, "OptionsPressed.png", "OptionsNormal.png");
-		setButton(loadButton, "LoadPressed.png", "LoadNormal.png");
-		setButton(exitButton, "ExitPressed.png", "ExitNormal.png");
+		setButton(startButton, "resources/images/StartPressed.png", "resources/images/StartNormal.png");
+		setButton(optionButton, "resources/images/OptionsPressed.png", "resources/images/OptionsNormal.png");
+		setButton(loadButton, "resources/images/LoadPressed.png", "resources/images/LoadNormal.png");
+		setButton(exitButton, "resources/images/ExitPressed.png", "resources/images/ExitNormal.png");
 
         /* Add buttons and text to the grid */
         grid.add(startButton, 1, 1);
         grid.add(loadButton, 2, 1);
-        grid.add(optionButton, 1, 2);
-        grid.add(exitButton, 2, 2);
+        grid.add(optionButton, 3, 1);
+        grid.add(exitButton, 4, 1);
 
         stackPane.getChildren().addAll(menuImage, titleGrid, grid);
         wholeScreen.getChildren().addAll(stackPane);
@@ -119,6 +130,15 @@ public class Menu {
             @Override
             public void handle(ActionEvent event) {
         		gameManager.setScrollSpeed(scrollSpeed);
+
+        		// Example (only 2 TypingScenes is this example)
+        		Events events = new Events();
+
+        		ArrayList<TypingScene> mainStoryTypingScenesArrayList = events.getEventsArrayList(gameManager);
+
+        		gameManager.randEventOrder = events.getRandEventOrder();
+        		gameManager.setMainStoryTypingScenes(mainStoryTypingScenesArrayList);
+        		gameManager.setScreenSize(screenWidth, screenHeight);
         		gameManager.startGame(); // Probably change it to show the game menu instead
             }
         });
@@ -151,10 +171,15 @@ public class Menu {
     }
 
     public VBox loadMenu(Stage primaryStage){
-		/* for background */
-		Image image = new Image("bg.png");
+		Image image = new Image("resources/images/bg.png");
 		ImageView menuImage = new ImageView();
 		menuImage.setImage(image);
+
+    	/* button location */
+    	HBox buttonBox = new HBox();
+    	BorderPane root = new BorderPane();
+
+    	root.setBottom(buttonBox);
 
 		/* To stack buttons and text over image */
 		StackPane stackPane = new StackPane();
@@ -162,16 +187,52 @@ public class Menu {
     	VBox vBox = new VBox();
     	vBox.setAlignment(Pos.CENTER);
 
+    	/* back button setup */
+        Button backBtn = new Button();
         Button btn = new Button();
-        btn.setText("Load");
+        setButton(backBtn, "resources/images/BackPressed.png", "resources/images/BackNormal.png");
+        setButton(btn, "resources/images/LoadPressed.png", "resources/images/LoadNormal.png");
 
-        stackPane.getChildren().addAll(menuImage, btn);
+        buttonBox.getChildren().add(backBtn);
+        stackPane.getChildren().addAll(menuImage, btn, root);
         vBox.getChildren().addAll(stackPane);
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	btn.getScene().setRoot(mMenu(primaryStage));
+
+            	FileChooser fileChooser = new FileChooser();
+            	fileChooser.setTitle("Open Save File");
+            	File file = fileChooser.showOpenDialog(primaryStage);
+
+                if (file != null) {
+                    String fileName = file.getAbsolutePath();
+                    Load loadedSave = new Load();
+                    loadedSave.loadSaveFile(fileName);
+
+                    GameManager gameManager = new GameManager(primaryStage);
+                    Events events = new Events();
+
+            		ArrayList<TypingScene> mainStoryTypingScenesArrayList = events.loadEventsArrayList(gameManager, loadedSave.getRandOrderList());
+
+            		gameManager.randEventOrder = loadedSave.getRandOrderList();
+            		gameManager.loadPlayerStats(loadedSave.getPlayer());
+            		gameManager.setCurSceneIndex(loadedSave.getIndex());
+            		gameManager.setMainStoryTypingScenes(mainStoryTypingScenesArrayList);
+            		gameManager.setScreenSize(screenWidth, screenHeight);
+            		gameManager.showNextTypingScene();
+
+                }
+                else {
+                	System.err.println("User did not choose file");
+                }
+            }
+        });
+
+        backBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	backBtn.getScene().setRoot(mMenu(primaryStage));
             }
         });
 
@@ -180,7 +241,7 @@ public class Menu {
 
     public VBox optionMenu(Stage primaryStage){
 		/* for background */
-		Image image = new Image("bg.png");
+		Image image = new Image("resources/images/bg.png");
 		ImageView menuImage = new ImageView();
 		menuImage.setImage(image);
 
@@ -223,13 +284,17 @@ public class Menu {
     	volumeSlider.setMax(100);
     	volumeSlider.setBlockIncrement(1);
 
-    	/* back button setup */
+    	/* sets the slider position on startup */
+		volumeSlider.setValue(volume);
+		scrollSpeedSlider.setValue(scrollSpeed);
+
+    	/* button setup */
         Button backBtn = new Button();
-        setButton(backBtn, "BackPressed.png", "BackNormal.png");
+        setButton(backBtn, "resources/images/BackPressed.png", "resources/images/BackNormal.png");
         Button saveBtn = new Button();
-        setButton(saveBtn, "SavePressed.png", "SaveNormal.png");
+        setButton(saveBtn, "resources/images/SavePressed.png", "resources/images/SaveNormal.png");
         Button TutBtn = new Button();
-        setButton(TutBtn, "TutorialPressed.png", "TutorialNormal.png");
+        setButton(TutBtn, "resources/images/TutorialPressed.png", "resources/images/TutorialNormal.png");
 
         /* add components to grid */
         grid.add(scrolTitle, 0, 0);
@@ -289,7 +354,7 @@ public class Menu {
 
     public VBox tutorialMenu(Stage primaryStage){
 		/* for background */
-		Image image = new Image("tm.png");
+		Image image = new Image("resources/images/tm.png");
 		ImageView menuImage = new ImageView();
 		menuImage.setImage(image);
 
@@ -307,7 +372,7 @@ public class Menu {
     	root.setBottom(buttonBox);
 
         Button btn = new Button();
-        setButton(btn, "BackPressed.png", "BackNormal.png");
+        setButton(btn, "resources/images/BackPressed.png", "resources/images/BackNormal.png");
 
         buttonBox.getChildren().add(btn);
         stackPane.getChildren().addAll(menuImage, root);
