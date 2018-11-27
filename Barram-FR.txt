@@ -1,4 +1,0 @@
-﻿Functional Requirements
-1. The system shall provide the option to adjust the size of game viewing window.
-2. The system shall provide in-game randomized events.
-3. The system shall provide in-game achievements.
