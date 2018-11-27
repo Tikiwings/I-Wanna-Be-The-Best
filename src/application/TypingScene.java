@@ -187,27 +187,21 @@ public class TypingScene {
 		option1Button.setText(option1Title);
 		option1Button.setMinHeight(optionHeight);
 		option1Button.setId("optionButton");
-		if(totalOptionsNum != 1)
-		{
-		option1Button.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				gameManager.updateStats(option1Stats);
-				
-				gameManager.showNextTypingScene();
-			}
-		});
-		}
-		else if( totalOptionsNum == 1)
-		{
+		
+		if(totalOptionsNum != 1) {
 			option1Button.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					//gameManager.updateStats(option1Stats);
+					gameManager.updateStats(option1Stats);
 					
-					//gameManager.showNextTypingScene();
-					//new Main().start(gameManager.primaryStage);
-					
+					gameManager.showNextTypingScene();
+				}
+			});
+		}
+		else if( totalOptionsNum == 1) {
+			option1Button.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
 					// Show ending screen
 					EndingScreen end = new EndingScreen(gameManager);
 					
@@ -219,13 +213,9 @@ public class TypingScene {
 					
 					scene.getStylesheets().add(getClass().getResource("/resources/css/application.css").toExternalForm());
 			        gameManager.primaryStage.setScene(scene);
-			       
-			        // Listen to key
-			        //listenToKey(scene);
 			        
 			        // Show stage
 			        gameManager.primaryStage.show();
-			        
 				}
 			});
 		}
