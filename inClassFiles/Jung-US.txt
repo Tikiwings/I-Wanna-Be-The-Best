@@ -1,0 +1,5 @@
+As a player, I want a difficulty system, so I can choose how difficult I want the game to be.
+
+As a player, I want a start screen menu, so i have options to choose before i play the game.
+
+As a player, I want an in game menu, so i can choose to save or leave the game whenever i want.

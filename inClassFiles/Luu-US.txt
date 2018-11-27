@@ -1,0 +1,3 @@
+1. As a beginner player, I want a list of commands, so I know what to type so I can play the game.
+2. As an advanced player, I want complexity in the decisions that can be made, so I can have more fun learning the strategies involved in being successful in this game.
+3. As a gamer, I want to have a progression system, so each playthrough won't be the same.
