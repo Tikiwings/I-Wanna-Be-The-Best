@@ -30,13 +30,11 @@ public class GameManager {
 		this.primaryStage = primaryStage;
 	}
 	
-	public int getScreenWidth()
-	{
+	public int getScreenWidth() {
 		return screenWidth;
 	}
 	
-	public int getScreenHeight()
-	{
+	public int getScreenHeight() {
 		return screenHeight;
 	}
 	

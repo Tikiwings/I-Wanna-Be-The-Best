@@ -1,7 +1,5 @@
 package application;
 
-import java.util.Arrays;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -9,18 +7,17 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
-import javafx.stage.Stage;
 
 public class TypingScene {
 
@@ -60,7 +57,7 @@ public class TypingScene {
 		text = new Text();
 		text.setTextAlignment(TextAlignment.CENTER);
 		text.wrappingWidthProperty().set(screenWidth - 200 > 150 ? screenWidth - 200 : screenWidth);
-		text.setStyle("-fx-font: 15px Tahoma; -fx-fill: #FFFFFF;");
+		text.setStyle("-fx-font: 20px Tahoma; -fx-fill: #FFFFFF;");
 		
 		displayPane.setCenter(text);
 		displayPane.setMinHeight(displayHeight);
@@ -68,37 +65,36 @@ public class TypingScene {
 		root.getChildren().add(displayPane);
 
 		// Set options
-		double totalOptionsHeight = screenHeight - displayHeight;
-		double statsHeight = 80;
-		double optionHeight = (totalOptionsHeight-statsHeight)/totalOptionsNum;
-		
 		if(totalOptionsNum >= 1) {
 			Button option1Button = new Button();
-			option1Pane = setOption1(option1Button, optionHeight);
+			option1Pane = setOption1(option1Button);
+			option1Pane.setPadding(new Insets(10, 0, 0, 0));
 			root.getChildren().add(option1Pane);
 		}
 		if(totalOptionsNum >= 2) {
 			Button option2Button = new Button();
-			option2Pane = setOption2(option2Button, optionHeight);
+			option2Pane = setOption2(option2Button);
+			option2Pane.setPadding(new Insets(10, 0, 0, 0));
 			root.getChildren().add(option2Pane);
 		}
 		if(totalOptionsNum >= 3) {
 			Button option3Button = new Button();
-			option3Pane = setOption3(option3Button, optionHeight);
+			option3Pane = setOption3(option3Button);
+			option3Pane.setPadding(new Insets(10, 0, 0, 0));
 			root.getChildren().add(option3Pane);
 		}
 		
-		// Stats text
+		// Stats
 		Label stats_label = new Label();
-		stats_label.setStyle("-fx-font: 15px Tahoma; -fx-text-fill: #FFFFFF; -fx-padding: 20px;");
+		stats_label.setStyle("-fx-font: 15px Tahoma; -fx-text-fill: #FFFFFF; -fx-padding: 0px 0px 20px 20px;");
 		stats_label.setText(gameManager.player.getStatStr());
-		// TODO: save button here
 		
-		HBox stats_box = new HBox();
-		stats_box.setMinHeight(statsHeight);
-		stats_box.setAlignment(Pos.BOTTOM_LEFT);
-		stats_box.getChildren().add(stats_label);
-		root.getChildren().add(stats_box);
+		BorderPane stats_Pane = new BorderPane();
+		stats_Pane.setBottom(stats_label);
+		VBox.setVgrow(stats_Pane, Priority.ALWAYS);
+		root.getChildren().add(stats_Pane);
+		
+		// TODO: save button here
 		        
         return root;
 	}
@@ -183,31 +179,26 @@ public class TypingScene {
 	}
 	
 	// Options
-	private BorderPane setOption1(Button option1Button, double optionHeight) {
+	private BorderPane setOption1(Button option1Button) {
 		option1Button.setText(option1Title);
-		option1Button.setMinHeight(optionHeight);
+		option1Button.wrapTextProperty().setValue(true);
+		option1Button.setPadding(new Insets(0, 50, 0, 50));
 		option1Button.setId("optionButton");
-		if(totalOptionsNum != 1)
-		{
-		option1Button.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				gameManager.updateStats(option1Stats);
-				
-				gameManager.showNextTypingScene();
-			}
-		});
-		}
-		else if( totalOptionsNum == 1)
-		{
+		
+		if(totalOptionsNum != 1) {
 			option1Button.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					//gameManager.updateStats(option1Stats);
+					gameManager.updateStats(option1Stats);
 					
-					//gameManager.showNextTypingScene();
-					//new Main().start(gameManager.primaryStage);
-					
+					gameManager.showNextTypingScene();
+				}
+			});
+		}
+		else if( totalOptionsNum == 1) {
+			option1Button.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
 					// Show ending screen
 					EndingScreen end = new EndingScreen(gameManager);
 					
@@ -219,13 +210,9 @@ public class TypingScene {
 					
 					scene.getStylesheets().add(getClass().getResource("/resources/css/application.css").toExternalForm());
 			        gameManager.primaryStage.setScene(scene);
-			       
-			        // Listen to key
-			        //listenToKey(scene);
 			        
 			        // Show stage
 			        gameManager.primaryStage.show();
-			        
 				}
 			});
 		}
@@ -236,9 +223,10 @@ public class TypingScene {
 		return option1Pane;
 	}
 	
-	private BorderPane setOption2(Button option2Button, double optionHeight) {
+	private BorderPane setOption2(Button option2Button) {
 		option2Button.setText(option2Title);
-		option2Button.setMinHeight(optionHeight);
+		option2Button.wrapTextProperty().setValue(true);
+		option2Button.setPadding(new Insets(0, 50, 0, 50));
 		option2Button.setId("optionButton");
 		option2Button.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -255,9 +243,10 @@ public class TypingScene {
 		return option2Pane;
 	}
 	
-	private BorderPane setOption3(Button option3Button, double optionHeight) {
+	private BorderPane setOption3(Button option3Button) {
 		option3Button.setText(option3Title);
-		option3Button.setMinHeight(optionHeight);
+		option3Button.wrapTextProperty().setValue(true);
+		option3Button.setPadding(new Insets(0, 50, 0, 50));
 		option3Button.setId("optionButton");
 		option3Button.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
