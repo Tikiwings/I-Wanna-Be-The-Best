@@ -5,7 +5,7 @@
 3;Week 5;Description here;Description here;2;mainbutton1;1;2;-1;0;mainbutton2;1;2;-1;0;
 3;Week 6;Description here;Description here;2;mainbutton1;1;2;-1;0;mainbutton2;1;2;-1;0;
 3;Week 7;Today during class you were assigned a project to implement LZW compression.;How do you want to spend your day?;2;Work on the project;1;2;-1;0;Procrastinate until the last minute;1;2;-1;0;
-3;Week 8;Description here;Description here;2;mainbutton1;1;2;-1;0;mainbutton2;1;2;-1;0;
-3;Week 9;After class today the girl you like started talking to you.;She asks you if you would want to go to the movies with her;2;Accept and go to the movies with her;1;2;-1;0;Decline and go home for the night.;1;2;-1;0;
-3;Week 10;Mammon assigns your final project to you today.;How will you spend your week on the project?;3;Power through the project early so you have more time to study for your upcoming finals.;1;2;-1;0;Space the project out over the week.;1;2;-1;0;Wait until the last minute to do the project. Then cram your finals studying into one day;1;2;-1;0;
+3;Week 8;After class today the girl you like started talking to you.;She asks you if you would want to go to the movies with her;2;Accept and go to the movies with her;1;2;-1;0;Decline and go home for the night.;1;2;-1;0;
+3;Week 9;Mammon assigns your final project to you today.;How will you spend your week on the project?;3;Power through the project early so you have more time to study for your upcoming finals.;1;2;-1;0;Space the project out over the week.;1;2;-1;0;Wait until the last minute to do the project. Then cram your finals studying into one day;1;2;-1;0;
+3;Week 10;Description here;Description here;2;mainbutton1;1;2;-1;0;mainbutton2;1;2;-1;0;
 3;Week 11;It's time for you to test your knowledge on your finals this week.;Good luck!;1;Take your finals exams;0;0;0;0;
