@@ -53,8 +53,6 @@ public class GameManager {
 	}
 	
 	public void startGame() {
-		firstSetup = false;
-		
 		// Show class selection screen
 		ClassSelection classSelection = new ClassSelection(this);
 		
@@ -64,11 +62,6 @@ public class GameManager {
        
         // Listen to key
         listenToKey(scene);
-        
-        // Show stage
-        primaryStage.show();
-        
-        firstSetup = false;
 	}
 	
 	public void setMainStoryTypingScenes(List<TypingScene> mainStoryTypingScenes) {
@@ -88,27 +81,10 @@ public class GameManager {
 	}
 	
 	private void showNextTypingScene(TypingScene typingScene) {
+		// Set currentTypingScene
 		currentTypingScene = typingScene;
-		
-		if (firstSetup) {
-			// First time, init scene
-			Scene scene = new Scene(typingScene.init_scene(screenWidth, screenHeight), screenWidth, screenHeight, Color.WHITE);
-			scene.getStylesheets().add(getClass().getResource("/resources/css/application.css").toExternalForm());
-	        primaryStage.setScene(scene);
-	       
-	        // Listen to key
-	        listenToKey(scene);
-	        
-	        // Show stage
-	        primaryStage.show();
-	        
-	        firstSetup = false;
-		} else {
-			// Not first time, only change the root of the scene
-			primaryStage.getScene().setRoot(typingScene.init_scene(screenWidth, screenHeight));
-		}
-		
-        
+		primaryStage.getScene().setRoot(typingScene.init_scene(screenWidth, screenHeight));
+	
         // Play scene text
         typingScene.playText(scrollSpeed);
 	}
@@ -116,7 +92,7 @@ public class GameManager {
 	private void listenToKey(Scene scene) {
 		scene.addEventFilter(KeyEvent.KEY_PRESSED, event->{
             if (event.getCode() == KeyCode.SPACE) {
-            	currentTypingScene.playText(scrollSpeed);
+            	if (currentTypingScene != null) currentTypingScene.playText(scrollSpeed);
             	event.consume();
             }
             else if (event.getCode() == KeyCode.S) {
