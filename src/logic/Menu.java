@@ -2,6 +2,7 @@ package logic;
 
 import java.io.File;
 import java.util.ArrayList;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -29,13 +30,13 @@ import javafx.stage.Stage;
 public class Menu {
 	int volume = 1;
 	int scrollSpeed = 1;
-	
+
 	private int screenWidth, screenHeight;
 
 	public void initMenu(Stage primaryStage, int screenWidth, int screenHeight, VBox menu){
 		this.screenWidth = screenWidth;
 		this.screenHeight = screenHeight;
-		
+
 		Scene home = new Scene(menu, screenWidth, screenHeight);
 		primaryStage.setTitle("I Wanna Be The Best");
     	primaryStage.setScene(home);
@@ -114,8 +115,8 @@ public class Menu {
         /* Add buttons and text to the grid */
         grid.add(startButton, 1, 1);
         grid.add(loadButton, 2, 1);
-        grid.add(optionButton, 1, 2);
-        grid.add(exitButton, 2, 2);
+        grid.add(optionButton, 3, 1);
+        grid.add(exitButton, 4, 1);
 
         stackPane.getChildren().addAll(menuImage, titleGrid, grid);
         wholeScreen.getChildren().addAll(stackPane);
@@ -125,12 +126,12 @@ public class Menu {
             @Override
             public void handle(ActionEvent event) {
         		gameManager.setScrollSpeed(scrollSpeed);
-        		
+
         		// Example (only 2 TypingScenes is this example)
         		Events events = new Events();
-        		
+
         		ArrayList<TypingScene> mainStoryTypingScenesArrayList = events.getEventsArrayList(gameManager);
-        		
+
         		gameManager.randEventOrder = events.getRandEventOrder();
         		gameManager.setMainStoryTypingScenes(mainStoryTypingScenesArrayList);
         		gameManager.setScreenSize(screenWidth, screenHeight);
@@ -170,47 +171,64 @@ public class Menu {
 		ImageView menuImage = new ImageView();
 		menuImage.setImage(image);
 
+    	/* button location */
+    	HBox buttonBox = new HBox();
+    	BorderPane root = new BorderPane();
+
+    	root.setBottom(buttonBox);
+
 		/* To stack buttons and text over image */
 		StackPane stackPane = new StackPane();
 
     	VBox vBox = new VBox();
     	vBox.setAlignment(Pos.CENTER);
 
+    	/* back button setup */
+        Button backBtn = new Button();
         Button btn = new Button();
-        btn.setText("Load");
+        setButton(backBtn, "resources/images/BackPressed.png", "resources/images/BackNormal.png");
+        setButton(btn, "resources/images/LoadPressed.png", "resources/images/LoadNormal.png");
 
-        stackPane.getChildren().addAll(menuImage, btn);
+        buttonBox.getChildren().add(backBtn);
+        stackPane.getChildren().addAll(menuImage, btn, root);
         vBox.getChildren().addAll(stackPane);
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-        		
+
             	FileChooser fileChooser = new FileChooser();
             	fileChooser.setTitle("Open Save File");
             	File file = fileChooser.showOpenDialog(primaryStage);
-            	
+
                 if (file != null) {
                     String fileName = file.getAbsolutePath();
                     Load loadedSave = new Load();
                     loadedSave.loadSaveFile(fileName);
-                    
+
                     GameManager gameManager = new GameManager(primaryStage);
                     Events events = new Events();
-            		
+
             		ArrayList<TypingScene> mainStoryTypingScenesArrayList = events.loadEventsArrayList(gameManager, loadedSave.getRandOrderList());
-            		
+
             		gameManager.randEventOrder = loadedSave.getRandOrderList();
             		gameManager.loadPlayerStats(loadedSave.getPlayer());
             		gameManager.setCurSceneIndex(loadedSave.getIndex());
             		gameManager.setMainStoryTypingScenes(mainStoryTypingScenesArrayList);
             		gameManager.setScreenSize(screenWidth, screenHeight);
             		gameManager.showNextTypingScene();
-                    
+
                 }
                 else {
                 	System.err.println("User did not choose file");
                 }
+            }
+        });
+
+        backBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	backBtn.getScene().setRoot(mMenu(primaryStage));
             }
         });
 
@@ -261,12 +279,12 @@ public class Menu {
     	volumeSlider.setMin(0);
     	volumeSlider.setMax(100);
     	volumeSlider.setBlockIncrement(1);
-    	
+
     	/* sets the slider position on startup */
 		volumeSlider.setValue(volume);
 		scrollSpeedSlider.setValue(scrollSpeed);
 
-    	/* back button setup */
+    	/* button setup */
         Button backBtn = new Button();
         setButton(backBtn, "resources/images/BackPressed.png", "resources/images/BackNormal.png");
         Button saveBtn = new Button();
