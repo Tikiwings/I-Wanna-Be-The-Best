@@ -26,6 +26,10 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import logic.Events;
+import logic.GameManager;
+import logic.Load;
+import logic.TypingScene;
 
 public class Menu {
 	int volume = 1;
@@ -183,15 +187,22 @@ public class Menu {
     	VBox vBox = new VBox();
     	vBox.setAlignment(Pos.CENTER);
 
-    	/* back button setup */
+    	/* button setup */
         Button backBtn = new Button();
         Button btn = new Button();
-        setButton(backBtn, "resources/images/BackPressed.png", "resources/images/BackNormal.png");
         setButton(btn, "resources/images/LoadPressed.png", "resources/images/LoadNormal.png");
+        setButton(backBtn, "resources/images/BackPressed.png", "resources/images/BackNormal.png");
 
         buttonBox.getChildren().add(backBtn);
-        stackPane.getChildren().addAll(menuImage, btn, root);
+        stackPane.getChildren().addAll(menuImage, root, btn);
         vBox.getChildren().addAll(stackPane);
+
+        backBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	backBtn.getScene().setRoot(mMenu(primaryStage));
+            }
+        });
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -222,13 +233,6 @@ public class Menu {
                 else {
                 	System.err.println("User did not choose file");
                 }
-            }
-        });
-
-        backBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-            	backBtn.getScene().setRoot(mMenu(primaryStage));
             }
         });
 
