@@ -1,5 +1,7 @@
 package logic;
 
+import java.io.File;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -14,6 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -28,6 +32,10 @@ public class TypingScene {
 	
 	// Current string index
 	public int strIndex = 0;
+	
+	//Sound effect
+	public String sound = "YeaPoly.mp3";
+	MediaPlayer player;
 	
 	// Play text timeline
 	private Timeline textTimeline = null;
@@ -83,6 +91,9 @@ public class TypingScene {
 			option3Pane.setPadding(new Insets(10, 0, 0, 0));
 			root.getChildren().add(option3Pane);
 		}
+		
+		//Sound
+		playSound(1);
 		
 		// Stats
 		Label stats_label = new Label();
@@ -155,6 +166,33 @@ public class TypingScene {
         return true;
 	}
 	
+	public void setSound(String sound) {
+		this.sound = sound;
+	}
+	
+	public boolean playSound(int volume) {
+		Media media = new Media(new File("src/resources/songs/"+sound).toURI().toString());
+		player = new MediaPlayer(media);
+		player.setVolume(volume);
+		player.play();
+		return true;
+	}
+	
+	public boolean pauseSound() {
+		player.pause();
+		return true;
+	}
+	
+	public boolean setVolume(int volume) {
+		player.setVolume(volume);
+		return true;
+	}
+	
+	public boolean setImage() {
+		
+		return true;
+	}
+	
 	public void setStrArray(String[] strArray) {
 		this.strArray = strArray;
 	}
@@ -190,7 +228,7 @@ public class TypingScene {
 				@Override
 				public void handle(ActionEvent event) {
 					gameManager.updateStats(option1Stats);
-					
+					pauseSound();
 					gameManager.showNextTypingScene();
 				}
 			});
@@ -232,7 +270,7 @@ public class TypingScene {
 			@Override
 			public void handle(ActionEvent event) {
 				gameManager.updateStats(option2Stats);
-				
+				pauseSound();
 				gameManager.showNextTypingScene();
 			}
 		});
@@ -252,7 +290,7 @@ public class TypingScene {
 			@Override
 			public void handle(ActionEvent event) {
 				gameManager.updateStats(option3Stats);
-				
+				pauseSound();
 				gameManager.showNextTypingScene();
 			}
 		});

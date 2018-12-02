@@ -20,6 +20,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -36,6 +38,8 @@ public class Menu {
 	int scrollSpeed = 1;
 
 	private int screenWidth, screenHeight;
+	
+	MediaPlayer player;
 
 	public void initMenu(Stage primaryStage, int screenWidth, int screenHeight, VBox menu){
 		this.screenWidth = screenWidth;
@@ -78,7 +82,13 @@ public class Menu {
 		Image image = new Image("resources/images/mainMenu.png");
 		ImageView menuImage = new ImageView();
 		menuImage.setImage(image);
-
+		
+		/* Music */
+		Media media = new Media(new File("src/resources/songs/YeaPoly.mp3").toURI().toString());
+		player = new MediaPlayer(media);
+		player.setVolume(volume);
+		player.play();
+		
 		GameManager gameManager = new GameManager(primaryStage);
 
 		/* To stack buttons and text over image */
@@ -135,7 +145,7 @@ public class Menu {
         		Events events = new Events();
 
         		ArrayList<TypingScene> mainStoryTypingScenesArrayList = events.getEventsArrayList(gameManager);
-
+        		player.pause();
         		gameManager.randEventOrder = events.getRandEventOrder();
         		gameManager.setMainStoryTypingScenes(mainStoryTypingScenesArrayList);
         		gameManager.setScreenSize(screenWidth, screenHeight);
