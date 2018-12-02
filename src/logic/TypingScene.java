@@ -17,6 +17,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -171,11 +172,16 @@ public class TypingScene {
 	}
 	
 	public boolean playSound(int volume) {
-		Media media = new Media(new File("src/resources/songs/"+sound).toURI().toString());
-		player = new MediaPlayer(media);
-		player.setVolume(volume);
-		player.play();
-		return true;
+		try {
+			Media media = new Media(new File("src/resources/songs/"+sound).toURI().toString());
+			player = new MediaPlayer(media);
+			player.setVolume(volume);
+			player.play();
+			return true;
+		}
+		catch(MediaException e){
+			return true;
+		}
 	}
 	
 	public boolean pauseSound() {
