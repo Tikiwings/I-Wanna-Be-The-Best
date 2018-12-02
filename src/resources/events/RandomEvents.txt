@@ -4,7 +4,7 @@
 1;Family emergency;2;Go home;10;10;-10;0;Stay at school;-10;-10;10;0;emergency.mp3;
 2;A video game that;you are excited for just came out;3;Play it a lot;0;20;-10;-10;Don't play it and study instead;0;0;5;0;Don't play it and work out instead;5;0;0;0;videogame.mp3;
 1;You fell off your bike;3;Patch yourself up;10;0;0;0;Go to the health center;10;-10;0;0;Just ignore it;-10;-10;0;0;crash.mp3;
-1;You get an interview with a company;3;Study for interview;0;-10;10;0;Wing it;0;-20;0;0;Don't go;0;-10;0;-10;interview.mp3
+1;You get an interview with a company;3;Study for interview;0;-10;10;0;Wing it;0;-20;0;0;Don't go;0;-10;0;-10;interview.mp3;
 1;It's club showcase;2;Join a technical club;0;0;10;0;Join a social club;0;0;0;10;club.mp3;
 2;you are bored;and want to do something interesting;3;Go downtown with friends;0;5;0;10;Do a side project;0;0;10;0;Go bowling with friends;5;0;0;5;bored.mp3;
 1;Three day weekend;3;Go downtown with friends;0;10;0;0;Throw a party;0;0;0;10;Just binge netflix;0;0;0;0;threedayweekend.mp3;

@@ -180,6 +180,10 @@ public class TypingScene {
 			return true;
 		}
 		catch(MediaException e){
+			Media media = new Media(new File("src/resources/songs/"+"YeaPoly.mp3").toURI().toString());
+			player = new MediaPlayer(media);
+			player.setVolume(volume);
+			player.play();
 			return true;
 		}
 	}
@@ -245,7 +249,7 @@ public class TypingScene {
 				public void handle(ActionEvent event) {
 					// Show ending screen
 					EndingScreen end = new EndingScreen(gameManager);
-					
+					pauseSound();
 					Scene scene = new Scene(end.init_scene(gameManager.getScreenWidth(), 
 							gameManager.getScreenHeight()), 
 							gameManager.getScreenWidth(), 
