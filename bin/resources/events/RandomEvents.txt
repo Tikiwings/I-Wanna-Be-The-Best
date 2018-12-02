@@ -1,0 +1,20 @@
+1;Get asked out on a date;2;Accept;0;10;-10;5;Decline;0;-10;0;0;catcall.mp3;
+1;You Got Sick!;2;Stay home;10;0;-10;0;Go to class anyway;-20;0;5;0;sick.mp3;
+2;Your friends want to go to a concert;but an assignment is due tomorrow;2;Go to the concert;0;20;-10;10;Stay Home and work on assignment;0;-10;10;-10;concert.mp3;
+1;Family emergency;2;Go home;10;10;-10;0;Stay at school;-10;-10;10;0;emergency.mp3;
+2;A video game that;you are excited for just came out;3;Play it a lot;0;20;-10;-10;Don't play it and study instead;0;0;5;0;Don't play it and work out instead;5;0;0;0;videogame.mp3;
+1;You fell off your bike;3;Patch yourself up;10;0;0;0;Go to the health center;10;-10;0;0;Just ignore it;-10;-10;0;0;crash.mp3;
+1;You get an interview with a company;3;Study for interview;0;-10;10;0;Wing it;0;-20;0;0;Don't go;0;-10;0;-10;interview.mp3
+1;It's club showcase;2;Join a technical club;0;0;10;0;Join a social club;0;0;0;10;club.mp3;
+2;you are bored;and want to do something interesting;3;Go downtown with friends;0;5;0;10;Do a side project;0;0;10;0;Go bowling with friends;5;0;0;5;bored.mp3;
+1;Three day weekend;3;Go downtown with friends;0;10;0;0;Throw a party;0;0;0;10;Just binge netflix;0;0;0;0;threedayweekend.mp3;
+1;Quiz tomorrow;2;Pull an all nighter to study;-10;0;0;0;Just do your best;0;-10;0;0;quiz.mp3;
+1;Lab is due today;2;Meet up with your partner to work on it together;0;-10;10;10;Skip the lab to go partying;0;10;-10;5;lab.mp3;
+1;Friend needs you to take notes for them;2;Take notes;0;0;0;10;Ignore them;0;0;0;-5;notesforme.mp3;
+2;Friends want to grab dinner;but you are broke;2;Go anyway;0;-5;0;10;Don't go;0;0;0;-5;
+2;Friends want to go to a baseball game;but you think baseball is boring;2;Go;0;-5;0;5;Stay Home;0;0;0;-10;baseball.mp3;
+1;You got robbed!;2;Chase the robber!;-10;10;0;0;Let them get away;0;-20;0;0;thief.mp3;
+1;You were injured doing a lab experiment;3;Go to the health center;0;0;0;0;Brush it off;-10;0;0;0;Try to be macho;-10;-10;0;0;labexperimentdeath.mp3;
+2;Your phone is busted;and you have no money;2;Buy a new phone by working a side job;-5;-5;-5;10;Buy a used phone;0;0;0;-5;phone.mp3;
+1;You should probably do your laundry...;2;Don't do it;0;-10;0;-5;Do it;-5;0;0;10;laundry.mp3;
+1;Your roommate wants you to do more chores;2;Do more chores;-10;0;-10;0;Ignore your roommate;0;0;0;-5;chores.mp3;

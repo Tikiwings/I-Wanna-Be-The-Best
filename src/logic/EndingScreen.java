@@ -27,7 +27,8 @@ public class EndingScreen {
 	 * [0] = Education Score
 	 * [1] = Social Score
 	 */
-	private Double[] getFinalScore(GameManager gameManager)
+	
+	public Double[] getFinalScore(GameManager gameManager)
 	{
 		Double [] finalScore = new Double [2];
 		
@@ -39,26 +40,26 @@ public class EndingScreen {
 		
 	}
 	
-	private Text getFinalGrade(Double score)
+	public Text getFinalGrade(Double score)
 	{
 		Text finalGrade  = new Text();
 		finalGrade.setTextAlignment(TextAlignment.CENTER);
 		finalGrade.setStyle("-fx-font: 35px Tahoma; -fx-fill: #FFFFFF;");
 		finalGrade.setText("This isn't working");
 		
-		if(score > 90.0)
+		if(score >= 90.0)
 		{
 			finalGrade.setText("A");
 		}
-		else if(score > 80.0)
+		else if(score >= 80.0)
 		{
 			finalGrade.setText("B");
 		}
-		else if(score > 70.0)
+		else if(score >= 70.0)
 		{
 			finalGrade.setText("C");
 		}
-		else if (score > 60.0)
+		else if (score >= 60.0)
 		{
 			finalGrade.setText("D");
 		}
