@@ -15,9 +15,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaException;
@@ -40,7 +40,9 @@ public class TypingScene {
 	//Sound effect
 	public String sound = "YeaPoly.mp3";
 	MediaPlayer player;
-	boolean soundPlaying = false;
+	
+	//Image
+	private String imageName = "bg.png";
 	
 	// Play text timeline
 	private Timeline textTimeline = null;
@@ -58,94 +60,82 @@ public class TypingScene {
 	}
 	
 	public VBox init_scene(int screenWidth, int screenHeight) {
-		// Set VBox
-        VBox root = new VBox();
-        root.setStyle("-fx-background-color: #035642");
-		
-		// Display (Text, settings...)
-		double displayHeight = screenHeight/2;
-		
-		BorderPane displayPane = new BorderPane();
+		 // For background image
+		 Image image = new Image("resources/images/" + imageName);
+		 ImageView menuImage = new ImageView();
+		 menuImage.setImage(image);
 
-		text = new Text();
-		text.setTextAlignment(TextAlignment.CENTER);
-		text.wrappingWidthProperty().set(screenWidth - 200 > 150 ? screenWidth - 200 : screenWidth);
-		text.setStyle("-fx-font: 20px Tahoma; -fx-fill: #FFFFFF;");
-		
-		displayPane.setCenter(text);
-		displayPane.setMinHeight(displayHeight);
-		displayPane.setStyle("-fx-background-color: #035642;");
-		root.getChildren().add(displayPane);
+		 // To put texts over image
+		 StackPane stackPane = new StackPane();
 
-		// Set options
-		if(totalOptionsNum >= 1) {
-			Button option1Button = new Button();
-			option1Pane = setOption1(option1Button);
-			option1Pane.setPadding(new Insets(10, 0, 0, 0));
-			root.getChildren().add(option1Pane);
-		}
-		if(totalOptionsNum >= 2) {
-			Button option2Button = new Button();
-			option2Pane = setOption2(option2Button);
-			option2Pane.setPadding(new Insets(10, 0, 0, 0));
-			root.getChildren().add(option2Pane);
-		}
-		if(totalOptionsNum >= 3) {
-			Button option3Button = new Button();
-			option3Pane = setOption3(option3Button);
-			option3Pane.setPadding(new Insets(10, 0, 0, 0));
-			root.getChildren().add(option3Pane);
-		}
-		
-		//Sound
-		if (soundPlaying == false) {
-			soundPlaying = playSound(gameManager.volume);
-		}
-		
-		// Stats
-		Label stats_label = new Label();
-		stats_label.setStyle("-fx-font: 15px Tahoma; -fx-text-fill: #FFFFFF; -fx-padding: 0px 0px 20px 20px;");
-		stats_label.setText(gameManager.player.getStatStr());
-		
-		BorderPane stats_Pane = new BorderPane();
-		stats_Pane.setBottom(stats_label);
-		VBox.setVgrow(stats_Pane, Priority.ALWAYS);
-		root.getChildren().add(stats_Pane);
-		
-		// TODO: save button here
+		 // Set VBox
+		        VBox textBox = new VBox();
 
-        return root;
-	}
-	
-	public void setButton(Button button, String pressedImage, String normalImage){
-		Image startNormal = new Image(normalImage);
-		Image startPressed = new Image(pressedImage);
-		button.setGraphic(new ImageView(startNormal));
-        button.setStyle("-fx-background-color: #035642");
+		 // Set VBox
+		        VBox root = new VBox();
+		        //root.setStyle("-fx-background-color: #035642");
 
-        button.addEventHandler(MouseEvent.MOUSE_ENTERED,
-    		new EventHandler<MouseEvent>() {
-    			@Override
-    			public void handle(MouseEvent e) {
-    				button.setGraphic(new ImageView(startPressed));
-    			}
-    		});
-        button.addEventHandler(MouseEvent.MOUSE_EXITED,
-    		new EventHandler<MouseEvent>() {
-    			@Override
-    			public void handle(MouseEvent e) {
-    				button.setGraphic(new ImageView(startNormal));
-    			}
-    		});
+		 // Display (Text, settings...)
+		 double displayHeight = screenHeight/2;
+
+		 BorderPane displayPane = new BorderPane();
+
+		 text = new Text();
+		 text.setTextAlignment(TextAlignment.CENTER);
+		 text.wrappingWidthProperty().set(screenWidth - 200 > 150 ? screenWidth - 200 : screenWidth);
+		 text.setStyle("-fx-font: 20px Tahoma; -fx-fill: #FFFFFF;");
+
+		 displayPane.setCenter(text);
+		 displayPane.setMinHeight(displayHeight);
+		 //displayPane.setStyle("-fx-background-color: #035642;");
+		 textBox.getChildren().add(displayPane);
+		 stackPane.getChildren().addAll(menuImage, textBox);
+		 root.getChildren().add(stackPane);
+		 //root.getChildren().addAll(displayPane, stackPane);
+
+
+		 // Set options
+		 if(totalOptionsNum >= 1) {
+		  Button option1Button = new Button();
+		  option1Pane = setOption1(option1Button);
+		  option1Pane.setPadding(new Insets(10, 0, 0, 0));
+		  textBox.getChildren().add(option1Pane);
+		 }
+		 if(totalOptionsNum >= 2) {
+		  Button option2Button = new Button();
+		  option2Pane = setOption2(option2Button);
+		  option2Pane.setPadding(new Insets(10, 0, 0, 0));
+		  textBox.getChildren().add(option2Pane);
+		 }
+		 if(totalOptionsNum >= 3) {
+		  Button option3Button = new Button();
+		  option3Pane = setOption3(option3Button);
+		  option3Pane.setPadding(new Insets(10, 0, 0, 0));
+		  textBox.getChildren().add(option3Pane);
+		 }
+
+		 //Sound
+		 playSound(1);
+
+		 // Stats
+		 Label stats_label = new Label();
+		 stats_label.setStyle("-fx-font: 15px Tahoma; -fx-text-fill: #FFFFFF; -fx-padding: 0px 0px 20px 20px;");
+		 stats_label.setText(gameManager.player.getStatStr());
+
+		 BorderPane stats_Pane = new BorderPane();
+		 stats_Pane.setBottom(stats_label);
+		 VBox.setVgrow(stats_Pane, Priority.ALWAYS);
+		 textBox.getChildren().add(stats_Pane);
+
+		 // TODO: save button here
+
+		 return root;
 	}
 	
 	// Return false when running out of strings (possibly means should go to next scene)
 	public boolean playText(double scrollSpeed) {		
 		// check if has previous string playing
 		if(textTimeline != null) {
-			if (strIndex < 1) {
-				strIndex = 1;
-			}
 			// Show entire string immediately
 			text.setText(strArray[strIndex-1]);
 			
@@ -184,11 +174,8 @@ public class TypingScene {
                     	if(strIndex >= strArray.length) showOptions();
                     	
                     	// Stop timeline
-                    	if (textTimeline != null) {
-                    		textTimeline.stop();
-                        	textTimeline = null;
-                    	}
-                    	
+                    	textTimeline.stop();
+                    	textTimeline = null;
                     } else {
                         text.setText(thisString.substring(0, i.get()));
                         i.set(i.get() + 1);
@@ -228,12 +215,12 @@ public class TypingScene {
 	}
 	
 	public boolean setVolume(int volume) {
-		player.setVolume(volume / 10.0);
+		player.setVolume(volume);
 		return true;
 	}
 	
-	public boolean setImage() {
-		
+	public boolean setImage(String image) {
+		this.imageName = image;
 		return true;
 	}
 	
