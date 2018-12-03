@@ -26,6 +26,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 public class TypingScene {
 
@@ -40,6 +43,7 @@ public class TypingScene {
 	//Sound effect
 	public String sound = "YeaPoly.mp3";
 	MediaPlayer player;
+	boolean soundPlaying = false;
 	
 	//Image
 	private String imageName = "bg.png";
@@ -69,11 +73,11 @@ public class TypingScene {
 		 StackPane stackPane = new StackPane();
 
 		 // Set VBox
-		        VBox textBox = new VBox();
+		 VBox textBox = new VBox();
 
 		 // Set VBox
-		        VBox root = new VBox();
-		        //root.setStyle("-fx-background-color: #035642");
+		 VBox root = new VBox();
+		 //root.setStyle("-fx-background-color: #035642");
 
 		 // Display (Text, settings...)
 		 double displayHeight = screenHeight/2;
@@ -115,7 +119,9 @@ public class TypingScene {
 		 }
 
 		 //Sound
-		 playSound(1);
+		 if (soundPlaying == false) {
+		   	 soundPlaying = playSound(gameManager.volume);
+		 }
 
 		 // Stats
 		 Label stats_label = new Label();
@@ -132,10 +138,34 @@ public class TypingScene {
 		 return root;
 	}
 	
+	public void setButton(Button button, String pressedImage, String normalImage){
+		Image startNormal = new Image(normalImage);
+		Image startPressed = new Image(pressedImage);
+		button.setGraphic(new ImageView(startNormal));
+        button.setStyle("-fx-background-color: #035642");
+        button.addEventHandler(MouseEvent.MOUSE_ENTERED,
+    		new EventHandler<MouseEvent>() {
+    			@Override
+    			public void handle(MouseEvent e) {
+    				button.setGraphic(new ImageView(startPressed));
+    			}
+    		});
+        button.addEventHandler(MouseEvent.MOUSE_EXITED,
+    		new EventHandler<MouseEvent>() {
+    			@Override
+    			public void handle(MouseEvent e) {
+    				button.setGraphic(new ImageView(startNormal));
+    			}
+        	});
+	}
+	
 	// Return false when running out of strings (possibly means should go to next scene)
 	public boolean playText(double scrollSpeed) {		
 		// check if has previous string playing
 		if(textTimeline != null) {
+			if (strIndex < 1) {
+				strIndex = 1;
+			}
 			// Show entire string immediately
 			text.setText(strArray[strIndex-1]);
 			
@@ -174,8 +204,10 @@ public class TypingScene {
                     	if(strIndex >= strArray.length) showOptions();
                     	
                     	// Stop timeline
-                    	textTimeline.stop();
-                    	textTimeline = null;
+                    	if (textTimeline != null) {
+                    		textTimeline.stop();
+                        	textTimeline = null;
+                    	}
                     } else {
                         text.setText(thisString.substring(0, i.get()));
                         i.set(i.get() + 1);
@@ -196,7 +228,7 @@ public class TypingScene {
 		try {
 			Media media = new Media(new File("src/resources/songs/"+sound).toURI().toString());
 			player = new MediaPlayer(media);
-			player.setVolume(((float)volume)/100);
+			player.setVolume(volume);
 			player.play();
 			return true;
 		}
@@ -215,7 +247,7 @@ public class TypingScene {
 	}
 	
 	public boolean setVolume(int volume) {
-		player.setVolume(volume);
+		player.setVolume(((float)volume)/100);
 		return true;
 	}
 	
