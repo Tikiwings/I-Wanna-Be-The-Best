@@ -15,7 +15,7 @@ import logic.EndingScreen;
 public class TestGetFinalGrade {
 	
 	@Test
-	public void testGetFinalGrade() throws Exception
+	public void testGetFinalGrade()
 	{
 		Double aGrade = 95.2;
 		Double bGrade = 89.9;
