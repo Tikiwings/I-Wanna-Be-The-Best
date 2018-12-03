@@ -94,7 +94,7 @@ public class TypingScene {
 		}
 		
 		//Sound
-		playSound(1);
+		playSound(gameManager.volume);
 		
 		// Stats
 		Label stats_label = new Label();
@@ -175,7 +175,7 @@ public class TypingScene {
 		try {
 			Media media = new Media(new File("src/resources/songs/"+sound).toURI().toString());
 			player = new MediaPlayer(media);
-			player.setVolume(volume);
+			player.setVolume(((float)volume)/100);
 			player.play();
 			return true;
 		}

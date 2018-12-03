@@ -18,11 +18,10 @@ public class GameManager {
 	private List<TypingScene> mainStoryTypingScenes;
 	private TypingScene currentTypingScene = null;
 	private int currentTypingSceneIndex = -1;
-	
-	private boolean firstSetup = true;
-	
+		
 	// Player properties
 	public Player player;
+	public int volume;
 
 	protected List<Integer> randEventOrder;
 		
@@ -121,4 +120,7 @@ public class GameManager {
 		Save.saveProgress(player, randEventOrder, currentTypingSceneIndex);
 	}
 	
+	public void setVolume(int volume) {
+		this.volume = volume;
+	}
 }

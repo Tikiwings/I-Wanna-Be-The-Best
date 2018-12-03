@@ -34,8 +34,9 @@ import logic.Load;
 import logic.TypingScene;
 
 public class Menu {
-	int volume = 1;
+	public int volume = 50;
 	int scrollSpeed = 1;
+	GameManager gameManager;
 
 	private int screenWidth, screenHeight;
 	
@@ -84,13 +85,15 @@ public class Menu {
 		menuImage.setImage(image);
 		
 		/* Music */
-		Media media = new Media(new File("src/resources/songs/YeaPoly.mp3").toURI().toString());
-		player = new MediaPlayer(media);
-		player.setVolume(volume);
-		player.play();
+		if(player == null) {
+			Media media = new Media(new File("src/resources/songs/YeaPoly.mp3").toURI().toString());
+			player = new MediaPlayer(media);
+			player.setVolume(((float)volume)/100);
+			player.play();
+		}
 		
-		GameManager gameManager = new GameManager(primaryStage);
-
+		gameManager = new GameManager(primaryStage);
+		gameManager.setVolume(volume);
 		/* To stack buttons and text over image */
 		StackPane stackPane = new StackPane();
 
@@ -346,6 +349,8 @@ public class Menu {
         		Number oldValue, Number newValue) {
         		volume = newValue.intValue();
         		volumePercentage.setText(newValue.intValue() + "%");
+        		player.setVolume(((float)volume)/100);
+        		gameManager.setVolume(volume);
         	}
         });
 
