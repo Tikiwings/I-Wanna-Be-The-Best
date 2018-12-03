@@ -12,6 +12,8 @@ public class GameManager {
 	// Stage reference
 	Stage primaryStage = null;
 	
+	Menu menu;
+	
 	private int screenWidth = 640, screenHeight = 360;
 	private double scrollSpeed = 1;
 	
@@ -21,7 +23,7 @@ public class GameManager {
 		
 	// Player properties
 	public Player player;
-	public int volume;
+	public int volume = 10;
 
 	protected List<Integer> randEventOrder;
 		
@@ -88,14 +90,49 @@ public class GameManager {
         typingScene.playText(scrollSpeed);
 	}
 	
+	public void setMenu(Menu menu) {
+		this.menu = menu;
+	}
+	
+	public void showCurrentTypingScene() {
+		if (currentTypingSceneIndex >= mainStoryTypingScenes.size()) {
+			System.out.println("Warning: run out of TypingScene to play");
+			return;
+		}
+		
+		// Reset
+		if (mainStoryTypingScenes.get(currentTypingSceneIndex).strIndex > 0)
+			mainStoryTypingScenes.get(currentTypingSceneIndex).strIndex--;
+		 
+		else if (mainStoryTypingScenes.get(currentTypingSceneIndex).strIndex < 0) {
+			mainStoryTypingScenes.get(currentTypingSceneIndex).strIndex = 0;
+		}	
+		showCurrentTypingScene(mainStoryTypingScenes.get(currentTypingSceneIndex));
+	}
+	
+	private void showCurrentTypingScene(TypingScene typingScene) {
+		// Set currentTypingScene
+		currentTypingScene = typingScene;
+		primaryStage.getScene().setRoot(typingScene.init_scene(screenWidth, screenHeight));
+	
+        // Play scene text
+		typingScene.playText(scrollSpeed);
+	}
+	
 	private void listenToKey(Scene scene) {
 		scene.addEventFilter(KeyEvent.KEY_PRESSED, event->{
             if (event.getCode() == KeyCode.SPACE) {
-            	if (currentTypingScene != null) currentTypingScene.playText(scrollSpeed);
+            	if (currentTypingScene != null) {
+            		currentTypingScene.playText(scrollSpeed);
+            	}
             	event.consume();
             }
             else if (event.getCode() == KeyCode.S) {
             	saveFile();
+            }
+            else if ((event.getCode() == KeyCode.ESCAPE || event.getCode() == KeyCode.P) && currentTypingSceneIndex != -1) {
+            	// pause menu
+            	scene.setRoot(menu.pauseMenu(primaryStage));
             }
         });
 	}
@@ -116,11 +153,13 @@ public class GameManager {
 		player.setChar(player.getChar() + statsChange.charisma > 0 ? player.getChar() + statsChange.charisma : 0);
 	}
 	
-	private void saveFile() {
+	public void saveFile() {
 		Save.saveProgress(player, randEventOrder, currentTypingSceneIndex);
 	}
 	
 	public void setVolume(int volume) {
 		this.volume = volume;
+		if (currentTypingScene != null)
+			currentTypingScene.setVolume(volume);
 	}
 }

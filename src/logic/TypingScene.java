@@ -13,6 +13,9 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -37,6 +40,7 @@ public class TypingScene {
 	//Sound effect
 	public String sound = "YeaPoly.mp3";
 	MediaPlayer player;
+	boolean soundPlaying = false;
 	
 	// Play text timeline
 	private Timeline textTimeline = null;
@@ -94,7 +98,9 @@ public class TypingScene {
 		}
 		
 		//Sound
-		playSound(gameManager.volume);
+		if (soundPlaying == false) {
+			soundPlaying = playSound(gameManager.volume);
+		}
 		
 		// Stats
 		Label stats_label = new Label();
@@ -107,14 +113,39 @@ public class TypingScene {
 		root.getChildren().add(stats_Pane);
 		
 		// TODO: save button here
-		        
+
         return root;
+	}
+	
+	public void setButton(Button button, String pressedImage, String normalImage){
+		Image startNormal = new Image(normalImage);
+		Image startPressed = new Image(pressedImage);
+		button.setGraphic(new ImageView(startNormal));
+        button.setStyle("-fx-background-color: #035642");
+
+        button.addEventHandler(MouseEvent.MOUSE_ENTERED,
+    		new EventHandler<MouseEvent>() {
+    			@Override
+    			public void handle(MouseEvent e) {
+    				button.setGraphic(new ImageView(startPressed));
+    			}
+    		});
+        button.addEventHandler(MouseEvent.MOUSE_EXITED,
+    		new EventHandler<MouseEvent>() {
+    			@Override
+    			public void handle(MouseEvent e) {
+    				button.setGraphic(new ImageView(startNormal));
+    			}
+    		});
 	}
 	
 	// Return false when running out of strings (possibly means should go to next scene)
 	public boolean playText(double scrollSpeed) {		
 		// check if has previous string playing
 		if(textTimeline != null) {
+			if (strIndex < 1) {
+				strIndex = 1;
+			}
 			// Show entire string immediately
 			text.setText(strArray[strIndex-1]);
 			
@@ -153,8 +184,11 @@ public class TypingScene {
                     	if(strIndex >= strArray.length) showOptions();
                     	
                     	// Stop timeline
-                    	textTimeline.stop();
-                    	textTimeline = null;
+                    	if (textTimeline != null) {
+                    		textTimeline.stop();
+                        	textTimeline = null;
+                    	}
+                    	
                     } else {
                         text.setText(thisString.substring(0, i.get()));
                         i.set(i.get() + 1);
@@ -194,7 +228,7 @@ public class TypingScene {
 	}
 	
 	public boolean setVolume(int volume) {
-		player.setVolume(volume);
+		player.setVolume(volume / 10.0);
 		return true;
 	}
 	
