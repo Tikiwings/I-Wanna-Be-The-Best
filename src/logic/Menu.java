@@ -395,6 +395,41 @@ public class Menu {
         });
         return wholeScreen;
     }
+    
+    public VBox pauseTutorialMenu(Stage primaryStage){
+		/* for background */
+		Image image = new Image("resources/images/tm.png");
+		ImageView menuImage = new ImageView();
+		menuImage.setImage(image);
+
+		/* To stack buttons and text over image */
+		StackPane stackPane = new StackPane();
+
+		/* vbox to be outputted */
+    	VBox wholeScreen = new VBox();
+    	wholeScreen.setAlignment(Pos.BOTTOM_CENTER);
+
+    	/* button location */
+    	HBox buttonBox = new HBox();
+    	BorderPane root = new BorderPane();
+
+    	root.setBottom(buttonBox);
+
+        Button btn = new Button();
+        setButton(btn, "resources/images/BackPressed.png", "resources/images/BackNormal.png");
+
+        buttonBox.getChildren().add(btn);
+        stackPane.getChildren().addAll(menuImage, root);
+        wholeScreen.getChildren().addAll(stackPane);
+
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	btn.getScene().setRoot(pauseMenu(primaryStage));
+            }
+        });
+        return wholeScreen;
+    }
 
     public VBox pauseMenu(Stage primaryStage){
 		/* for background */
@@ -465,7 +500,7 @@ public class Menu {
         TutBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	TutBtn.getScene().setRoot(tutorialMenu(primaryStage));
+            	TutBtn.getScene().setRoot(pauseTutorialMenu(primaryStage));
             }
         });
         saveBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -496,5 +531,6 @@ public class Menu {
         });
         return wholeScreen;
     }
-        
+    
+    
 }
