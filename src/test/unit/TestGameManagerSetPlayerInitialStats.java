@@ -1,4 +1,4 @@
-// Written by Daniel Tseng
+// Written by Daniel Tseng (unit test)
 
 package test.unit;
 
