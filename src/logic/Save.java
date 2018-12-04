@@ -17,7 +17,7 @@ public class Save {
 		
 	    if (file != null) {
 	        try {
-	        	BufferedWriter bw = new BufferedWriter(new FileWriter(file+".txt"));
+	        	BufferedWriter bw = new BufferedWriter(new FileWriter(file +".txt"));
 	            bw.write(player.getCurClass());
 	            bw.newLine();
 	            bw.write(player.getInt().toString());
@@ -40,5 +40,31 @@ public class Save {
 	            ex.printStackTrace();
 	        }
 	    }
+	}
+	
+	public static void saveProgressTestMethod(Player player, List<Integer> randEventOrder, Integer currentTypingSceneIndex, String fileName) {
+		 try {
+	        	BufferedWriter bw = new BufferedWriter(new FileWriter(fileName +".txt"));
+	            bw.write(player.getCurClass());
+	            bw.newLine();
+	            bw.write(player.getInt().toString());
+	            bw.newLine();
+	            bw.write(player.getChar().toString());
+	            bw.newLine();
+	            bw.write(player.getHP().toString());
+	            bw.newLine();
+	            bw.write(player.getMP().toString());
+	            bw.newLine();
+	            bw.write(player.getScore().toString());
+	            bw.newLine();
+	            bw.write(currentTypingSceneIndex.toString());
+	            for (int i = 0; i < randEventOrder.size(); i++) {
+	            	bw.newLine();
+	            	bw.write(randEventOrder.get(i).toString());
+	            }
+	            bw.close();
+	        } catch (Exception ex) {
+	            ex.printStackTrace();
+	        }
 	}
 }

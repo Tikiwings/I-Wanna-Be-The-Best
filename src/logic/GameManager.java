@@ -31,6 +31,7 @@ public class GameManager {
 		this.primaryStage = primaryStage;
 	}
 	
+	// Getter
 	public int getScreenWidth() {
 		return screenWidth;
 	}
@@ -39,6 +40,11 @@ public class GameManager {
 		return screenHeight;
 	}
 	
+	public double getScrollSpeed() {
+		return scrollSpeed;
+	} 
+	
+	// Setter
 	public void setCurSceneIndex(Integer currentTypingSceneIndex) {
 		this.currentTypingSceneIndex = currentTypingSceneIndex - 1;
 	}
@@ -50,6 +56,12 @@ public class GameManager {
 	}
 	
 	public void setScrollSpeed(double scrollSpeed) {
+		this.scrollSpeed = scrollSpeed;
+	}
+	
+	public void setGameSettings(int screenWidth, int screenHeight, double scrollSpeed) {
+		this.screenWidth = screenWidth;
+		this.screenHeight = screenHeight;
 		this.scrollSpeed = scrollSpeed;
 	}
 	
@@ -155,6 +167,10 @@ public class GameManager {
 	
 	public void saveFile() {
 		Save.saveProgress(player, randEventOrder, currentTypingSceneIndex);
+	}
+	
+	public void saveFile(String filePath, List<Integer> randEventOrder) {
+		Save.saveProgressTestMethod(player, randEventOrder, currentTypingSceneIndex, filePath);
 	}
 	
 	public void setVolume(int volume) {

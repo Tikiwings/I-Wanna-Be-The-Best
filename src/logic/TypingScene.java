@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
@@ -23,13 +24,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 
 public class TypingScene {
 
@@ -53,10 +49,10 @@ public class TypingScene {
 	private Timeline textTimeline = null;
 
 	// Options
-	private double totalOptionsNum = 0;
+	public int totalOptionsNum = 0;
 
-	private String option1Title = "Empty", option2Title = "Empty", option3Title = "Empty";
-	private Stats option1Stats, option2Stats, option3Stats;
+	public String option1Title = "Empty", option2Title = "Empty", option3Title = "Empty";
+	public Stats option1Stats, option2Stats, option3Stats;
 	private BorderPane option1Pane, option2Pane, option3Pane;
 
 	public TypingScene(GameManager gameManager) {
@@ -66,9 +62,18 @@ public class TypingScene {
 
 	public VBox init_scene(int screenWidth, int screenHeight) {
 		 // For background image
-		 Image image = new Image("resources/images/" + imageName);
-		 ImageView menuImage = new ImageView();
-		 menuImage.setImage(image);
+		 System.out.println(imageName);
+		 ImageView menuImage;
+		 try {
+			 Image image = new Image("resources/images/" + imageName);
+			 menuImage = new ImageView();
+			 menuImage.setImage(image);
+		 }
+		 catch(IllegalArgumentException e) {
+			 Image image = new Image("resources/images/" + "Lab.jpg");
+			 menuImage = new ImageView();
+			 menuImage.setImage(image);
+		 }
 
 		 // To put texts over image
 		 StackPane stackPane = new StackPane();
@@ -130,7 +135,10 @@ public class TypingScene {
 
 		 // Stats
 		 Label stats_label = new Label();
-		 stats_label.setStyle("-fx-font: 15px Tahoma; -fx-text-fill: #FFFFFF; -fx-padding: 0px 0px 20px 20px;");
+		 stats_label.setStyle("-fx-font: 15px Tahoma;"
+		 		+ "-fx-text-fill: #FFFFFF;"
+		 		+ "-fx-padding: 0px 0px 20px 20px;"
+		 		+ "-fx-background-color: #035642;");
 		 stats_label.setText(gameManager.player.getStatStr());
 
 		 BorderPane stats_Pane = new BorderPane();
@@ -288,6 +296,22 @@ public class TypingScene {
 	public void setOption3(String title, Stats stats) {
 		option3Title = "3. " + title;
 		option3Stats = stats;
+	}
+	
+	public void setOptions(int optionsNum, 
+			String title1, Stats stats1,
+			String title2, Stats stats2,
+			String title3, Stats stats3) {
+		totalOptionsNum = optionsNum;
+		
+		option1Title = "1. " + title1;
+		option1Stats = stats1;
+		
+		option2Title = "2. " + title2;
+		option2Stats = stats2;
+		
+		option3Title = "3. " + title3;
+		option3Stats = stats3;
 	}
 
 	// Options
