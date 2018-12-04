@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import logic.GameManager;
 import logic.MainEvents;
-import logic.Menu;
 
 public class TestImageSettings {
 

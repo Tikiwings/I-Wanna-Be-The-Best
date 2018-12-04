@@ -66,9 +66,18 @@ public class TypingScene {
 
 	public VBox init_scene(int screenWidth, int screenHeight) {
 		 // For background image
-		 Image image = new Image("resources/images/" + imageName);
-		 ImageView menuImage = new ImageView();
-		 menuImage.setImage(image);
+		 System.out.println(imageName);
+		 ImageView menuImage;
+		 try {
+			 Image image = new Image("resources/images/" + imageName);
+			 menuImage = new ImageView();
+			 menuImage.setImage(image);
+		 }
+		 catch(IllegalArgumentException e) {
+			 Image image = new Image("resources/images/" + "Lab.jpg");
+			 menuImage = new ImageView();
+			 menuImage.setImage(image);
+		 }
 
 		 // To put texts over image
 		 StackPane stackPane = new StackPane();
@@ -130,7 +139,10 @@ public class TypingScene {
 
 		 // Stats
 		 Label stats_label = new Label();
-		 stats_label.setStyle("-fx-font: 15px Tahoma; -fx-text-fill: #FFFFFF; -fx-padding: 0px 0px 20px 20px;");
+		 stats_label.setStyle("-fx-font: 15px Tahoma;"
+		 		+ "-fx-text-fill: #FFFFFF;"
+		 		+ "-fx-padding: 0px 0px 20px 20px;"
+		 		+ "-fx-background-color: #035642;");
 		 stats_label.setText(gameManager.player.getStatStr());
 
 		 BorderPane stats_Pane = new BorderPane();
