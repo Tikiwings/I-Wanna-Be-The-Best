@@ -42,7 +42,7 @@ public class TypingScene {
 	
 	//Sound effect
 	public String sound = "YeaPoly.mp3";
-	MediaPlayer player;
+	public MediaPlayer player;
 	boolean soundPlaying = false;
 	
 	//Image
@@ -100,22 +100,22 @@ public class TypingScene {
 
 		 // Set options
 		 if(totalOptionsNum >= 1) {
-		  Button option1Button = new Button();
-		  option1Pane = setOption1(option1Button);
-		  option1Pane.setPadding(new Insets(10, 0, 0, 0));
-		  textBox.getChildren().add(option1Pane);
+			 Button option1Button = new Button();
+			 option1Pane = setOption1(option1Button);
+			 option1Pane.setPadding(new Insets(10, 0, 0, 0));
+			 textBox.getChildren().add(option1Pane);
 		 }
 		 if(totalOptionsNum >= 2) {
-		  Button option2Button = new Button();
-		  option2Pane = setOption2(option2Button);
-		  option2Pane.setPadding(new Insets(10, 0, 0, 0));
-		  textBox.getChildren().add(option2Pane);
+			 Button option2Button = new Button();
+			 option2Pane = setOption2(option2Button);
+			 option2Pane.setPadding(new Insets(10, 0, 0, 0));
+			 textBox.getChildren().add(option2Pane);
 		 }
 		 if(totalOptionsNum >= 3) {
-		  Button option3Button = new Button();
-		  option3Pane = setOption3(option3Button);
-		  option3Pane.setPadding(new Insets(10, 0, 0, 0));
-		  textBox.getChildren().add(option3Pane);
+			 Button option3Button = new Button();
+			 option3Pane = setOption3(option3Button);
+			 option3Pane.setPadding(new Insets(10, 0, 0, 0));
+			 textBox.getChildren().add(option3Pane);
 		 }
 
 		 //Sound
@@ -220,8 +220,9 @@ public class TypingScene {
         return true;
 	}
 	
-	public void setSound(String sound) {
+	public String setSound(String sound) {
 		this.sound = sound;
+		return this.sound;
 	}
 	
 	public boolean playSound(int volume) {
@@ -256,8 +257,9 @@ public class TypingScene {
 		return true;
 	}
 	
-	public void setStrArray(String[] strArray) {
+	public String[] setStrArray(String[] strArray) {
 		this.strArray = strArray;
+		return strArray;
 	}
 	
 	public void setOptionsNum(int optionsNum) {
