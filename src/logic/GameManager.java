@@ -169,6 +169,10 @@ public class GameManager {
 		Save.saveProgress(player, randEventOrder, currentTypingSceneIndex);
 	}
 	
+	public void saveFile(String filePath, List<Integer> randEventOrder) {
+		Save.saveProgressTestMethod(player, randEventOrder, currentTypingSceneIndex, filePath);
+	}
+	
 	public void setVolume(int volume) {
 		this.volume = volume;
 		if(currentTypingScene != null) {
