@@ -53,10 +53,10 @@ public class TypingScene {
 	private Timeline textTimeline = null;
 
 	// Options
-	private double totalOptionsNum = 0;
+	public int totalOptionsNum = 0;
 
-	private String option1Title = "Empty", option2Title = "Empty", option3Title = "Empty";
-	private Stats option1Stats, option2Stats, option3Stats;
+	public String option1Title = "Empty", option2Title = "Empty", option3Title = "Empty";
+	public Stats option1Stats, option2Stats, option3Stats;
 	private BorderPane option1Pane, option2Pane, option3Pane;
 
 	public TypingScene(GameManager gameManager) {
@@ -300,6 +300,22 @@ public class TypingScene {
 	public void setOption3(String title, Stats stats) {
 		option3Title = "3. " + title;
 		option3Stats = stats;
+	}
+	
+	public void setOptions(int optionsNum, 
+			String title1, Stats stats1,
+			String title2, Stats stats2,
+			String title3, Stats stats3) {
+		totalOptionsNum = optionsNum;
+		
+		option1Title = "1. " + title1;
+		option1Stats = stats1;
+		
+		option2Title = "2. " + title2;
+		option2Stats = stats2;
+		
+		option3Title = "3. " + title3;
+		option3Stats = stats3;
 	}
 
 	// Options
