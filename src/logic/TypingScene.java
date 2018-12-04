@@ -35,7 +35,7 @@ public class TypingScene {
 
 	private GameManager gameManager;
 	
-	private Text text = null;
+	private Label label = null;
 	private String[] strArray = null;
 	
 	// Current string index
@@ -85,12 +85,16 @@ public class TypingScene {
 
 		 BorderPane displayPane = new BorderPane();
 
-		 text = new Text();
-		 text.setTextAlignment(TextAlignment.CENTER);
-		 text.wrappingWidthProperty().set(screenWidth - 200 > 150 ? screenWidth - 200 : screenWidth);
-		 text.setStyle("-fx-font: 20px Tahoma; -fx-fill: #FFFFFF;-fx-background-color: #035642;");
+		 label = new Label();
+		 label.setText("Hello there");
+		 label.setTextAlignment(TextAlignment.CENTER);
+		 label.setWrapText(true);
+		 label.setStyle("-fx-font: 20px Tahoma;"
+		 		+ "-fx-text-fill: #FFFFFF;"
+		 		+ "-fx-background-color: #035642;");
+		 label.setPadding(new Insets(0, 50, 0, 50));
 
-		 displayPane.setCenter(text);
+		 displayPane.setCenter(label);
 		 displayPane.setMinHeight(displayHeight);
 		 //displayPane.setStyle("-fx-background-color: #035642;");
 		 textBox.getChildren().add(displayPane);
@@ -168,7 +172,7 @@ public class TypingScene {
 				strIndex = 1;
 			}
 			// Show entire string immediately
-			text.setText(strArray[strIndex-1]);
+			label.setText(strArray[strIndex-1]);
 			
 			// Show options
 			if(strIndex >= strArray.length) showOptions();
@@ -210,7 +214,7 @@ public class TypingScene {
                         	textTimeline = null;
                     	}
                     } else {
-                        text.setText(thisString.substring(0, i.get()));
+                    	label.setText(thisString.substring(0, i.get()));
                         i.set(i.get() + 1);
                     }
                 });
