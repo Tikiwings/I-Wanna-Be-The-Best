@@ -35,7 +35,6 @@ public class Events {
 			}
 		}
 		
-		//list.add(endEvent);
 		
 		return list;
 	}

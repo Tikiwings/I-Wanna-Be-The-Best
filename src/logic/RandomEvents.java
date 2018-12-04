@@ -53,6 +53,7 @@ public class RandomEvents {
 							wordScan.nextInt(), wordScan.nextInt()));
 				}
 				typeSc.setSound(wordScan.next());
+				typeSc.setImage(wordScan.next());
 				list.add(typeSc);
 				wordScan.close();
 			}

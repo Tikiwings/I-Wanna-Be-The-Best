@@ -55,6 +55,7 @@ public class MainEvents {
 							new Stats(wordScan.nextInt(), wordScan.nextInt(),
 							wordScan.nextInt(), wordScan.nextInt()));
 				}
+				typeSc.setSound(wordScan.next());
 				list.add(typeSc);
 				wordScan.close();
 			}

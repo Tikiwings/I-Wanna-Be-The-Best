@@ -34,8 +34,9 @@ import logic.Load;
 import logic.TypingScene;
 
 public class Menu {
-	int volume = 1;
+	public int volume = 50;
 	int scrollSpeed = 1;
+	GameManager gameManager;
 
 	private int screenWidth, screenHeight;
 	
@@ -84,13 +85,16 @@ public class Menu {
 		menuImage.setImage(image);
 		
 		/* Music */
-		Media media = new Media(new File("src/resources/songs/YeaPoly.mp3").toURI().toString());
-		player = new MediaPlayer(media);
-		player.setVolume(volume);
-		player.play();
+		if(player == null) {
+			Media media = new Media(new File("src/resources/songs/YeaPoly.mp3").toURI().toString());
+			player = new MediaPlayer(media);
+			player.setVolume(((float)volume)/100);
+			player.play();
+		}
 		
-		GameManager gameManager = new GameManager(primaryStage);
-
+		gameManager = new GameManager(primaryStage);
+		gameManager.setVolume(volume);
+		gameManager.setMenu(this);
 		/* To stack buttons and text over image */
 		StackPane stackPane = new StackPane();
 
@@ -301,8 +305,6 @@ public class Menu {
     	/* button setup */
         Button backBtn = new Button();
         setButton(backBtn, "resources/images/BackPressed.png", "resources/images/BackNormal.png");
-        Button saveBtn = new Button();
-        setButton(saveBtn, "resources/images/SavePressed.png", "resources/images/SaveNormal.png");
         Button TutBtn = new Button();
         setButton(TutBtn, "resources/images/TutorialPressed.png", "resources/images/TutorialNormal.png");
 
@@ -315,7 +317,6 @@ public class Menu {
         grid.add(volumePercentage, 4, 1);
         grid.add(TutBtn, 0, 2);
         grid.add(backBtn, 0, 3);
-        grid.add(saveBtn, 1, 3);
 
         stackPane.getChildren().addAll(menuImage, grid);
         wholeScreen.getChildren().addAll(stackPane);
@@ -334,10 +335,6 @@ public class Menu {
             }
         });
 
-        saveBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {}
-        });
 
         // Adding Listener to volume property.
         volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -346,6 +343,8 @@ public class Menu {
         		Number oldValue, Number newValue) {
         		volume = newValue.intValue();
         		volumePercentage.setText(newValue.intValue() + "%");
+        		player.setVolume(((float)volume)/100);
+        		gameManager.setVolume(volume);
         	}
         });
 
@@ -394,7 +393,144 @@ public class Menu {
             	btn.getScene().setRoot(optionMenu(primaryStage));
             }
         });
-
         return wholeScreen;
     }
+    
+    public VBox pauseTutorialMenu(Stage primaryStage){
+		/* for background */
+		Image image = new Image("resources/images/tm.png");
+		ImageView menuImage = new ImageView();
+		menuImage.setImage(image);
+
+		/* To stack buttons and text over image */
+		StackPane stackPane = new StackPane();
+
+		/* vbox to be outputted */
+    	VBox wholeScreen = new VBox();
+    	wholeScreen.setAlignment(Pos.BOTTOM_CENTER);
+
+    	/* button location */
+    	HBox buttonBox = new HBox();
+    	BorderPane root = new BorderPane();
+
+    	root.setBottom(buttonBox);
+
+        Button btn = new Button();
+        setButton(btn, "resources/images/BackPressed.png", "resources/images/BackNormal.png");
+
+        buttonBox.getChildren().add(btn);
+        stackPane.getChildren().addAll(menuImage, root);
+        wholeScreen.getChildren().addAll(stackPane);
+
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	btn.getScene().setRoot(pauseMenu(primaryStage));
+            }
+        });
+        return wholeScreen;
+    }
+
+    public VBox pauseMenu(Stage primaryStage){
+		/* for background */
+		Image image = new Image("resources/images/bg.png");
+		ImageView menuImage = new ImageView();
+		menuImage.setImage(image);
+ 		/* text for options */
+		Text volumeTitle = new Text("Volume");
+		volumeTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 30));
+		volumeTitle.setFill(Color.WHITE);
+		Text scrolTitle = new Text("Scroll Speed");
+		scrolTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 30));
+		scrolTitle.setFill(Color.WHITE);
+     	/* configuration for grid holding slider and percentages */
+    	GridPane grid = new GridPane();
+    	grid.setAlignment(Pos.CENTER);
+    	grid.setHgap(10);
+    	grid.setVgap(10);
+ 		/* label for scroll speed percentage */
+		Label scrollSpeedPercentage = new Label("" + (scrollSpeed * 10) + "%");
+		scrollSpeedPercentage.setTextFill(Color.WHITE);
+		Label volumePercentage = new Label("" + volume + "%");
+		volumePercentage.setTextFill(Color.WHITE);
+ 		/* To stack buttons and text over image */
+		StackPane stackPane = new StackPane();
+ 		/* vbox to be outputted */
+    	VBox wholeScreen = new VBox();
+    	wholeScreen.setAlignment(Pos.CENTER);
+     	/* slider for scroll speed */
+    	Slider scrollSpeedSlider = new Slider();
+    	scrollSpeedSlider.setMin(0);
+    	scrollSpeedSlider.setMax(10);
+    	scrollSpeedSlider.setBlockIncrement(1);
+     	/* slider for scroll speed */
+    	Slider volumeSlider = new Slider();
+    	volumeSlider.setMin(0);
+    	volumeSlider.setMax(100);
+    	volumeSlider.setBlockIncrement(1);
+     	/* sets the slider position on startup */
+		volumeSlider.setValue(volume);
+		scrollSpeedSlider.setValue(scrollSpeed);
+     	/* button setup */
+        Button backBtn = new Button();
+        setButton(backBtn, "resources/images/BackPressed.png", "resources/images/BackNormal.png");
+        Button saveBtn = new Button();
+        setButton(saveBtn, "resources/images/SavePressed.png", "resources/images/SaveNormal.png");
+        Button TutBtn = new Button();
+        setButton(TutBtn, "resources/images/TutorialPressed.png", "resources/images/TutorialNormal.png");
+        /* add components to grid */
+        grid.add(scrolTitle, 0, 0);
+        grid.add(scrollSpeedSlider, 1, 0);
+        grid.add(scrollSpeedPercentage, 4, 0);
+        grid.add(volumeTitle, 0, 1);
+        grid.add(volumeSlider, 1, 1);
+        grid.add(volumePercentage, 4, 1);
+        grid.add(TutBtn, 0, 2);
+        grid.add(backBtn, 0, 3);
+        grid.add(saveBtn, 1, 3);
+        stackPane.getChildren().addAll(menuImage, grid);
+        wholeScreen.getChildren().addAll(stackPane);
+        backBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	//backBtn.getScene().setRoot(mMenu(primaryStage));
+            	gameManager.showCurrentTypingScene();
+            }
+        });
+        TutBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	TutBtn.getScene().setRoot(pauseTutorialMenu(primaryStage));
+            }
+        });
+        saveBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	gameManager.saveFile();
+            }
+        });
+        // Adding Listener to volume property.
+        volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+        	@Override
+        	public void changed(ObservableValue<? extends Number> observable, //
+        		Number oldValue, Number newValue) {
+        		volume = newValue.intValue();
+        		volumePercentage.setText(newValue.intValue() + "%");
+        		player.setVolume(volume);
+        		gameManager.setVolume(volume);
+        	}
+        });
+        // Adding Listener to scroll speed property.
+        scrollSpeedSlider.valueProperty().addListener(new ChangeListener<Number>() {
+        	@Override
+        	public void changed(ObservableValue<? extends Number> observable, //
+        		Number oldValue, Number newValue) {
+        		scrollSpeed = newValue.intValue();
+        		scrollSpeedPercentage.setText((newValue.intValue() * 10) + "%");
+        	}
+        });
+        return wholeScreen;
+    }
+    
+    
 }

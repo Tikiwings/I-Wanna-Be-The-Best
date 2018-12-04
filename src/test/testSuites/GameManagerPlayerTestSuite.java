@@ -1,10 +1,13 @@
 // Written by Daniel Tseng
 
-package test;
+package test.testSuites;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+
+import test.unit.TestGameManagerLoadPlayerStats;
+import test.unit.TestGameManagerSetPlayerInitialStats;
 
 @RunWith(Suite.class)
 
