@@ -23,6 +23,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
@@ -87,7 +88,7 @@ public class TypingScene {
 		 text = new Text();
 		 text.setTextAlignment(TextAlignment.CENTER);
 		 text.wrappingWidthProperty().set(screenWidth - 200 > 150 ? screenWidth - 200 : screenWidth);
-		 text.setStyle("-fx-font: 20px Tahoma; -fx-fill: #FFFFFF;");
+		 text.setStyle("-fx-font: 20px Tahoma; -fx-fill: #FFFFFF;-fx-background-color: #035642;");
 
 		 displayPane.setCenter(text);
 		 displayPane.setMinHeight(displayHeight);
