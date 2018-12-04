@@ -34,36 +34,36 @@ import javafx.scene.input.MouseEvent;
 public class TypingScene {
 
 	private GameManager gameManager;
-	
+
 	private Label label = null;
 	private String[] strArray = null;
-	
+
 	// Current string index
 	public int strIndex = 0;
-	
+
 	//Sound effect
 	public String sound = "YeaPoly.mp3";
 	public MediaPlayer player;
 	boolean soundPlaying = false;
-	
+
 	//Image
 	private String imageName = "bg.png";
-	
+
 	// Play text timeline
 	private Timeline textTimeline = null;
-	
+
 	// Options
 	private double totalOptionsNum = 0;
-	
+
 	private String option1Title = "Empty", option2Title = "Empty", option3Title = "Empty";
 	private Stats option1Stats, option2Stats, option3Stats;
 	private BorderPane option1Pane, option2Pane, option3Pane;
-	
+
 	public TypingScene(GameManager gameManager) {
 		// Set gameManager
 		this.gameManager = gameManager;
 	}
-	
+
 	public VBox init_scene(int screenWidth, int screenHeight) {
 		 // For background image
 		 Image image = new Image("resources/images/" + imageName);
@@ -142,7 +142,7 @@ public class TypingScene {
 
 		 return root;
 	}
-	
+
 	public void setButton(Button button, String pressedImage, String normalImage){
 		Image startNormal = new Image(normalImage);
 		Image startPressed = new Image(pressedImage);
@@ -163,9 +163,9 @@ public class TypingScene {
     			}
         	});
 	}
-	
+
 	// Return false when running out of strings (possibly means should go to next scene)
-	public boolean playText(double scrollSpeed) {		
+	public boolean playText(double scrollSpeed) {
 		// check if has previous string playing
 		if(textTimeline != null) {
 			if (strIndex < 1) {
@@ -173,31 +173,31 @@ public class TypingScene {
 			}
 			// Show entire string immediately
 			label.setText(strArray[strIndex-1]);
-			
+
 			// Show options
 			if(strIndex >= strArray.length) showOptions();
-			
+
 			// Stop timeline
 			textTimeline.stop();
 			textTimeline = null;
-			
+
 			// Return so player can have time to look at the string
 			return true;
 		}
-		
+
 		// Check if run out of strings
 		if(strIndex >= strArray.length) {
 			System.out.println("Warning: run out of strings to play");
 			return false;
 		}
-		
+
 		// Go to the new string
 		String thisString = strArray[strIndex++];
-		
+
 		// Given each char 0.05 seconds to play by default,
 		// the larger the scrollSpeed is, the faster it plays
 		double animate_duration = 0.05/scrollSpeed;
-		
+
 		// Play string
 		final IntegerProperty i = new SimpleIntegerProperty(0);
 		textTimeline = new Timeline();
@@ -207,7 +207,7 @@ public class TypingScene {
                     if (i.get() > thisString.length()) {
                     	// Show options
                     	if(strIndex >= strArray.length) showOptions();
-                    	
+
                     	// Stop timeline
                     	if (textTimeline != null) {
                     		textTimeline.stop();
@@ -221,15 +221,15 @@ public class TypingScene {
         textTimeline.getKeyFrames().add(keyFrame);
         textTimeline.setCycleCount(Animation.INDEFINITE);
         textTimeline.play();
-        
+
         return true;
 	}
-	
+
 	public String setSound(String sound) {
 		this.sound = sound;
 		return this.sound;
 	}
-	
+
 	public boolean playSound(int volume) {
 		try {
 			Media media = new Media(new File("src/resources/songs/"+sound).toURI().toString());
@@ -246,53 +246,57 @@ public class TypingScene {
 			return true;
 		}
 	}
-	
+
 	public boolean pauseSound() {
 		player.pause();
 		return true;
 	}
-	
+
 	public boolean setVolume(int volume) {
 		player.setVolume(((float)volume)/100);
 		return true;
 	}
-	
-	public boolean setImage(String image) {
-		this.imageName = image;
-		return true;
+
+	public int setVolumeTest(int volume) {
+		return volume;
 	}
-	
+
+	public String setImage(String image) {
+		this.imageName = image;
+		return image;
+	}
+
 	public String[] setStrArray(String[] strArray) {
 		this.strArray = strArray;
 		return strArray;
 	}
-	
+
 	public void setOptionsNum(int optionsNum) {
 		totalOptionsNum = optionsNum;
 	}
-	
+
 	public void setOption1(String title, Stats stats) {
 		option1Title = "1. " + title;
 		option1Stats = stats;
 	}
-	
+
 	public void setOption2(String title, Stats stats) {
 		option2Title = "2. " + title;
 		option2Stats = stats;
 	}
-	
+
 	public void setOption3(String title, Stats stats) {
 		option3Title = "3. " + title;
 		option3Stats = stats;
 	}
-	
+
 	// Options
 	private BorderPane setOption1(Button option1Button) {
 		option1Button.setText(option1Title);
 		option1Button.wrapTextProperty().setValue(true);
 		option1Button.setPadding(new Insets(0, 50, 0, 50));
 		option1Button.setId("optionButton");
-		
+
 		if(totalOptionsNum != 1) {
 			option1Button.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -310,27 +314,27 @@ public class TypingScene {
 					// Show ending screen
 					EndingScreen end = new EndingScreen(gameManager);
 					pauseSound();
-					Scene scene = new Scene(end.init_scene(gameManager.getScreenWidth(), 
-							gameManager.getScreenHeight()), 
-							gameManager.getScreenWidth(), 
-							gameManager.getScreenHeight(), 
+					Scene scene = new Scene(end.init_scene(gameManager.getScreenWidth(),
+							gameManager.getScreenHeight()),
+							gameManager.getScreenWidth(),
+							gameManager.getScreenHeight(),
 							Color.WHITE);
-					
+
 					scene.getStylesheets().add(getClass().getResource("/resources/css/application.css").toExternalForm());
 			        gameManager.primaryStage.setScene(scene);
-			        
+
 			        // Show stage
 			        gameManager.primaryStage.show();
 				}
 			});
 		}
-		
+
 		BorderPane option1Pane = new BorderPane();
 		option1Pane.setCenter(option1Button);
 		option1Pane.setVisible(false);
 		return option1Pane;
 	}
-	
+
 	private BorderPane setOption2(Button option2Button) {
 		option2Button.setText(option2Title);
 		option2Button.wrapTextProperty().setValue(true);
@@ -344,13 +348,13 @@ public class TypingScene {
 				gameManager.showNextTypingScene();
 			}
 		});
-		
+
 		BorderPane option2Pane = new BorderPane();
 		option2Pane.setCenter(option2Button);
 		option2Pane.setVisible(false);
 		return option2Pane;
 	}
-	
+
 	private BorderPane setOption3(Button option3Button) {
 		option3Button.setText(option3Title);
 		option3Button.wrapTextProperty().setValue(true);
@@ -364,13 +368,13 @@ public class TypingScene {
 				gameManager.showNextTypingScene();
 			}
 		});
-		
+
 		BorderPane option3Pane = new BorderPane();
 		option3Pane.setCenter(option3Button);
 		option3Pane.setVisible(false);
 		return option3Pane;
 	}
-	
+
 	private void showOptions() {
 		if(option1Pane != null) option1Pane.setVisible(true);
 		if(option2Pane != null) option2Pane.setVisible(true);
