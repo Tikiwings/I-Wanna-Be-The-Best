@@ -1,5 +1,5 @@
 //Written by Donald Sanchez
-package test;
+package test.integration;
 
 import static org.junit.Assert.*;
 
