@@ -62,30 +62,6 @@ public class Load {
 			
 			lineScan.close();
 			
-			// checks for any errors
-			
-//				Player's class is null as read from file
-				
-			
-			
-//				Player's intelligence stat is null as read from file
-				
-			
-			
-//				Player's charisma stat is null as read from file
-	
-			
-			
-//				Player's HP stat is null as read from file
-				
-			
-//				Player's mp stat is null as read from file
-
-			
-//				Player's score stat is null as read from file
-
-			
-			
 			// creates the new player from the loaded file
 			Stats loadedStats = new Stats(hp, mp, intel, charis);
 			loadedPlayer = new Player(playerClass, loadedStats, score);
