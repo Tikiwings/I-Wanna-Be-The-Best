@@ -72,7 +72,7 @@ public class GameManager {
 	
 	public void showCurrentTypingScene() {
 		if (currentTypingSceneIndex >= mainStoryTypingScenes.size()) {
-			System.out.println("Warning: run out of TypingScene to play");
+//			Warning: run out of TypingScene to play
 			return;
 		}
 		
@@ -113,7 +113,8 @@ public class GameManager {
 	
 	public void showNextTypingScene() {
 		if (++currentTypingSceneIndex >= mainStoryTypingScenes.size()) {
-			System.out.println("Warning: run out of TypingScene to play");
+//			Warning: run out of TypingScene to play
+			
 			return;
 		}
 		
