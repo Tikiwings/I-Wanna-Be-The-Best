@@ -33,8 +33,8 @@ public class TypingScene {
 
 	private Label label = null;
 	private String[] strArray = null;
-	final static String emptyStr = "Empty";
-	final static String optionButton = "optionButton";
+	static final String EMPTYSTR = "Empty";
+	static final String OPTIONBUTTON = "optionButton";
 
 	// Current string index
 	private int strIndex = 0;
@@ -53,9 +53,9 @@ public class TypingScene {
 	// Options
 	private int totalOptionsNum = 0;
 
-	private String option1Title = emptyStr;
-	private String option2Title = emptyStr;
-	private String option3Title = emptyStr;
+	private String option1Title = EMPTYSTR;
+	private String option2Title = EMPTYSTR;
+	private String option3Title = EMPTYSTR;
 	private Stats option1Stats;
 	private Stats option2Stats;
 	private Stats option3Stats;
@@ -169,7 +169,7 @@ public class TypingScene {
 
 		 // Set VBox
 		 VBox root = new VBox();
-		 //root.setStyle("-fx-background-color: #035642");
+		 
 
 		 // Display (Text, settings...)
 		 
@@ -188,11 +188,11 @@ public class TypingScene {
 
 		 displayPane.setCenter(label);
 		 displayPane.setMinHeight(displayHeight);
-		 //displayPane.setStyle("-fx-background-color: #035642;");
+		 
 		 textBox.getChildren().add(displayPane);
 		 stackPane.getChildren().addAll(menuImage, textBox);
 		 root.getChildren().add(stackPane);
-		 //root.getChildren().addAll(displayPane, stackPane);
+		 
 
 
 		 // Set options
@@ -217,7 +217,8 @@ public class TypingScene {
 
 		 //Sound
 		 if (!soundPlaying) {
-		   	 soundPlaying = playSound(gameManager.getVolume());
+		   	 soundPlaying = true; 
+		   	 playSound(gameManager.getVolume());
 		 }
 
 		 //Stats
@@ -326,20 +327,20 @@ public class TypingScene {
 		return this.sound;
 	}
 
-	public boolean playSound(int volume) {
+	public void playSound(int volume) {
 		try {
 			Media media = new Media(new File("src/resources/songs/"+sound).toURI().toString());
 			player = new MediaPlayer(media);
 			player.setVolume(volume);
 			player.play();
-			return true;
+			//return true;
 		}
 		catch(MediaException e){
 			Media media = new Media(new File("src/resources/songs/"+"YeaPoly.mp3").toURI().toString());
 			player = new MediaPlayer(media);
 			player.setVolume(volume);
 			player.play();
-			return true;
+			//return true;
 		}
 	}
 
@@ -407,7 +408,7 @@ public class TypingScene {
 		option1Button.setText(option1Title);
 		option1Button.wrapTextProperty().setValue(true);
 		option1Button.setPadding(new Insets(0, 50, 0, 50));
-		option1Button.setId(optionButton);
+		option1Button.setId(OPTIONBUTTON);
 
 		if(totalOptionsNum != 1) {
 			option1Button.setOnAction(new EventHandler<ActionEvent>() {
@@ -451,7 +452,7 @@ public class TypingScene {
 		option2Button.setText(option2Title);
 		option2Button.wrapTextProperty().setValue(true);
 		option2Button.setPadding(new Insets(0, 50, 0, 50));
-		option2Button.setId(optionButton);
+		option2Button.setId(OPTIONBUTTON);
 		option2Button.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -471,7 +472,7 @@ public class TypingScene {
 		option3Button.setText(option3Title);
 		option3Button.wrapTextProperty().setValue(true);
 		option3Button.setPadding(new Insets(0, 50, 0, 50));
-		option3Button.setId(optionButton);
+		option3Button.setId(OPTIONBUTTON);
 		option3Button.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
