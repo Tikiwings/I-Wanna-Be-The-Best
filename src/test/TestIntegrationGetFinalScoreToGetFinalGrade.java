@@ -12,7 +12,7 @@ import logic.EndingScreen;
 import logic.Player;
 
 
-public class TestIntegration_getFinalScore_to_getFinalGrade {
+public class TestIntegrationGetFinalScoreToGetFinalGrade {
 
 	@Test
 	public void testIntegration()

@@ -38,7 +38,4 @@ public class TypingSceneFactoryExample {
 		typingSceneArrayList.add(typingScene);
 	}
 	
-	//public List<TypingScene> getTypingSceneArrayList() {
-	//	return typingSceneArrayList;
-	//}
 }

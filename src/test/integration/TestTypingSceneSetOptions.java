@@ -12,9 +12,9 @@ import logic.TypingScene;
 
 public class TestTypingSceneSetOptions {
 
-	final static String optionOneStr = "option1 title";
-	final static String optionTwoStr = "option2 title";
-	final static String optionThreeStr = "option3 title";
+	static final String OPTIONONESTR = "option1 title";
+	static final String OPTIONTWOSTR = "option2 title";
+	static final String OPTIONTHREESTR = "option3 title";
 	@Test
 	public void testSetOptionsOptionNum() {
 		// Initialize GameManager
@@ -27,9 +27,9 @@ public class TestTypingSceneSetOptions {
 		typingScene.setOptionsNum(optionNum);
 		
 		Stats stats = new Stats(0, 0, 0, 0);
-		String option1Title = optionOneStr;
-		String option2Title = optionTwoStr;
-		String option3Title = optionThreeStr;
+		String option1Title = OPTIONONESTR;
+		String option2Title = OPTIONTWOSTR;
+		String option3Title = OPTIONTHREESTR;
 		
 		typingScene.setOptions(optionNum, 
 				option1Title, stats, 
@@ -51,9 +51,9 @@ public class TestTypingSceneSetOptions {
 		typingScene.setOptionsNum(optionNum);
 		
 		Stats stats = new Stats(0, 0, 0, 0);
-		String option1Title = optionOneStr;
-		String option2Title = optionTwoStr;
-		String option3Title = optionThreeStr;
+		String option1Title = OPTIONONESTR;
+		String option2Title = OPTIONTWOSTR;
+		String option3Title = OPTIONTHREESTR;
 		
 		typingScene.setOptions(optionNum, 
 				option1Title, stats, 
@@ -75,9 +75,9 @@ public class TestTypingSceneSetOptions {
 		typingScene.setOptionsNum(optionNum);
 		
 		Stats stats = new Stats(0, 0, 0, 0);
-		String option1Title = optionOneStr;
-		String option2Title = optionTwoStr;
-		String option3Title = optionThreeStr;
+		String option1Title = OPTIONONESTR;
+		String option2Title = OPTIONTWOSTR;
+		String option3Title = OPTIONTHREESTR;
 		
 		typingScene.setOptions(optionNum, 
 				option1Title, stats, 
@@ -99,9 +99,9 @@ public class TestTypingSceneSetOptions {
 		typingScene.setOptionsNum(optionNum);
 		
 		Stats stats = new Stats(0, 0, 0, 0);
-		String option1Title = optionOneStr;
-		String option2Title = optionTwoStr;
-		String option3Title = optionThreeStr;
+		String option1Title = OPTIONONESTR;
+		String option2Title = OPTIONTWOSTR;
+		String option3Title = OPTIONTHREESTR;
 		
 		typingScene.setOptions(optionNum, 
 				option1Title, stats, 

@@ -51,14 +51,9 @@ public class TestGameManagerSave {
 
 	        while (line1 != null || line2 != null)
 	        {
-	            if (line1 == null || line2 == null)
+	            if (line1 == null || line2 == null || !line1.equalsIgnoreCase(line2))
 	            {
 	                areEqual = false;   
-	                break;
-	            }
-	            else if (!line1.equalsIgnoreCase(line2))
-	            {
-	                areEqual = false;
 	                break;
 	            }
 	            line1 = reader1.readLine();

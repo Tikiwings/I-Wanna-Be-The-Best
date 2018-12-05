@@ -13,14 +13,14 @@ import logic.Player;
 
 public class TestLoadFile {
 
-	final static String testSavePath = "/src/test/unit/resources/testSave.txt";
+	static final String TESTSAVEPATH = "/src/test/unit/resources/testSave.txt";
 	@Test
 	public void testLoadFileClass() {
 		// Initialize Loader
 		Load loader = new Load();
 		
 		String filePath = new File("").getAbsolutePath();
-		filePath += testSavePath;
+		filePath += TESTSAVEPATH;
 		
 		loader.loadSaveFile(filePath);
 		
@@ -33,7 +33,7 @@ public class TestLoadFile {
 		Load loader = new Load();
 		
 		String filePath = new File("").getAbsolutePath();
-		filePath += testSavePath;
+		filePath += TESTSAVEPATH;
 		
 		loader.loadSaveFile(filePath);
 		
@@ -51,7 +51,7 @@ public class TestLoadFile {
 		Load loader = new Load();
 		
 		String filePath = new File("").getAbsolutePath();
-		filePath += testSavePath;
+		filePath += TESTSAVEPATH;
 		
 		loader.loadSaveFile(filePath);
 		
@@ -64,7 +64,7 @@ public class TestLoadFile {
 		Load loader = new Load();
 		
 		String filePath = new File("").getAbsolutePath();
-		filePath += testSavePath;
+		filePath += TESTSAVEPATH;
 		
 		loader.loadSaveFile(filePath);
 		

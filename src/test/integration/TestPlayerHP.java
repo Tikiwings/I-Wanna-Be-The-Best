@@ -14,7 +14,7 @@ public class TestPlayerHP {
 		
 		Integer difference = bro.getHP() - athlete.getHP();
 		
-		assertEquals(new Integer (0), difference);
+		assertEquals(Integer.valueOf(0), difference);
 	}
 
 }

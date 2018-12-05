@@ -11,13 +11,13 @@ import logic.GameManager;
 
 public class TestGameManagerSetPlayerInitialStats {
 	
-	final static String codeWizard = "Coding Wizard";
+	static final String CODEWIZARD = "Coding Wizard";
 
 	@Test
 	public void testSetPlayerInitialStatsHP() {
     	// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
-		gameManager.setPlayerInitialStats(codeWizard);
+		gameManager.setPlayerInitialStats(CODEWIZARD);
 		
 		// Get player
 		Player player = gameManager.getPlayer();
@@ -29,7 +29,7 @@ public class TestGameManagerSetPlayerInitialStats {
 	public void testSetPlayerInitialStatsMP() {
     	// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
-		gameManager.setPlayerInitialStats(codeWizard);
+		gameManager.setPlayerInitialStats(CODEWIZARD);
 		
 		// Get player
 		Player player = gameManager.getPlayer();
@@ -41,7 +41,7 @@ public class TestGameManagerSetPlayerInitialStats {
 	public void testSetPlayerInitialStatsInt() {
     	// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
-		gameManager.setPlayerInitialStats(codeWizard);
+		gameManager.setPlayerInitialStats(CODEWIZARD);
 		
 		// Get player
 		Player player = gameManager.getPlayer();
@@ -53,7 +53,7 @@ public class TestGameManagerSetPlayerInitialStats {
 	public void testSetPlayerInitialStatsChar() {
     	// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
-		gameManager.setPlayerInitialStats(codeWizard);
+		gameManager.setPlayerInitialStats(CODEWIZARD);
 		
 		// Get player
 		Player player = gameManager.getPlayer();

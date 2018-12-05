@@ -14,7 +14,7 @@ public class TestPlayerIntelligence {
 		
 		Integer difference = bro.getInt() - athlete.getInt();
 		
-		assertEquals(new Integer (1), difference);
+		assertEquals(Integer.valueOf(1), difference);
 	}
 
 }

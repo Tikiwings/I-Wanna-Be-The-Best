@@ -11,12 +11,12 @@ import logic.Player;
 
 public class TestGameManagerLoadPlayerStats {
 
-	final static String codeWizard = "Coding Wizard";
+	static final String CODEWIZARD = "Coding Wizard";
 	
 	@Test
 	public void testLoadPlayerStatsHP() {
 		// Initialize player
-		Player player = new Player(codeWizard);
+		Player player = new Player(CODEWIZARD);
 		
 		// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
@@ -31,7 +31,7 @@ public class TestGameManagerLoadPlayerStats {
 	@Test
 	public void testLoadPlayerStatsMP() {
 		// Initialize player
-		Player player = new Player(codeWizard);
+		Player player = new Player(CODEWIZARD);
 		
 		// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
@@ -46,7 +46,7 @@ public class TestGameManagerLoadPlayerStats {
 	@Test
 	public void testLoadPlayerStatsInt() {
 		// Initialize player
-		Player player = new Player(codeWizard);
+		Player player = new Player(CODEWIZARD);
 		
 		// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
@@ -61,7 +61,7 @@ public class TestGameManagerLoadPlayerStats {
 	@Test
 	public void testLoadPlayerStatsChar() {
 		// Initialize player
-		Player player = new Player(codeWizard);
+		Player player = new Player(CODEWIZARD);
 		
 		// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
