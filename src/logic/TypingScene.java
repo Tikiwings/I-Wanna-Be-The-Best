@@ -149,7 +149,6 @@ public class TypingScene {
 
 	public VBox initScene(int screenWidth, int screenHeight) {
 		 // For background image
-		 System.out.println(imageName);
 		 ImageView menuImage;
 		 try {
 			 Image image = new Image("resources/images/" + imageName);
