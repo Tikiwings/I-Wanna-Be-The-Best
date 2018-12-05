@@ -14,16 +14,24 @@ public class Save {
 	}
 
 	// saves the current game's state to a file
-	public static void saveProgress(Player player, List<Integer> randEventOrder, Integer currentTypingSceneIndex) {
+	public static void saveProgress(Player player, List<Integer> randEventOrder, Integer currentTypingSceneIndex, String fileName) {
 		
+		File file = null;
 		FileChooser fileChooser = new FileChooser();
     	fileChooser.setTitle("Open Save File");
-    	File file = fileChooser.showSaveDialog(null);
+    	
+		if (fileName == null) {
+	    	file = fileChooser.showSaveDialog(null);
+		}
+		
     	BufferedWriter bw = null;
 		
-	    if (file != null) {
+	    if (file != null || fileName != null) {
 	        try {
-	        	bw = new BufferedWriter(new FileWriter(file +".txt"));
+	        	if (file != null)
+	        		bw = new BufferedWriter(new FileWriter(file +".txt"));
+	        	else if (fileName != null)
+	        		bw = new BufferedWriter(new FileWriter(fileName +".txt"));
 	            bw.write(player.getCurClass());
 	            bw.newLine();
 	            bw.write(player.getInt().toString());
@@ -56,44 +64,5 @@ public class Save {
 				}
 	        }
 	    }
-	}
-	
-	public static void saveProgressTestMethod(Player player, List<Integer> randEventOrder, Integer currentTypingSceneIndex, String fileName) {
-		BufferedWriter bw = null;
-		try {
-	        	bw = new BufferedWriter(new FileWriter(fileName +".txt"));
-	            bw.write(player.getCurClass());
-	            bw.newLine();
-	            bw.write(player.getInt().toString());
-	            bw.newLine();
-	            bw.write(player.getChar().toString());
-	            bw.newLine();
-	            bw.write(player.getHP().toString());
-	            bw.newLine();
-	            bw.write(player.getMP().toString());
-	            bw.newLine();
-	            bw.write(player.getScore().toString());
-	            bw.newLine();
-	            bw.write(currentTypingSceneIndex.toString());
-	            for (int i = 0; i < randEventOrder.size(); i++) {
-	            	bw.newLine();
-	            	bw.write(randEventOrder.get(i).toString());
-	            }
-	            bw.close();
-	        } 
-		catch (Exception ex) {
-	            ex.printStackTrace();
-	        }
-		finally
-		{
-			if(bw != null)
-			{
-				try {
-					bw.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 	}
 }

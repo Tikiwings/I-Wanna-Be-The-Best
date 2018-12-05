@@ -27,7 +27,7 @@ public class GameManager {
 	private Player player;
 	private int volume;
 
-	protected List<Integer> randEventOrder;
+	public List<Integer> randEventOrder;
 		
 	public GameManager(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -142,7 +142,7 @@ public class GameManager {
             	event.consume();
             }
             else if (event.getCode() == KeyCode.S) {
-            	saveFile();
+            	saveFile(null, randEventOrder);
             }
             else if ((event.getCode() == KeyCode.ESCAPE || event.getCode() == KeyCode.P) && currentTypingSceneIndex != -1) {
             	// pause menu
@@ -169,12 +169,8 @@ public class GameManager {
 		player.setChar(player.getChar() + statsChange.charisma > 0 ? player.getChar() + statsChange.charisma : 0);
 	}
 	
-	public void saveFile() {
-		Save.saveProgress(player, randEventOrder, currentTypingSceneIndex);
-	}
-	
-	public void saveFile(String filePath, List<Integer> randEventOrder) {
-		Save.saveProgressTestMethod(player, randEventOrder, currentTypingSceneIndex, filePath);
+	public void saveFile(String fileName, List<Integer> randEventOrder) {
+		Save.saveProgress(player, randEventOrder, currentTypingSceneIndex, fileName);
 	}
 	
 	public void setVolume(int volume) {

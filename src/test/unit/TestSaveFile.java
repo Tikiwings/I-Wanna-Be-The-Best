@@ -35,7 +35,7 @@ public class TestSaveFile {
 		filePath2 += "/src/test/unit/resources/testSave.txt";
 		
 		// Save
-		Save.saveProgressTestMethod(player, randEventOrder, 0, filePath);
+		Save.saveProgress(player, randEventOrder, 0, filePath);
 		
 		boolean areEqual = FileSameChecker.checkIfSameFile(filePath1, filePath2);
 

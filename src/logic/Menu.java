@@ -355,7 +355,7 @@ public class Menu {
             @Override
             public void handle(ActionEvent event) {
             	if (save)
-            		gameManager.saveFile();
+            		gameManager.saveFile(null, gameManager.randEventOrder);
             }
         });
 
