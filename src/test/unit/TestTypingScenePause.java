@@ -7,15 +7,8 @@ import org.junit.Test;
 import logic.GameManager;
 import logic.MainEvents;
 
-public class TestTypingSceneAttributes {
+public class TestTypingScenePause{
 
-	@Test
-	public void testSound() {
-		GameManager gm = new GameManager(null);
-		MainEvents main = new MainEvents();
-		main.initEvents(gm,"MainEvents.txt");
-		assertEquals("YeaPoly.mp3",main.getMainEventsArrayList().get(0).setSound("YeaPoly.mp3"));
-	}
 	@Test
 	public void testPause() {
 		String[] strArray = {"hello"};
