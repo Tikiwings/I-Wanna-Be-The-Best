@@ -13,6 +13,8 @@ public class Load {
 	private Integer curIndex;
 	private List<Integer> randOrderList;
 	
+	
+	
 	// loads a save file for the game
 	public void loadSaveFile(String filepath){
 		Scanner lineScan;
@@ -61,30 +63,28 @@ public class Load {
 			lineScan.close();
 			
 			// checks for any errors
-			if (playerClass == null) {
+			
 //				Player's class is null as read from file
 				
-			}
-			else if (intel == null) {
+			
+			
 //				Player's intelligence stat is null as read from file
 				
-			}
-			else if (charis == null) {
+			
+			
 //				Player's charisma stat is null as read from file
 	
-			}
-			else if (hp == null) {
+			
+			
 //				Player's HP stat is null as read from file
 				
-			}
-			else if (mp == null) {
+			
 //				Player's mp stat is null as read from file
 
-			}
-			else if (score == null) {
+			
 //				Player's score stat is null as read from file
 
-			}
+			
 			
 			// creates the new player from the loaded file
 			Stats loadedStats = new Stats(hp, mp, intel, charis);

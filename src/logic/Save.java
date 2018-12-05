@@ -7,6 +7,10 @@ import java.util.List;
 import javafx.stage.FileChooser;
 
 public class Save {
+	private Save()
+	{
+		
+	}
 
 	// saves the current game's state to a file
 	public static void saveProgress(Player player, List<Integer> randEventOrder, Integer currentTypingSceneIndex) {
