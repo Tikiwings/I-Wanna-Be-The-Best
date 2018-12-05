@@ -347,7 +347,7 @@ public class Menu {
         tutBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	tutBtn.getScene().setRoot(tutorialMenu(primaryStage, optionMenu(primaryStage, returnTo, save)));
+            	tutBtn.getScene().setRoot(tutorialMenu(optionMenu(primaryStage, returnTo, save)));
             }
         });
         
@@ -385,7 +385,7 @@ public class Menu {
         return wholeScreen;
     }
 
-    public VBox tutorialMenu(Stage primaryStage, VBox returnTo){
+    public VBox tutorialMenu(VBox returnTo){
 		/* for background */
 		Image image = new Image("resources/images/tm.png");
 		ImageView menuImage = new ImageView();

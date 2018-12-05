@@ -91,10 +91,7 @@ public class GameManager {
 	private TypingScene showCurrentTypingScene(TypingScene typingScene) {
 		// Set currentTypingScene
 		currentTypingScene = typingScene;
-//		primaryStage.getScene().setRoot(typingScene.initScene(screenWidth, screenHeight));
-//	
-//        // Play scene text
-//		typingScene.playText(scrollSpeed);
+	
 		return typingScene;
 	}
 	
