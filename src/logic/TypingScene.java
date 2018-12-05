@@ -282,7 +282,8 @@ public class TypingScene {
 
 		// Check if run out of strings
 		if(strIndex >= strArray.length) {
-			System.out.println("Warning: run out of strings to play");
+//			Warning: run out of strings to play
+			
 			return false;
 		}
 

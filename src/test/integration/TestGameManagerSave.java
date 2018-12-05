@@ -41,7 +41,8 @@ public class TestGameManagerSave {
 		boolean areEqual = true;
 		
 		try {
-			System.out.println(filePath1);
+			//print file path 1
+			
 			BufferedReader reader1 = new BufferedReader(new FileReader(filePath1));
 	        BufferedReader reader2 = new BufferedReader(new FileReader(filePath2));
 	        

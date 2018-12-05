@@ -36,10 +36,10 @@ public class Menu {
 	private int scrollSpeed = 1;
 	private int screenWidth;
 	private int screenHeight;
-	final static String RESOURCEIMG = "resources/images/bg.png";
-	final static String RESOURCEIMGBACKPRESSED ="resources/images/BACKPRESSED.png";
-	final static String RESOURCEIMGBACKNORMAL ="resources/images/BACKNORMAL.png";
-	final static String TEXTSTYLETAHOMA = "Tahoma";
+	static final String RESOURCEIMG = "resources/images/bg.png";
+	static final String RESOURCEIMGBACKPRESSED ="resources/images/BACKPRESSED.png";
+	static final String RESOURCEIMGBACKNORMAL ="resources/images/BACKNORMAL.png";
+	static final String TEXTSTYLETAHOMA = "Tahoma";
 
 	public void initMenu(Stage primaryStage, int screenWidth, int screenHeight, VBox menu){
 		this.screenWidth = screenWidth;
@@ -255,8 +255,7 @@ public class Menu {
             		newGameManager.setScreenSize(screenWidth, screenHeight);
             		newGameManager.showNextTypingScene();
 
-                }
-                else {}
+                }      
             }
         });
 

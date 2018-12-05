@@ -46,7 +46,7 @@ public class Player {
 				playerStats = new Stats(100, 100, 1, 1);
 				break;
 			default:
-				System.err.println("Class name given is not a valid class"); 
+//				Class name given is not a valid class 
 		}
 		score = 0;
 	}

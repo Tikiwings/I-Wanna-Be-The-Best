@@ -14,8 +14,9 @@ import javafx.scene.text.TextAlignment;
 
 public class EndingScreen {
 
-	private static final Double eduMax = 20.0; 
-	private static final Double socMax = 20.0;
+	private static final Double EDUMAX = 20.0; 
+	private static final Double SOCMAX = 20.0;
+	private static final String GRADETEXTSTYLE = "-fx-font: 35px Tahoma; -fx-fill: #FFFFFF;";
 	
 	private GameManager gameManager;
 	
@@ -28,8 +29,8 @@ public class EndingScreen {
 	{
 		Double [] finalScore = new Double [2];
 		
-		finalScore[0] = gameManager.getPlayer().getInt() / eduMax * 100.0;
-		finalScore[1] = gameManager.getPlayer().getChar() / socMax * 100.0;
+		finalScore[0] = gameManager.getPlayer().getInt() / EDUMAX * 100.0;
+		finalScore[1] = gameManager.getPlayer().getChar() / SOCMAX * 100.0;
 		
 		
 		return finalScore;
@@ -38,7 +39,7 @@ public class EndingScreen {
 	
 	public Text getFinalGrade(Double score)
 	{
-		String textStyle = "-fx-font: 35px Tahoma; -fx-fill: #FFFFFF;";
+		String textStyle = GRADETEXTSTYLE;
 		Text finalGrade  = new Text();
 		finalGrade.setTextAlignment(TextAlignment.CENTER);
 		finalGrade.setStyle(textStyle);
@@ -83,12 +84,12 @@ public class EndingScreen {
         Text titleText = new Text();
         titleText.setText("Final Scores");
         titleText.setTextAlignment(TextAlignment.CENTER);
-        titleText.setStyle("-fx-font: 35px Tahoma; -fx-fill: #FFFFFF;");
+        titleText.setStyle(GRADETEXTSTYLE);
 
 		HBox titleHBox = new HBox();
 		titleHBox.getChildren().add(titleText);
 		titleHBox.setMinHeight(screenHeight/4);
-		titleHBox.setMaxHeight(screenHeight/4);
+		titleHBox.setMaxHeight(screenWidth/4);
 		titleHBox.setAlignment(Pos.CENTER);
 		
 		//Calculate Scores
@@ -103,13 +104,13 @@ public class EndingScreen {
 		Text eduScoreText = new Text();
 		eduScoreText.setText("Education Score:");
 		eduScoreText.setTextAlignment(TextAlignment.CENTER);
-		eduScoreText.setStyle("-fx-font: 35px Tahoma; -fx-fill: #FFFFFF;");
+		eduScoreText.setStyle(GRADETEXTSTYLE);
 		
 		HBox socScoreTextBox = new HBox();
 		Text socScoreText = new Text();
 		socScoreText.setText("Social Score:");
 		socScoreText.setTextAlignment(TextAlignment.CENTER);
-		socScoreText.setStyle("-fx-font: 35px Tahoma; -fx-fill: #FFFFFF;");
+		socScoreText.setStyle(GRADETEXTSTYLE);
 
 		
 		eduScoreTextBox.getChildren().add(eduScoreText);

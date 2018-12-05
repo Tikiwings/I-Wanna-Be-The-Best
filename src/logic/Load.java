@@ -62,22 +62,28 @@ public class Load {
 			
 			// checks for any errors
 			if (playerClass == null) {
-				System.err.println("Player's class is null as read from file");
+//				Player's class is null as read from file
+				
 			}
 			else if (intel == null) {
-				System.err.println("Player's intelligence stat is null as read from file");
+//				Player's intelligence stat is null as read from file
+				
 			}
 			else if (charis == null) {
-				System.err.println("Player's charisma stat is null as read from file");
+//				Player's charisma stat is null as read from file
+	
 			}
 			else if (hp == null) {
-				System.err.println("Player's HP stat is null as read from file");
+//				Player's HP stat is null as read from file
+				
 			}
 			else if (mp == null) {
-				System.err.println("Player's mp stat is null as read from file");
+//				Player's mp stat is null as read from file
+
 			}
 			else if (score == null) {
-				System.err.println("Player's score stat is null as read from file");
+//				Player's score stat is null as read from file
+
 			}
 			
 			// creates the new player from the loaded file
