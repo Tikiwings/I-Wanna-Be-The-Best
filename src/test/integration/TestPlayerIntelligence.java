@@ -1,3 +1,4 @@
+// written by Thinh Luu
 package test.integration;
 
 import static org.junit.Assert.*;
