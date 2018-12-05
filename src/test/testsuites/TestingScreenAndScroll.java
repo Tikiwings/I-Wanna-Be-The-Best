@@ -1,5 +1,5 @@
 // written by Thinh Luu (test suite)
-package test.testSuites;
+package test.testsuites;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
