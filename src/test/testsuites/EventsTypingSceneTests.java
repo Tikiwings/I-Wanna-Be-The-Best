@@ -6,11 +6,13 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import test.integration.TestEvents;
-import test.unit.TestTypingSceneAttributes;
+import test.unit.TestTypingSceneSound;
+import test.unit.TestTypingScenePause;
 
 @RunWith(Suite.class)
 @SuiteClasses({ TestEvents.class,
-				TestTypingSceneAttributes.class})
+				TestTypingScenePause.class,
+				TestTypingSceneSound.class})
 public class EventsTypingSceneTests {
 
 }
