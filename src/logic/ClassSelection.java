@@ -13,12 +13,15 @@ public class ClassSelection {
 	
 	private GameManager gameManager;
 	
+	
 	public ClassSelection(GameManager gameManager) {
 		// Set gameManager
 		this.gameManager = gameManager;
 	}
 	
-	public VBox init_scene(int screenWidth, int screenHeight) {
+	public VBox initScene(int screenWidth, int screenHeight) {
+		String optionBtn = "optionButton";
+		
 		// Set VBox
         VBox root = new VBox();
         root.setStyle("-fx-background-color: #035642");
@@ -32,12 +35,13 @@ public class ClassSelection {
 		HBox titleHBox = new HBox();
 		titleHBox.getChildren().add(titleText);
 		titleHBox.setMinHeight(screenHeight/4);
+		titleHBox.setMaxHeight(screenWidth/4);
 		titleHBox.setAlignment(Pos.CENTER);
 		
 		// Buttons
 		Button codingWizardButton = new Button();
 		codingWizardButton.setText("Coding Wizard");
-		codingWizardButton.setId("optionButton");
+		codingWizardButton.setId(optionBtn);
 		codingWizardButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -48,7 +52,7 @@ public class ClassSelection {
 		
 		Button codingMonkeyButton = new Button();
 		codingMonkeyButton.setText("Coding Monkey");
-		codingMonkeyButton.setId("optionButton");
+		codingMonkeyButton.setId(optionBtn);
 		codingMonkeyButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -59,7 +63,7 @@ public class ClassSelection {
 
 		Button brogrammerButton = new Button();
 		brogrammerButton.setText("Brogrammer");
-		brogrammerButton.setId("optionButton");
+		brogrammerButton.setId(optionBtn);
 		brogrammerButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -70,7 +74,7 @@ public class ClassSelection {
 		
 		Button athleteButton = new Button();
 		athleteButton.setText("Athlete");
-		athleteButton.setId("optionButton");
+		athleteButton.setId(optionBtn);
 		athleteButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -81,7 +85,7 @@ public class ClassSelection {
 		
 		Button networkKingButton = new Button();
 		networkKingButton.setText("Network King");
-		networkKingButton.setId("optionButton");
+		networkKingButton.setId(optionBtn);
 		networkKingButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -92,7 +96,7 @@ public class ClassSelection {
 		
 		Button degenerateButton = new Button();
 		degenerateButton.setText("Degenerate");
-		degenerateButton.setId("optionButton");
+		degenerateButton.setId(optionBtn);
 		degenerateButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {

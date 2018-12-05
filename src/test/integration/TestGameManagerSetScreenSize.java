@@ -11,7 +11,7 @@ import logic.GameManager;
 public class TestGameManagerSetScreenSize {
 
 	@Test
-	public void testSetScreenSize_Width() {
+	public void testSetScreenSizeWidth() {
 		// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
 		
@@ -23,7 +23,7 @@ public class TestGameManagerSetScreenSize {
 	}
 
 	@Test
-	public void testSetScreenSize_Height() {
+	public void testSetScreenSizeHeight() {
 		// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
 		

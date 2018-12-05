@@ -3,26 +3,30 @@ package logic;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
 public class RandomEvents {
 	
 	private ArrayList<TypingScene> list;
-	private ArrayList<Integer> randomList = new ArrayList<Integer>();
+												//ArrayList<Integer>
+	private ArrayList<Integer> randomList = new ArrayList<>();
 
-	public void initRandomEvents(GameManager GameManager){
+	public void initRandomEvents(GameManager gameManager){
 		Scanner lineScan;
-		list = new ArrayList <TypingScene>();
+//		list = new ArrayList<TypingScene>();
+		list = new ArrayList<>();
 		try {
 			lineScan = new Scanner(new File(System.getProperty("user.dir") + "/src/resources/events/RandomEvents.txt"));
 			lineScan.useDelimiter("\n");
 			Scanner wordScan;
-			int numTexts,numButtons;
+			int numTexts;
+			int numButtons;
 			String[] strArray;
 			TypingScene typeSc;
 			while(lineScan.hasNext()) {
-				typeSc = new TypingScene(GameManager);
+				typeSc = new TypingScene(gameManager);
 				wordScan = new Scanner(lineScan.next());
 				wordScan.useDelimiter(";");
 				
@@ -63,12 +67,12 @@ public class RandomEvents {
 				e.printStackTrace();
 		}
 	}
-	
-	public ArrayList<TypingScene> getRandomEventsArrayList(){
+	//ArrayList<TypingScene>
+	public List<TypingScene> getRandomEventsArrayList(){
 		return list;
 	}
 	
-	public int NonRepeatRandNum() {
+	public int nonRepeatRandNum() {
 		int randNum;
 		int attempts = 0;
 		Random rand = new Random();

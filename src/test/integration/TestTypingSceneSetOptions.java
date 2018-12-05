@@ -12,8 +12,11 @@ import logic.TypingScene;
 
 public class TestTypingSceneSetOptions {
 
+	final static String optionOneStr = "option1 title";
+	final static String optionTwoStr = "option2 title";
+	final static String optionThreeStr = "option3 title";
 	@Test
-	public void testSetOptions_OptionNum() {
+	public void testSetOptionsOptionNum() {
 		// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
 		
@@ -24,20 +27,20 @@ public class TestTypingSceneSetOptions {
 		typingScene.setOptionsNum(optionNum);
 		
 		Stats stats = new Stats(0, 0, 0, 0);
-		String option1Title = "option1 title";
-		String option2Title = "option2 title";
-		String option3Title = "option3 title";
+		String option1Title = optionOneStr;
+		String option2Title = optionTwoStr;
+		String option3Title = optionThreeStr;
 		
 		typingScene.setOptions(optionNum, 
 				option1Title, stats, 
 				option2Title, stats, 
 				option3Title, stats);
 		
-		assertEquals(optionNum, typingScene.totalOptionsNum);
+		assertEquals(optionNum, typingScene.getOptionNum());
 	}
 
 	@Test
-	public void testSetOptions_Option1() {
+	public void testSetOptionsOption1() {
 		// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
 		
@@ -48,20 +51,20 @@ public class TestTypingSceneSetOptions {
 		typingScene.setOptionsNum(optionNum);
 		
 		Stats stats = new Stats(0, 0, 0, 0);
-		String option1Title = "option1 title";
-		String option2Title = "option2 title";
-		String option3Title = "option3 title";
+		String option1Title = optionOneStr;
+		String option2Title = optionTwoStr;
+		String option3Title = optionThreeStr;
 		
 		typingScene.setOptions(optionNum, 
 				option1Title, stats, 
 				option2Title, stats, 
 				option3Title, stats);
 		
-		assertEquals("1. " + option1Title, typingScene.option1Title);
+		assertEquals("1. " + option1Title, typingScene.getOptionTitleOne());
 	}
 	
 	@Test
-	public void testSetOptions_Option2() {
+	public void testSetOptionsOption2() {
 		// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
 		
@@ -72,20 +75,20 @@ public class TestTypingSceneSetOptions {
 		typingScene.setOptionsNum(optionNum);
 		
 		Stats stats = new Stats(0, 0, 0, 0);
-		String option1Title = "option1 title";
-		String option2Title = "option2 title";
-		String option3Title = "option3 title";
+		String option1Title = optionOneStr;
+		String option2Title = optionTwoStr;
+		String option3Title = optionThreeStr;
 		
 		typingScene.setOptions(optionNum, 
 				option1Title, stats, 
 				option2Title, stats, 
 				option3Title, stats);
 		
-		assertEquals("2. " + option2Title, typingScene.option2Title);
+		assertEquals("2. " + option2Title, typingScene.getOptionTitleTwo());
 	}
 	
 	@Test
-	public void testSetOptions_Option3() {
+	public void testSetOptionsOption3() {
 		// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
 		
@@ -96,15 +99,15 @@ public class TestTypingSceneSetOptions {
 		typingScene.setOptionsNum(optionNum);
 		
 		Stats stats = new Stats(0, 0, 0, 0);
-		String option1Title = "option1 title";
-		String option2Title = "option2 title";
-		String option3Title = "option3 title";
+		String option1Title = optionOneStr;
+		String option2Title = optionTwoStr;
+		String option3Title = optionThreeStr;
 		
 		typingScene.setOptions(optionNum, 
 				option1Title, stats, 
 				option2Title, stats, 
 				option3Title, stats);
 		
-		assertEquals("3. " + option3Title, typingScene.option3Title);
+		assertEquals("3. " + option3Title, typingScene.getOptionTitleThree());
 	}
 }

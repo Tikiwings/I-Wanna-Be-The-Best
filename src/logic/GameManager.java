@@ -14,7 +14,8 @@ public class GameManager {
 	
 	Menu menu;
 	
-	private int screenWidth = 640, screenHeight = 360;
+	private int screenWidth = 640;
+	private int screenHeight = 360;
 	private double scrollSpeed = 1;
 	
 	private List<TypingScene> mainStoryTypingScenes;
@@ -22,8 +23,8 @@ public class GameManager {
 	private int currentTypingSceneIndex = -1;
 		
 	// Player properties
-	public Player player;
-	public int volume;
+	private Player player;
+	private int volume;
 
 	protected List<Integer> randEventOrder;
 		
@@ -76,11 +77,11 @@ public class GameManager {
 		}
 		
 		// Reset
-		if (mainStoryTypingScenes.get(currentTypingSceneIndex).strIndex > 0)
-			mainStoryTypingScenes.get(currentTypingSceneIndex).strIndex--;
+		if (mainStoryTypingScenes.get(currentTypingSceneIndex).getStrIndex() > 0)
+			mainStoryTypingScenes.get(currentTypingSceneIndex).incStrIndex(-1);
 		 
-		else if (mainStoryTypingScenes.get(currentTypingSceneIndex).strIndex < 0) {
-			mainStoryTypingScenes.get(currentTypingSceneIndex).strIndex = 0;
+		else if (mainStoryTypingScenes.get(currentTypingSceneIndex).getStrIndex() < 0) {
+			mainStoryTypingScenes.get(currentTypingSceneIndex).setStrIndex(0);
 		}	
 		showCurrentTypingScene(mainStoryTypingScenes.get(currentTypingSceneIndex));
 	}
@@ -88,7 +89,7 @@ public class GameManager {
 	private void showCurrentTypingScene(TypingScene typingScene) {
 		// Set currentTypingScene
 		currentTypingScene = typingScene;
-		primaryStage.getScene().setRoot(typingScene.init_scene(screenWidth, screenHeight));
+		primaryStage.getScene().setRoot(typingScene.initScene(screenWidth, screenHeight));
 	
         // Play scene text
 		typingScene.playText(scrollSpeed);
@@ -98,7 +99,7 @@ public class GameManager {
 		// Show class selection screen
 		ClassSelection classSelection = new ClassSelection(this);
 		
-		Scene scene = new Scene(classSelection.init_scene(screenWidth, screenHeight), screenWidth, screenHeight, Color.WHITE);
+		Scene scene = new Scene(classSelection.initScene(screenWidth, screenHeight), screenWidth, screenHeight, Color.WHITE);
 		scene.getStylesheets().add(getClass().getResource("/resources/css/application.css").toExternalForm());
         primaryStage.setScene(scene);
        
@@ -117,7 +118,7 @@ public class GameManager {
 		}
 		
 		// Reset
-		mainStoryTypingScenes.get(currentTypingSceneIndex).strIndex = 0;
+		mainStoryTypingScenes.get(currentTypingSceneIndex).setStrIndex(0);
 		
 		showNextTypingScene(mainStoryTypingScenes.get(currentTypingSceneIndex));
 	}
@@ -125,7 +126,7 @@ public class GameManager {
 	private void showNextTypingScene(TypingScene typingScene) {
 		// Set currentTypingScene
 		currentTypingScene = typingScene;
-		primaryStage.getScene().setRoot(typingScene.init_scene(screenWidth, screenHeight));
+		primaryStage.getScene().setRoot(typingScene.initScene(screenWidth, screenHeight));
 	
         // Play scene text
         typingScene.playText(scrollSpeed);
@@ -178,5 +179,13 @@ public class GameManager {
 		if(currentTypingScene != null) {
 			currentTypingScene.setVolume(volume);
 		} 
+	}
+	public Player getPlayer()
+	{
+		return this.player;
+	}
+	public int getVolume()
+	{
+		return this.volume;
 	}
 }

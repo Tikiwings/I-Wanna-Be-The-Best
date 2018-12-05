@@ -14,7 +14,8 @@ import javafx.scene.text.TextAlignment;
 
 public class EndingScreen {
 
-	private final Double EDU_MAX = 20.0, SOC_MAX = 20.0;
+	private static final Double eduMax = 20.0; 
+	private static final Double socMax = 20.0;
 	
 	private GameManager gameManager;
 	
@@ -23,17 +24,12 @@ public class EndingScreen {
 		this.gameManager = gameManager;
 	}
 	
-	/*Calculates final score and returns an array with the scores; 
-	 * [0] = Education Score
-	 * [1] = Social Score
-	 */
-	
 	public Double[] getFinalScore(GameManager gameManager)
 	{
 		Double [] finalScore = new Double [2];
 		
-		finalScore[0] = gameManager.player.getInt() / EDU_MAX * 100.0;
-		finalScore[1] = gameManager.player.getChar() / SOC_MAX * 100.0;
+		finalScore[0] = gameManager.getPlayer().getInt() / eduMax * 100.0;
+		finalScore[1] = gameManager.getPlayer().getChar() / socMax * 100.0;
 		
 		
 		return finalScore;
@@ -42,9 +38,10 @@ public class EndingScreen {
 	
 	public Text getFinalGrade(Double score)
 	{
+		String textStyle = "-fx-font: 35px Tahoma; -fx-fill: #FFFFFF;";
 		Text finalGrade  = new Text();
 		finalGrade.setTextAlignment(TextAlignment.CENTER);
-		finalGrade.setStyle("-fx-font: 35px Tahoma; -fx-fill: #FFFFFF;");
+		finalGrade.setStyle(textStyle);
 		finalGrade.setText("This isn't working");
 		
 		if(score >= 90.0)
@@ -71,7 +68,7 @@ public class EndingScreen {
 		return finalGrade;
 	}
 	
-	public VBox init_scene(int screenWidth, int screenHeight) {
+	public VBox initScene(int screenWidth, int screenHeight) {
 		// Set VBox
         VBox root = new VBox();
         root.setStyle("-fx-background-color: #035642");
@@ -91,10 +88,11 @@ public class EndingScreen {
 		HBox titleHBox = new HBox();
 		titleHBox.getChildren().add(titleText);
 		titleHBox.setMinHeight(screenHeight/4);
+		titleHBox.setMaxHeight(screenHeight/4);
 		titleHBox.setAlignment(Pos.CENTER);
 		
 		//Calculate Scores
-		Double [] finalScores = new Double [2];
+		Double [] finalScores;
 		finalScores = getFinalScore(gameManager);
 		
 		//Create boxes for grade text and set final grade
@@ -134,8 +132,6 @@ public class EndingScreen {
 		mainMenuButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-//				gameManager.setPlayerInitialStats(codingWizardButton.getText());
-//				gameManager.showNextTypingScene();
 				new Main().start(gameManager.primaryStage);
 			}
 		});
