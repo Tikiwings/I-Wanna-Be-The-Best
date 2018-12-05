@@ -16,14 +16,14 @@ public class TestEvents {
 	public void testRandomEvents() {
 		GameManager gm = new GameManager(null);
 		RandomEvents rand = new RandomEvents();
-		rand.initRandomEvents(gm);
+		rand.initRandomEvents(gm,"RandomEvents.txt");
 		assertEquals("catcall.mp3",rand.getRandomEventsArrayList().get(0).getSound());
 	}
 	@Test
 	public void testMainEvents() {
 		GameManager gm = new GameManager(null);
 		MainEvents main = new MainEvents();
-		main.initMainEvents(gm);
+		main.initEvents(gm,"MainEvents.txt");
 		assertEquals("YeaPoly.mp3",main.getMainEventsArrayList().get(0).getSound());
 	}
 	@Test

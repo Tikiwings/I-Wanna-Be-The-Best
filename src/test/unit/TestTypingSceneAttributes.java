@@ -13,7 +13,7 @@ public class TestTypingSceneAttributes {
 	public void testSound() {
 		GameManager gm = new GameManager(null);
 		MainEvents main = new MainEvents();
-		main.initMainEvents(gm);
+		main.initEvents(gm,"MainEvents.txt");
 		assertEquals("YeaPoly.mp3",main.getMainEventsArrayList().get(0).setSound("YeaPoly.mp3"));
 	}
 	@Test
@@ -21,7 +21,7 @@ public class TestTypingSceneAttributes {
 		String[] strArray = {"hello"};
 		GameManager gm = new GameManager(null);
 		MainEvents main = new MainEvents();
-		main.initMainEvents(gm);
+		main.initEvents(gm,"MainEvents.txt");
 		assertEquals("hello",main.getMainEventsArrayList().get(0).setStrArray(strArray)[0]);
 	}
 }

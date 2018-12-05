@@ -17,7 +17,7 @@ public class TestImageSettings {
 
 		GameManager gameManager = new GameManager(null);
 		MainEvents main = new MainEvents();
-		main.initMainEvents(gameManager);
+		main.initEvents(gameManager,"MainEvents.txt");
 
 		String setImage = main.getMainEventsArrayList().get(0).setImage(image);
 
@@ -30,7 +30,7 @@ public class TestImageSettings {
 
 		GameManager gameManager = new GameManager(null);
 		MainEvents main = new MainEvents();
-		main.initMainEvents(gameManager);
+		main.initEvents(gameManager,"MainEvents.txt");
 
 		String setImage = main.getMainEventsArrayList().get(0).setImage(image);
 

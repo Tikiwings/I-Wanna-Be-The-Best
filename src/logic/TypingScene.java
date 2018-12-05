@@ -15,7 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
@@ -237,27 +236,6 @@ public class TypingScene {
 		 //save button here when implemented
 
 		 return root;
-	}
-
-	public void setButton(Button button, String pressedImage, String normalImage){
-		Image startNormal = new Image(normalImage);
-		Image startPressed = new Image(pressedImage);
-		button.setGraphic(new ImageView(startNormal));
-        button.setStyle("-fx-background-color: #035642");
-        button.addEventHandler(MouseEvent.MOUSE_ENTERED,
-    		new EventHandler<MouseEvent>() {
-    			@Override
-    			public void handle(MouseEvent e) {
-    				button.setGraphic(new ImageView(startPressed));
-    			}
-    		});
-        button.addEventHandler(MouseEvent.MOUSE_EXITED,
-    		new EventHandler<MouseEvent>() {
-    			@Override
-    			public void handle(MouseEvent e) {
-    				button.setGraphic(new ImageView(startNormal));
-    			}
-        	});
 	}
 
 	// Return false when running out of strings (possibly means should go to next scene)

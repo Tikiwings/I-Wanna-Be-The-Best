@@ -18,7 +18,7 @@ public class TestVolumeSetting {
 
 		GameManager gameManager = new GameManager(null);
 		MainEvents main = new MainEvents();
-		main.initMainEvents(gameManager);
+		main.initEvents(gameManager,"MainEvents.txt");
 
 		int setVolume = main.getMainEventsArrayList().get(0).setVolumeTest(originalVolume);
 
@@ -33,7 +33,7 @@ public class TestVolumeSetting {
 
 		GameManager gameManager = new GameManager(null);
 		MainEvents main = new MainEvents();
-		main.initMainEvents(gameManager);
+		main.initEvents(gameManager,"MainEvents.txt");
 
 		int setVolume = main.getMainEventsArrayList().get(0).setVolumeTest(originalVolume);
 

@@ -15,7 +15,7 @@ public class Events {
 		list = new ArrayList<>();
 		
 		RandomEvents randEvents = new RandomEvents();
-		randEvents.initRandomEvents(gameManager);
+		randEvents.initRandomEvents(gameManager,"RandomEvents.txt");
 		for (int i = 0; i < mainList.size(); i++) {
 			randEventOrder.add(randEvents.nonRepeatRandNum());
 		}
@@ -54,7 +54,7 @@ public class Events {
 	private List<TypingScene> initializeRandomEvents(GameManager gameManager){
 		ArrayList<TypingScene> randList;
 		RandomEvents randEvents = new RandomEvents();
-		randEvents.initRandomEvents(gameManager);
+		randEvents.initRandomEvents(gameManager,"RandomEvents.txt");
 		randList = (ArrayList<TypingScene>) randEvents.getRandomEventsArrayList();
 		return randList;
 	}
@@ -62,7 +62,7 @@ public class Events {
 	private List<TypingScene> initializeMainEvents(GameManager gameManager){
 		ArrayList<TypingScene> mainList;
 		MainEvents mainEvents = new MainEvents();
-		mainEvents.initMainEvents(gameManager);
+		mainEvents.initEvents(gameManager,"MainEvents.txt");
 		mainList = (ArrayList<TypingScene>) mainEvents.getMainEventsArrayList();
 		return mainList;
 	}

@@ -180,7 +180,7 @@ public class Menu {
         optionButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	optionButton.getScene().setRoot(optionMenu(primaryStage));
+            	optionButton.getScene().setRoot(optionMenu(primaryStage, mMenu(primaryStage), false));
             }
         });
 
@@ -262,7 +262,7 @@ public class Menu {
         return vBox;
     }
 
-    public VBox optionMenu(Stage primaryStage){
+    public VBox optionMenu(Stage primaryStage, VBox returnTo, boolean save){
 		/* for background */
 		Image image = new Image(RESOURCEIMG);
 		ImageView menuImage = new ImageView();
@@ -316,7 +316,10 @@ public class Menu {
         setButton(backBtn, RESOURCEIMGBACKPRESSED, RESOURCEIMGBACKNORMAL);
         Button tutBtn = new Button();
         setButton(tutBtn, "resources/images/TutorialPressed.png", "resources/images/TutorialNormal.png");
-
+        Button saveBtn = new Button();
+        if (save)
+        	setButton(saveBtn, "resources/images/SavePressed.png", "resources/images/SaveNormal.png");
+        
         /* add components to grid */
         grid.add(scrolTitle, 0, 0);
         grid.add(scrollSpeedSlider, 1, 0);
@@ -326,21 +329,33 @@ public class Menu {
         grid.add(volumePercentage, 4, 1);
         grid.add(tutBtn, 0, 2);
         grid.add(backBtn, 0, 3);
-
+        if (save)
+        	grid.add(saveBtn, 1, 3);
         stackPane.getChildren().addAll(menuImage, grid);
         wholeScreen.getChildren().addAll(stackPane);
 
         backBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	backBtn.getScene().setRoot(mMenu(primaryStage));
+            	if (returnTo == null)
+            		backBtn.getScene().setRoot(mMenu(primaryStage));
+            	else
+            		backBtn.getScene().setRoot(returnTo);
             }
         });
 
         tutBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	tutBtn.getScene().setRoot(tutorialMenu(primaryStage));
+            	tutBtn.getScene().setRoot(tutorialMenu(primaryStage, optionMenu(primaryStage, returnTo, save)));
+            }
+        });
+        
+        saveBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	if (save)
+            		gameManager.saveFile();
             }
         });
 
@@ -370,7 +385,7 @@ public class Menu {
         return wholeScreen;
     }
 
-    public VBox tutorialMenu(Stage primaryStage){
+    public VBox tutorialMenu(Stage primaryStage, VBox returnTo){
 		/* for background */
 		Image image = new Image("resources/images/tm.png");
 		ImageView menuImage = new ImageView();
@@ -399,146 +414,12 @@ public class Menu {
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	btn.getScene().setRoot(optionMenu(primaryStage));
+            	btn.getScene().setRoot(returnTo);
             }
         });
         return wholeScreen;
     }
     
-    public VBox pauseTutorialMenu(Stage primaryStage){
-		/* for background */
-		Image image = new Image("resources/images/tm.png");
-		ImageView menuImage = new ImageView();
-		menuImage.setImage(image);
-
-		/* To stack buttons and text over image */
-		StackPane stackPane = new StackPane();
-
-		/* vbox to be outputted */
-    	VBox wholeScreen = new VBox();
-    	wholeScreen.setAlignment(Pos.BOTTOM_CENTER);
-
-    	/* button location */
-    	HBox buttonBox = new HBox();
-    	BorderPane root = new BorderPane();
-
-    	root.setBottom(buttonBox);
-
-        Button btn = new Button();
-        setButton(btn, RESOURCEIMGBACKPRESSED, RESOURCEIMGBACKNORMAL);
-
-        buttonBox.getChildren().add(btn);
-        stackPane.getChildren().addAll(menuImage, root);
-        wholeScreen.getChildren().addAll(stackPane);
-
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-            	btn.getScene().setRoot(pauseMenu(primaryStage));
-            }
-        });
-        return wholeScreen;
-    }
-
-    public VBox pauseMenu(Stage primaryStage){
-		/* for background */
-		Image image = new Image(RESOURCEIMG);
-		ImageView menuImage = new ImageView();
-		menuImage.setImage(image);
- 		/* text for options */
-		Text volumeTitle = new Text("Volume");
-		volumeTitle.setFont(Font.font(TEXTSTYLETAHOMA, FontWeight.NORMAL, 30));
-		volumeTitle.setFill(Color.WHITE);
-		Text scrolTitle = new Text("Scroll Speed");
-		scrolTitle.setFont(Font.font(TEXTSTYLETAHOMA, FontWeight.NORMAL, 30));
-		scrolTitle.setFill(Color.WHITE);
-     	/* configuration for grid holding slider and percentages */
-    	GridPane grid = new GridPane();
-    	grid.setAlignment(Pos.CENTER);
-    	grid.setHgap(10);
-    	grid.setVgap(10);
- 		/* label for scroll speed percentage */
-		Label scrollSpeedPercentage = new Label("" + (scrollSpeed * 10) + "%");
-		scrollSpeedPercentage.setTextFill(Color.WHITE);
-		Label volumePercentage = new Label("" + volume + "%");
-		volumePercentage.setTextFill(Color.WHITE);
- 		/* To stack buttons and text over image */
-		StackPane stackPane = new StackPane();
- 		/* vbox to be outputted */
-    	VBox wholeScreen = new VBox();
-    	wholeScreen.setAlignment(Pos.CENTER);
-     	/* slider for scroll speed */
-    	Slider scrollSpeedSlider = new Slider();
-    	scrollSpeedSlider.setMin(0);
-    	scrollSpeedSlider.setMax(10);
-    	scrollSpeedSlider.setBlockIncrement(1);
-     	/* slider for scroll speed */
-    	Slider volumeSlider = new Slider();
-    	volumeSlider.setMin(0);
-    	volumeSlider.setMax(100);
-    	volumeSlider.setBlockIncrement(1);
-     	/* sets the slider position on startup */
-		volumeSlider.setValue(volume);
-		scrollSpeedSlider.setValue(scrollSpeed);
-     	/* button setup */
-        Button backBtn = new Button();
-        setButton(backBtn, RESOURCEIMGBACKPRESSED, RESOURCEIMGBACKNORMAL);
-        Button saveBtn = new Button();
-        setButton(saveBtn, "resources/images/SavePressed.png", "resources/images/SaveNormal.png");
-        Button tutBtn = new Button();
-        setButton(tutBtn, "resources/images/TutorialPressed.png", "resources/images/TutorialNormal.png");
-        /* add components to grid */
-        grid.add(scrolTitle, 0, 0);
-        grid.add(scrollSpeedSlider, 1, 0);
-        grid.add(scrollSpeedPercentage, 4, 0);
-        grid.add(volumeTitle, 0, 1);
-        grid.add(volumeSlider, 1, 1);
-        grid.add(volumePercentage, 4, 1);
-        grid.add(tutBtn, 0, 2);
-        grid.add(backBtn, 0, 3);
-        grid.add(saveBtn, 1, 3);
-        stackPane.getChildren().addAll(menuImage, grid);
-        wholeScreen.getChildren().addAll(stackPane);
-        backBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-            	gameManager.showCurrentTypingScene();
-            }
-        });
-        tutBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-            	tutBtn.getScene().setRoot(pauseTutorialMenu(primaryStage));
-            }
-        });
-        saveBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-            	gameManager.saveFile();
-            }
-        });
-        // Adding Listener to volume property.
-        volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
-        	@Override
-        	public void changed(ObservableValue<? extends Number> observable, //
-        		Number oldValue, Number newValue) {
-        		volume = newValue.intValue();
-        		volumePercentage.setText(newValue.intValue() + "%");
-        		player.setVolume(volume);
-        		gameManager.setVolume(volume);
-        	}
-        });
-        // Adding Listener to scroll speed property.
-        scrollSpeedSlider.valueProperty().addListener(new ChangeListener<Number>() {
-        	@Override
-        	public void changed(ObservableValue<? extends Number> observable, //
-        		Number oldValue, Number newValue) {
-        		scrollSpeed = newValue.intValue();
-        		scrollSpeedPercentage.setText((newValue.intValue() * 10) + "%");
-        	}
-        });
-        return wholeScreen;
-    }
     
     
 }

@@ -14,12 +14,12 @@ public class MainEvents {
 		return list;
 	}
 	
-	public void initMainEvents(GameManager gameManager){
+	public List<TypingScene> initEvents(GameManager gameManager, String file){
 		Scanner lineScan = null;
 		Scanner wordScan = null;
 		list = new ArrayList<>();
 		try {
-			lineScan = new Scanner(new File(System.getProperty("user.dir") + "/src/resources/events/MainEvents.txt"));
+			lineScan = new Scanner(new File(System.getProperty("user.dir") + "/src/resources/events/"+file));
 			lineScan.useDelimiter("\n");
 			int numTexts;
 			int numButtons;
@@ -71,7 +71,9 @@ public class MainEvents {
 		{
 			lineScan.close();
 			wordScan.close();
+
 			
 		}
+		return list;
 	}
 }

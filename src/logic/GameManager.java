@@ -1,6 +1,7 @@
 package logic;
 
-import java.util.*;
+import java.util.List;
+
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -70,11 +71,11 @@ public class GameManager {
 		this.menu = menu;
 	}
 	
-	public void showCurrentTypingScene() {
+	public TypingScene showCurrentTypingScene() {
 		if (currentTypingSceneIndex >= mainStoryTypingScenes.size()) {
 //			Warning: run out of TypingScene to play
 
-			return;
+			return null; // ????
 		}
 		
 		// Reset
@@ -84,16 +85,17 @@ public class GameManager {
 		else if (mainStoryTypingScenes.get(currentTypingSceneIndex).getStrIndex() < 0) {
 			mainStoryTypingScenes.get(currentTypingSceneIndex).setStrIndex(0);
 		}	
-		showCurrentTypingScene(mainStoryTypingScenes.get(currentTypingSceneIndex));
+		return showCurrentTypingScene(mainStoryTypingScenes.get(currentTypingSceneIndex));
 	}
 	
-	private void showCurrentTypingScene(TypingScene typingScene) {
+	private TypingScene showCurrentTypingScene(TypingScene typingScene) {
 		// Set currentTypingScene
 		currentTypingScene = typingScene;
-		primaryStage.getScene().setRoot(typingScene.initScene(screenWidth, screenHeight));
-	
-        // Play scene text
-		typingScene.playText(scrollSpeed);
+//		primaryStage.getScene().setRoot(typingScene.initScene(screenWidth, screenHeight));
+//	
+//        // Play scene text
+//		typingScene.playText(scrollSpeed);
+		return typingScene;
 	}
 	
 	public void startGame() {
@@ -147,7 +149,9 @@ public class GameManager {
             }
             else if ((event.getCode() == KeyCode.ESCAPE || event.getCode() == KeyCode.P) && currentTypingSceneIndex != -1) {
             	// pause menu
-            	scene.setRoot(menu.pauseMenu(primaryStage));
+            	TypingScene curTS = showCurrentTypingScene();
+            	scene.setRoot(menu.optionMenu(primaryStage, curTS.initScene(screenWidth, screenHeight), true));
+            	curTS.playText(scrollSpeed);
             }
         });
 	}
