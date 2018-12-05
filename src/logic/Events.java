@@ -10,19 +10,11 @@ public class Events {
 	
 	// creates a random new game's event order
 	public List<TypingScene> getEventsArrayList(GameManager gameManager){
-		ArrayList<TypingScene> randList;
-		ArrayList<TypingScene> mainList;
-//		list = new ArrayList<TypingScene>();
+		ArrayList<TypingScene> randList = (ArrayList<TypingScene>) initializeRandomEvents(gameManager);
+		ArrayList<TypingScene> mainList = (ArrayList<TypingScene>) initializeMainEvents(gameManager);
 		list = new ArrayList<>();
 		
 		RandomEvents randEvents = new RandomEvents();
-		MainEvents mainEvents = new MainEvents();
-		
-		randEvents.initRandomEvents(gameManager);
-		mainEvents.initMainEvents(gameManager);
-		
-		randList = (ArrayList<TypingScene>) randEvents.getRandomEventsArrayList();
-		mainList = (ArrayList<TypingScene>)mainEvents.getMainEventsArrayList();
 		
 		for (int i = 0; i < mainList.size(); i++) {
 			randEventOrder.add(randEvents.nonRepeatRandNum());
@@ -47,19 +39,9 @@ public class Events {
 	
 	// loads the event order using an existing order
 	public List<TypingScene> loadEventsArrayList(GameManager gameManager, List<Integer> randEventOrd){
-		ArrayList<TypingScene> randList;
-		ArrayList<TypingScene> mainList;
-//		list = new ArrayList<TypingScene>();
+		ArrayList<TypingScene> randList = (ArrayList<TypingScene>) initializeRandomEvents(gameManager);
+		ArrayList<TypingScene> mainList = (ArrayList<TypingScene>) initializeMainEvents(gameManager);
 		list = new ArrayList<>();
-		
-		RandomEvents randEvents = new RandomEvents();
-		MainEvents mainEvents = new MainEvents();
-		
-		randEvents.initRandomEvents(gameManager);
-		mainEvents.initMainEvents(gameManager);
-		
-		randList = (ArrayList<TypingScene>) randEvents.getRandomEventsArrayList();
-		mainList = (ArrayList<TypingScene>) mainEvents.getMainEventsArrayList();
 		
 		for(int i = 0; i < mainList.size(); i++) {
 			list.add(mainList.get(i));
@@ -67,5 +49,23 @@ public class Events {
 		}
 		
 		return list;
+	}
+	
+	private List<TypingScene> initializeRandomEvents(GameManager gameManager){
+		ArrayList<TypingScene> randList;
+		randList = new ArrayList<>();
+		RandomEvents randEvents = new RandomEvents();
+		randEvents.initRandomEvents(gameManager);
+		randList = (ArrayList<TypingScene>) randEvents.getRandomEventsArrayList();
+		return randList;
+	}
+	
+	private List<TypingScene> initializeMainEvents(GameManager gameManager){
+		ArrayList<TypingScene> mainList;
+		mainList = new ArrayList<>();
+		RandomEvents mainEvents = new RandomEvents();
+		mainEvents.initRandomEvents(gameManager);
+		mainList = (ArrayList<TypingScene>) mainEvents.getRandomEventsArrayList();
+		return mainList;
 	}
 }
