@@ -49,7 +49,8 @@ public class Save {
 	        finally
 	        {
 	        	try {
-					bw.close();
+	        		if(bw != null)
+	        			bw.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -58,8 +59,9 @@ public class Save {
 	}
 	
 	public static void saveProgressTestMethod(Player player, List<Integer> randEventOrder, Integer currentTypingSceneIndex, String fileName) {
-		 try {
-	        	BufferedWriter bw = new BufferedWriter(new FileWriter(fileName +".txt"));
+		BufferedWriter bw = null;
+		try {
+	        	bw = new BufferedWriter(new FileWriter(fileName +".txt"));
 	            bw.write(player.getCurClass());
 	            bw.newLine();
 	            bw.write(player.getInt().toString());
@@ -78,8 +80,20 @@ public class Save {
 	            	bw.write(randEventOrder.get(i).toString());
 	            }
 	            bw.close();
-	        } catch (Exception ex) {
+	        } 
+		catch (Exception ex) {
 	            ex.printStackTrace();
 	        }
+		finally
+		{
+			if(bw != null)
+			{
+				try {
+					bw.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 }
