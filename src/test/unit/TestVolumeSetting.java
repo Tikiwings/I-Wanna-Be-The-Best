@@ -12,7 +12,7 @@ public class TestVolumeSetting {
 	@Test
 	public void testSettingInitialVolume() {
 		Menu menu = new Menu();
-		int originalVolume = menu.volume;
+		int originalVolume = menu.getVolume();
 
 		GameManager gameManager = new GameManager(null);
 		MainEvents main = new MainEvents();
@@ -26,8 +26,8 @@ public class TestVolumeSetting {
 	@Test
 	public void testSettingChangedVolume() {
 		Menu menu = new Menu();
-		menu.volume = 59;
-		int originalVolume = menu.volume;
+		menu.setVolume(59);
+		int originalVolume = menu.getVolume();
 
 		GameManager gameManager = new GameManager(null);
 		MainEvents main = new MainEvents();

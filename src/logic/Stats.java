@@ -1,7 +1,10 @@
 package logic;
 
 public class Stats {
-	public Integer hp, mp, intelligence, charisma;
+	Integer hp;
+	Integer mp;
+	Integer intelligence;
+	Integer charisma;
 	
 	public Stats(int hp, int mp, int intelligence, int charisma) {
 		this.hp = hp;

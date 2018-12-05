@@ -17,7 +17,11 @@ public class Load {
 	public void loadSaveFile(String filepath){
 		Scanner lineScan;
 		String playerClass = null;
-		Integer intel = null, charis = null, hp = null, mp = null, score = null;
+		Integer intel = null;
+		Integer charis = null; 
+		Integer hp = null;
+		Integer mp = null;
+		Integer score = null;
 		randOrderList = new ArrayList<>();
 		
 		try {

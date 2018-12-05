@@ -22,7 +22,7 @@ public class TestTypingSceneSetOptionNum {
 		int optionNum = 3;
 		typingScene.setOptionsNum(optionNum);
 		
-		assertEquals(optionNum, typingScene.totalOptionsNum);
+		assertEquals(optionNum, typingScene.getOptionNum());
 	}
 
 }

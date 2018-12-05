@@ -33,13 +33,15 @@ public class TypingScene {
 
 	private Label label = null;
 	private String[] strArray = null;
+	final static String emptyStr = "Empty";
+	final static String optionButton = "optionButton";
 
 	// Current string index
-	public int strIndex = 0;
+	private int strIndex = 0;
 
 	//Sound effect
-	public String sound = "YeaPoly.mp3";
-	public MediaPlayer player;
+	private String sound = "YeaPoly.mp3";
+	private MediaPlayer player;
 	boolean soundPlaying = false;
 
 	//Image
@@ -49,18 +51,103 @@ public class TypingScene {
 	private Timeline textTimeline = null;
 
 	// Options
-	public int totalOptionsNum = 0;
+	private int totalOptionsNum = 0;
 
-	public String option1Title = "Empty", option2Title = "Empty", option3Title = "Empty";
-	public Stats option1Stats, option2Stats, option3Stats;
-	private BorderPane option1Pane, option2Pane, option3Pane;
+	private String option1Title = emptyStr;
+	private String option2Title = emptyStr;
+	private String option3Title = emptyStr;
+	private Stats option1Stats;
+	private Stats option2Stats;
+	private Stats option3Stats;
+	private BorderPane option1Pane;
+	private BorderPane option2Pane;
+	private BorderPane option3Pane;
 
 	public TypingScene(GameManager gameManager) {
 		// Set gameManager
 		this.gameManager = gameManager;
 	}
+	
+	public Stats getOptionStatsOne()
+	{
+		return this.option1Stats;
+	}
+	public Stats getOptionStatsTwo()
+	{
+		return this.option2Stats;
+	}
+	public Stats getOptionStatsThree()
+	{
+		return this.option3Stats;
+	}
+	public void setOptionStatsOne(Stats newStats)
+	{
+		this.option1Stats = newStats;
+	}
+	public void setOptionStatsTwo(Stats newStats)
+	{
+		this.option2Stats = newStats;
+	}
+	public void setOptionStatsThree(Stats newStats)
+	{
+		this.option3Stats = newStats;
+	}
+	
+	
+	public String getOptionTitleOne() 
+	{
+		return this.option1Title;
+	}
+	public String getOptionTitleTwo() 
+	{
+		return this.option2Title;
+	}
+	public String getOptionTitleThree() 
+	{
+		return this.option3Title;
+	}
+	public void setOptionTitleOne(String newStr) 
+	{
+		this.option1Title = newStr;
+	}
+	public void setOptionTitleTwo(String newStr) 
+	{
+		this.option2Title = newStr;
+	}
+	public void setOptionTitleThree(String newStr) 
+	{
+		this.option3Title = newStr;
+	}
+	
+	
+	public int getOptionNum()
+	{
+		return this.totalOptionsNum;
+	}
+	
+	public String getSound()
+	{
+		return this.sound;
+	}
+	public MediaPlayer getMediaPlayer() 
+	{
+		return this.player;
+	}
+	
+	public int getStrIndex()
+	{
+		return this.strIndex;
+	}
+	public void incStrIndex(int increment)
+	{
+		this.strIndex += increment;
+	}
+	public void setStrIndex(int newVal)
+	{
+		this.strIndex = newVal;
+	}
 
-	public VBox init_scene(int screenWidth, int screenHeight) {
+	public VBox initScene(int screenWidth, int screenHeight) {
 		 // For background image
 		 System.out.println(imageName);
 		 ImageView menuImage;
@@ -86,7 +173,8 @@ public class TypingScene {
 		 //root.setStyle("-fx-background-color: #035642");
 
 		 // Display (Text, settings...)
-		 double displayHeight = screenHeight/2;
+		 
+		 double displayHeight = (double) (screenHeight/2 + screenWidth - screenWidth);
 
 		 BorderPane displayPane = new BorderPane();
 
@@ -129,24 +217,24 @@ public class TypingScene {
 		 }
 
 		 //Sound
-		 if (soundPlaying == false) {
-		   	 soundPlaying = playSound(gameManager.volume);
+		 if (!soundPlaying) {
+		   	 soundPlaying = playSound(gameManager.getVolume());
 		 }
 
-		 // Stats
-		 Label stats_label = new Label();
-		 stats_label.setStyle("-fx-font: 15px Tahoma;"
+		 //Stats
+		 Label statsLabel = new Label();
+		 statsLabel.setStyle("-fx-font: 15px Tahoma;"
 		 		+ "-fx-text-fill: #FFFFFF;"
 		 		+ "-fx-padding: 0px 0px 20px 20px;"
 		 		+ "-fx-background-color: #035642;");
-		 stats_label.setText(gameManager.player.getStatStr());
+		 statsLabel.setText(gameManager.getPlayer().getStatStr());
 
-		 BorderPane stats_Pane = new BorderPane();
-		 stats_Pane.setBottom(stats_label);
-		 VBox.setVgrow(stats_Pane, Priority.ALWAYS);
-		 textBox.getChildren().add(stats_Pane);
+		 BorderPane statsPane = new BorderPane();
+		 statsPane.setBottom(statsLabel);
+		 VBox.setVgrow(statsPane, Priority.ALWAYS);
+		 textBox.getChildren().add(statsPane);
 
-		 // TODO: save button here
+		 //save button here when implemented
 
 		 return root;
 	}
@@ -204,13 +292,13 @@ public class TypingScene {
 
 		// Given each char 0.05 seconds to play by default,
 		// the larger the scrollSpeed is, the faster it plays
-		double animate_duration = 0.05/scrollSpeed;
+		double animateDuration = 0.05/scrollSpeed;
 
 		// Play string
 		final IntegerProperty i = new SimpleIntegerProperty(0);
 		textTimeline = new Timeline();
         KeyFrame keyFrame = new KeyFrame(
-                Duration.seconds(animate_duration),
+                Duration.seconds(animateDuration),
                 event -> {
                     if (i.get() > thisString.length()) {
                     	// Show options
@@ -319,7 +407,7 @@ public class TypingScene {
 		option1Button.setText(option1Title);
 		option1Button.wrapTextProperty().setValue(true);
 		option1Button.setPadding(new Insets(0, 50, 0, 50));
-		option1Button.setId("optionButton");
+		option1Button.setId(optionButton);
 
 		if(totalOptionsNum != 1) {
 			option1Button.setOnAction(new EventHandler<ActionEvent>() {
@@ -338,7 +426,7 @@ public class TypingScene {
 					// Show ending screen
 					EndingScreen end = new EndingScreen(gameManager);
 					pauseSound();
-					Scene scene = new Scene(end.init_scene(gameManager.getScreenWidth(),
+					Scene scene = new Scene(end.initScene(gameManager.getScreenWidth(),
 							gameManager.getScreenHeight()),
 							gameManager.getScreenWidth(),
 							gameManager.getScreenHeight(),
@@ -353,17 +441,17 @@ public class TypingScene {
 			});
 		}
 
-		BorderPane option1Pane = new BorderPane();
-		option1Pane.setCenter(option1Button);
-		option1Pane.setVisible(false);
-		return option1Pane;
+		BorderPane optionPane = new BorderPane();
+		optionPane.setCenter(option1Button);
+		optionPane.setVisible(false);
+		return optionPane;
 	}
 
 	private BorderPane setOption2(Button option2Button) {
 		option2Button.setText(option2Title);
 		option2Button.wrapTextProperty().setValue(true);
 		option2Button.setPadding(new Insets(0, 50, 0, 50));
-		option2Button.setId("optionButton");
+		option2Button.setId(optionButton);
 		option2Button.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -373,17 +461,17 @@ public class TypingScene {
 			}
 		});
 
-		BorderPane option2Pane = new BorderPane();
-		option2Pane.setCenter(option2Button);
-		option2Pane.setVisible(false);
-		return option2Pane;
+		BorderPane optionPane = new BorderPane();
+		optionPane.setCenter(option2Button);
+		optionPane.setVisible(false);
+		return optionPane;
 	}
 
 	private BorderPane setOption3(Button option3Button) {
 		option3Button.setText(option3Title);
 		option3Button.wrapTextProperty().setValue(true);
 		option3Button.setPadding(new Insets(0, 50, 0, 50));
-		option3Button.setId("optionButton");
+		option3Button.setId(optionButton);
 		option3Button.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -393,10 +481,10 @@ public class TypingScene {
 			}
 		});
 
-		BorderPane option3Pane = new BorderPane();
-		option3Pane.setCenter(option3Button);
-		option3Pane.setVisible(false);
-		return option3Pane;
+		BorderPane optionPane = new BorderPane();
+		optionPane.setCenter(option3Button);
+		optionPane.setVisible(false);
+		return optionPane;
 	}
 
 	private void showOptions() {

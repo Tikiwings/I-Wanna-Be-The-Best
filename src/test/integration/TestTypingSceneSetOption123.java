@@ -26,7 +26,7 @@ public class TestTypingSceneSetOption123 {
 		String option1Title = "option1 title";
 		typingScene.setOption1(option1Title, new Stats(0, 0, 0, 0));
 		
-		assertEquals("1. " + option1Title, typingScene.option1Title);
+		assertEquals("1. " + option1Title, typingScene.getOptionTitleOne());
 	}
 	
 	@Test
@@ -43,7 +43,7 @@ public class TestTypingSceneSetOption123 {
 		String option2Title = "option2 title";
 		typingScene.setOption2(option2Title, new Stats(0, 0, 0, 0));
 		
-		assertEquals("2. " + option2Title, typingScene.option2Title);
+		assertEquals("2. " + option2Title, typingScene.getOptionTitleTwo());
 	}
 	
 	@Test
@@ -60,7 +60,7 @@ public class TestTypingSceneSetOption123 {
 		String option3Title = "option3 title";
 		typingScene.setOption3(option3Title, new Stats(0, 0, 0, 0));
 		
-		assertEquals("3. " + option3Title, typingScene.option3Title);
+		assertEquals("3. " + option3Title, typingScene.getOptionTitleThree());
 	}
 
 }

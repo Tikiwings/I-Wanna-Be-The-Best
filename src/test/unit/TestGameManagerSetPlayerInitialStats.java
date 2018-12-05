@@ -10,51 +10,53 @@ import logic.Player;
 import logic.GameManager;
 
 public class TestGameManagerSetPlayerInitialStats {
+	
+	final static String codeWizard = "Coding Wizard";
 
 	@Test
-	public void testSetPlayerInitialStats_HP() {
+	public void testSetPlayerInitialStatsHP() {
     	// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
-		gameManager.setPlayerInitialStats("Coding Wizard");
+		gameManager.setPlayerInitialStats(codeWizard);
 		
 		// Get player
-		Player player = gameManager.player;
+		Player player = gameManager.getPlayer();
 		
 		assertEquals(Integer.valueOf(100), player.getHP());
     }
 	
 	@Test
-	public void testSetPlayerInitialStats_MP() {
+	public void testSetPlayerInitialStatsMP() {
     	// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
-		gameManager.setPlayerInitialStats("Coding Wizard");
+		gameManager.setPlayerInitialStats(codeWizard);
 		
 		// Get player
-		Player player = gameManager.player;
+		Player player = gameManager.getPlayer();
 
 		assertEquals(Integer.valueOf(100), player.getMP());
     }
 	
 	@Test
-	public void testSetPlayerInitialStats_Int() {
+	public void testSetPlayerInitialStatsInt() {
     	// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
-		gameManager.setPlayerInitialStats("Coding Wizard");
+		gameManager.setPlayerInitialStats(codeWizard);
 		
 		// Get player
-		Player player = gameManager.player;
+		Player player = gameManager.getPlayer();
 		
 		assertEquals(Integer.valueOf(5), player.getInt());
     }
 	
 	@Test
-	public void testSetPlayerInitialStats_Char() {
+	public void testSetPlayerInitialStatsChar() {
     	// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
-		gameManager.setPlayerInitialStats("Coding Wizard");
+		gameManager.setPlayerInitialStats(codeWizard);
 		
 		// Get player
-		Player player = gameManager.player;
+		Player player = gameManager.getPlayer();
 		
 		assertEquals(Integer.valueOf(1), player.getChar());
     }

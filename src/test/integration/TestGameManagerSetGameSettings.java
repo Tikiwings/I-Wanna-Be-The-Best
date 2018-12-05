@@ -11,7 +11,7 @@ import logic.GameManager;
 public class TestGameManagerSetGameSettings {
 
 	@Test
-	public void testSetGameSettings_Width() {
+	public void testSetGameSettingsWidth() {
 		// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
 		
@@ -24,7 +24,7 @@ public class TestGameManagerSetGameSettings {
 	}
 	
 	@Test
-	public void testSetGameSettings_Height() {
+	public void testSetGameSettingsHeight() {
 		// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
 		
@@ -37,7 +37,7 @@ public class TestGameManagerSetGameSettings {
 	}
 	
 	@Test
-	public void testSetGameSettings_ScrollSpeed() {
+	public void testSetGameSettingsScrollSpeed() {
 		// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
 		

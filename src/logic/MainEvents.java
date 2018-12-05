@@ -3,28 +3,31 @@ package logic;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MainEvents {
 	
 	private ArrayList<TypingScene> list;
 
-	public ArrayList<TypingScene> getMainEventsArrayList(){
+	public List<TypingScene> getMainEventsArrayList(){
 		return list;
 	}
 	
-	public void initMainEvents(GameManager GameManager){
+	public void initMainEvents(GameManager gameManager){
 		Scanner lineScan;
-		list = new ArrayList <TypingScene>();
+//		list = new ArrayList<TypingScene>();
+		list = new ArrayList<>();
 		try {
 			lineScan = new Scanner(new File(System.getProperty("user.dir") + "/src/resources/events/MainEvents.txt"));
 			lineScan.useDelimiter("\n");
 			Scanner wordScan;
-			int numTexts,numButtons;
+			int numTexts;
+			int numButtons;
 			String[] strArray;
 			TypingScene typeSc;
 			while(lineScan.hasNext()) {
-				typeSc = new TypingScene(GameManager);
+				typeSc = new TypingScene(gameManager);
 				wordScan = new Scanner(lineScan.next());
 				wordScan.useDelimiter(";");
 				

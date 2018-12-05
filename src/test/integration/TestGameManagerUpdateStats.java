@@ -23,7 +23,7 @@ public class TestGameManagerUpdateStats {
 		
 		Player player = new Player();
 		
-		assertEquals(player.getStatStr(), gameManager.player.getStatStr());
+		assertEquals(player.getStatStr(), gameManager.getPlayer().getStatStr());
 	}
 	
 }

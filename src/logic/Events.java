@@ -9,22 +9,23 @@ public class Events {
 	private ArrayList<Integer> randEventOrder = new ArrayList<>();
 	
 	// creates a random new game's event order
-	public ArrayList<TypingScene> getEventsArrayList(GameManager GameManager){
+	public List<TypingScene> getEventsArrayList(GameManager gameManager){
 		ArrayList<TypingScene> randList;
 		ArrayList<TypingScene> mainList;
-		list = new ArrayList<TypingScene>();
+//		list = new ArrayList<TypingScene>();
+		list = new ArrayList<>();
 		
 		RandomEvents randEvents = new RandomEvents();
 		MainEvents mainEvents = new MainEvents();
 		
-		randEvents.initRandomEvents(GameManager);
-		mainEvents.initMainEvents(GameManager);
+		randEvents.initRandomEvents(gameManager);
+		mainEvents.initMainEvents(gameManager);
 		
-		randList = randEvents.getRandomEventsArrayList();
-		mainList = mainEvents.getMainEventsArrayList();
+		randList = (ArrayList<TypingScene>) randEvents.getRandomEventsArrayList();
+		mainList = (ArrayList<TypingScene>)mainEvents.getMainEventsArrayList();
 		
 		for (int i = 0; i < mainList.size(); i++) {
-			randEventOrder.add(randEvents.NonRepeatRandNum());
+			randEventOrder.add(randEvents.nonRepeatRandNum());
 		}
 		
 		for(int i = 0; i < mainList.size(); i++) {
@@ -45,19 +46,20 @@ public class Events {
 	}
 	
 	// loads the event order using an existing order
-	public ArrayList<TypingScene> loadEventsArrayList(GameManager GameManager, List<Integer> randEventOrd){
+	public List<TypingScene> loadEventsArrayList(GameManager gameManager, List<Integer> randEventOrd){
 		ArrayList<TypingScene> randList;
 		ArrayList<TypingScene> mainList;
-		list = new ArrayList<TypingScene>();
+//		list = new ArrayList<TypingScene>();
+		list = new ArrayList<>();
 		
 		RandomEvents randEvents = new RandomEvents();
 		MainEvents mainEvents = new MainEvents();
 		
-		randEvents.initRandomEvents(GameManager);
-		mainEvents.initMainEvents(GameManager);
+		randEvents.initRandomEvents(gameManager);
+		mainEvents.initMainEvents(gameManager);
 		
-		randList = randEvents.getRandomEventsArrayList();
-		mainList = mainEvents.getMainEventsArrayList();
+		randList = (ArrayList<TypingScene>) randEvents.getRandomEventsArrayList();
+		mainList = (ArrayList<TypingScene>) mainEvents.getMainEventsArrayList();
 		
 		for(int i = 0; i < mainList.size(); i++) {
 			list.add(mainList.get(i));

@@ -11,62 +11,64 @@ import logic.Player;
 
 public class TestGameManagerLoadPlayerStats {
 
+	final static String codeWizard = "Coding Wizard";
+	
 	@Test
-	public void testLoadPlayerStats_HP() {
+	public void testLoadPlayerStatsHP() {
 		// Initialize player
-		Player player = new Player("Coding Wizard");
+		Player player = new Player(codeWizard);
 		
 		// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
 		gameManager.loadPlayerStats(player);
 		
 		// Get player
-		Player thisPlayer = gameManager.player;
+		Player thisPlayer = gameManager.getPlayer();
 		
 		assertEquals(Integer.valueOf(100), thisPlayer.getHP());
 	}
 	
 	@Test
-	public void testLoadPlayerStats_MP() {
+	public void testLoadPlayerStatsMP() {
 		// Initialize player
-		Player player = new Player("Coding Wizard");
+		Player player = new Player(codeWizard);
 		
 		// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
 		gameManager.loadPlayerStats(player);
 		
 		// Get player
-		Player thisPlayer = gameManager.player;
+		Player thisPlayer = gameManager.getPlayer();
 		
 		assertEquals(Integer.valueOf(100), thisPlayer.getMP());
 	}
 	
 	@Test
-	public void testLoadPlayerStats_Int() {
+	public void testLoadPlayerStatsInt() {
 		// Initialize player
-		Player player = new Player("Coding Wizard");
+		Player player = new Player(codeWizard);
 		
 		// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
 		gameManager.loadPlayerStats(player);
 		
 		// Get player
-		Player thisPlayer = gameManager.player;
+		Player thisPlayer = gameManager.getPlayer();
 		
 		assertEquals(Integer.valueOf(5), thisPlayer.getInt());
 	}
 	
 	@Test
-	public void testLoadPlayerStats_Char() {
+	public void testLoadPlayerStatsChar() {
 		// Initialize player
-		Player player = new Player("Coding Wizard");
+		Player player = new Player(codeWizard);
 		
 		// Initialize GameManager
 		GameManager gameManager = new GameManager(null);
 		gameManager.loadPlayerStats(player);
 		
 		// Get player
-		Player thisPlayer = gameManager.player;
+		Player thisPlayer = gameManager.getPlayer();
 		
 		assertEquals(Integer.valueOf(1), thisPlayer.getChar());
 	}
