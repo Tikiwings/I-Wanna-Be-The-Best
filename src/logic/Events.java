@@ -52,7 +52,7 @@ public class Events {
 	}
 	
 	private List<TypingScene> initializeRandomEvents(GameManager gameManager){
-		ArrayList<TypingScene> randList = new ArrayList<>();
+		ArrayList<TypingScene> randList;
 		RandomEvents randEvents = new RandomEvents();
 		randEvents.initRandomEvents(gameManager);
 		randList = (ArrayList<TypingScene>) randEvents.getRandomEventsArrayList();
@@ -60,7 +60,7 @@ public class Events {
 	}
 	
 	private List<TypingScene> initializeMainEvents(GameManager gameManager){
-		ArrayList<TypingScene> mainList = new ArrayList<>();
+		ArrayList<TypingScene> mainList;
 		RandomEvents mainEvents = new RandomEvents();
 		mainEvents.initRandomEvents(gameManager);
 		mainList = (ArrayList<TypingScene>) mainEvents.getRandomEventsArrayList();
