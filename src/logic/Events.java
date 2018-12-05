@@ -1,5 +1,6 @@
 package logic;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,12 @@ public class Events {
 		list = new ArrayList<>();
 		
 		RandomEvents randEvents = new RandomEvents();
-		randEvents.initRandomEvents(gameManager,"RandomEvents.txt");
+		try {
+			randEvents.initRandomEvents(gameManager, "RandomEvents.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		for (int i = 0; i < mainList.size(); i++) {
 			randEventOrder.add(randEvents.nonRepeatRandNum());
 		}
@@ -54,7 +60,12 @@ public class Events {
 	private List<TypingScene> initializeRandomEvents(GameManager gameManager){
 		ArrayList<TypingScene> randList;
 		RandomEvents randEvents = new RandomEvents();
-		randEvents.initRandomEvents(gameManager,"RandomEvents.txt");
+		try {
+			randEvents.initRandomEvents(gameManager,"RandomEvents.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		randList = (ArrayList<TypingScene>) randEvents.getRandomEventsArrayList();
 		return randList;
 	}

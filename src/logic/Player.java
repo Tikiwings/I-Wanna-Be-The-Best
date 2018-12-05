@@ -26,28 +26,8 @@ public class Player {
 	public Player(String classChoice)
 	{
 		myClass = classChoice;
-		switch (classChoice) {
-			case "Coding Wizard":
-				playerStats = new Stats(100, 100, 5, 1);
-				break;
-			case "Coding Monkey":
-				playerStats = new Stats(100, 100, 4, 2);
-				break;
-			case "Brogrammer":
-				playerStats = new Stats(100, 100, 3, 3);
-				break;
-			case "Athlete":
-				playerStats = new Stats(100, 100, 2, 4);
-				break;
-			case "Network King":
-				playerStats = new Stats(100, 100, 1, 5);
-				break;
-			case "Degenerate":
-				playerStats = new Stats(100, 100, 1, 1);
-				break;
-			default:
-//				Class name given is not a valid class 
-		}
+		playerStats = new Stats(100, 100, 5, 1);
+
 		score = 0;
 	}
 	

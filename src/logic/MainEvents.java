@@ -15,11 +15,9 @@ public class MainEvents {
 	}
 	
 	public List<TypingScene> initEvents(GameManager gameManager, String file){
-		Scanner lineScan = null;
-		Scanner wordScan = null;
 		list = new ArrayList<>();
-		try {
-			lineScan = new Scanner(new File(System.getProperty("user.dir") + "/src/resources/events/"+file));
+		try (Scanner lineScan = new Scanner(new File(System.getProperty("user.dir") + "/src/resources/events/"+file));) {
+			Scanner wordScan = null;
 			lineScan.useDelimiter("\n");
 			int numTexts;
 			int numButtons;
@@ -63,17 +61,11 @@ public class MainEvents {
 				wordScan.close();
 			}
 			lineScan.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		catch (FileNotFoundException e) {
-				e.printStackTrace();
-		}
-		finally 
-		{
-			lineScan.close();
-			wordScan.close();
-
-			
-		}
+		
 		return list;
 	}
 }

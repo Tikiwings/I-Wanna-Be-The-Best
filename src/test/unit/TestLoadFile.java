@@ -12,8 +12,9 @@ import logic.Load;
 import logic.Player;
 
 public class TestLoadFile {
+	
 
-	static final String TESTSAVEPATH = "/src/test/unit/resources/testSave.txt";
+	static final String TESTSAVEPATH = "/testSave.txt";
 	@Test
 	public void testLoadFileClass() {
 		// Initialize Loader

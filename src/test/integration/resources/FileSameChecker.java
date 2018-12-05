@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class FileSameChecker {
+	private FileSameChecker() {
+		
+	}
 	public static boolean checkIfSameFile(String filePath1, String filePath2) {
 		boolean areEqual = true;
 		

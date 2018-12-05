@@ -4,6 +4,7 @@ package test.integration;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import org.junit.Test;
@@ -22,12 +23,17 @@ public class TestEventListGenerator {
 		
 		ArrayList<TypingScene> randList;
 		RandomEvents randEvents = new RandomEvents();
-		randEvents.initRandomEvents(gameManager);
+		try {
+			randEvents.initRandomEvents(gameManager, "RandomEvents.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		randList = (ArrayList<TypingScene>) randEvents.getRandomEventsArrayList();
 		
 		ArrayList<TypingScene> mainList;
 		MainEvents mainEvents = new MainEvents();
-		mainEvents.initMainEvents(gameManager);
+		mainEvents.initEvents(gameManager, "MainEvents.txt");
 		mainList = (ArrayList<TypingScene>) mainEvents.getMainEventsArrayList();
 		
 		ArrayList<TypingScene> list = new ArrayList<>();
