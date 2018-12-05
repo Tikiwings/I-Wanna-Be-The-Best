@@ -1,6 +1,6 @@
 // Written by John Luu (Test suite)
 
-package test.testSuites;
+package test.testsuites;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
