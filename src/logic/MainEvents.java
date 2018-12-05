@@ -60,9 +60,9 @@ public class MainEvents {
 				list.add(typeSc);
 				wordScan.close();
 			}
-			lineScan.close();
+			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		

@@ -26,18 +26,19 @@ public class Save {
 		
     	BufferedWriter bw = null;
     	
-    	if (file != null)
+    	if (file != null) {
 			try {
 				bw = new BufferedWriter(new FileWriter(file +".txt"));
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
+		
 				e1.printStackTrace();
 			}
+    	}
 		else
 			try {
 				bw = new BufferedWriter(new FileWriter(fileName +".txt"));
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
+				
 				e1.printStackTrace();
 			}
 	    if (file != null || fileName != null) {

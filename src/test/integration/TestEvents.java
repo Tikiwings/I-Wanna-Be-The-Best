@@ -3,8 +3,6 @@ package test.integration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.FileNotFoundException;
-
 import org.junit.Test;
 
 import logic.Events;
@@ -18,12 +16,7 @@ public class TestEvents {
 	public void testRandomEvents() {
 		GameManager gm = new GameManager(null);
 		RandomEvents rand = new RandomEvents();
-		try {
-			rand.initRandomEvents(gm,"RandomEvents.txt");
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		rand.initRandomEvents(gm,"RandomEvents.txt");
 		assertEquals("catcall.mp3",rand.getRandomEventsArrayList().get(0).getSound());
 	}
 	@Test

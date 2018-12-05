@@ -1,6 +1,5 @@
 package logic;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -8,14 +7,14 @@ import java.util.Random;
 public class RandomEvents {
 	
 	private ArrayList<TypingScene> list;
-												//ArrayList<Integer>
+	
 	private ArrayList<Integer> randomList = new ArrayList<>();
 
-	public void initRandomEvents(GameManager gameManager, String file) throws FileNotFoundException{
+	public void initRandomEvents(GameManager gameManager, String file) {
 		MainEvents main = new MainEvents();
 		list = (ArrayList<TypingScene>)main.initEvents(gameManager, file);
 	}
-	//ArrayList<TypingScene>
+	
 	public List<TypingScene> getRandomEventsArrayList(){
 		return list;
 	}
@@ -28,8 +27,7 @@ public class RandomEvents {
 		while(randomList.contains(randNum)) {
 			randNum = rand.nextInt(list.size());
 			attempts++;
-			if(attempts == list.size()) {
-				randomList.clear();
+			if(attempts == list.size()) {randomList.clear();
 			}
 		}
 		randomList.add(randNum);
