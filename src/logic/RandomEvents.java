@@ -15,7 +15,6 @@ public class RandomEvents {
 
 	public void initRandomEvents(GameManager gameManager){
 		Scanner lineScan;
-//		list = new ArrayList<TypingScene>();
 		list = new ArrayList<>();
 		try {
 			lineScan = new Scanner(new File(System.getProperty("user.dir") + "/src/resources/events/RandomEvents.txt"));

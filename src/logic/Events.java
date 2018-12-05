@@ -62,7 +62,7 @@ public class Events {
 	private List<TypingScene> initializeMainEvents(GameManager gameManager){
 		ArrayList<TypingScene> mainList;
 		MainEvents mainEvents = new MainEvents();
-		mainEvents.initEvents(gameManager,"MainEvents.txt");
+		mainEvents.initMainEvents(gameManager);
 		mainList = (ArrayList<TypingScene>) mainEvents.getMainEventsArrayList();
 		return mainList;
 	}

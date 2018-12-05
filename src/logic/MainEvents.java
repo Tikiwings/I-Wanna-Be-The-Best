@@ -16,7 +16,6 @@ public class MainEvents {
 	
 	public void initMainEvents(GameManager gameManager){
 		Scanner lineScan;
-//		list = new ArrayList<TypingScene>();
 		list = new ArrayList<>();
 		try {
 			lineScan = new Scanner(new File(System.getProperty("user.dir") + "/src/resources/events/MainEvents.txt"));
@@ -59,6 +58,7 @@ public class MainEvents {
 							wordScan.nextInt(), wordScan.nextInt()));
 				}
 				typeSc.setSound(wordScan.next());
+				typeSc.setImage(wordScan.next());
 				list.add(typeSc);
 				wordScan.close();
 			}
