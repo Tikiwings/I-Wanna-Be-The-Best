@@ -29,24 +29,17 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-//import logic.Events;
-//import logic.GameManager;
-//import logic.Load;
-//import logic.TypingScene;
-
 public class Menu {
+	GameManager gameManager;
+	MediaPlayer player;
 	private int volume = 50;
 	private int scrollSpeed = 1;
-	GameManager gameManager;
-
 	private int screenWidth;
 	private int screenHeight;
-	
-	MediaPlayer player;
-	final static String resourceImg = "resources/images/bg.png";
-	final static String resourceImgBackPressed ="resources/images/BackPressed.png";
-	final static String resourceImgBackNormal ="resources/images/BackNormal.png";
-	final static String textStyleTahoma = "Tahoma";
+	final static String RESOURCEIMG = "resources/images/bg.png";
+	final static String RESOURCEIMGBACKPRESSED ="resources/images/BACKPRESSED.png";
+	final static String RESOURCEIMGBACKNORMAL ="resources/images/BACKNORMAL.png";
+	final static String TEXTSTYLETAHOMA = "Tahoma";
 
 	public void initMenu(Stage primaryStage, int screenWidth, int screenHeight, VBox menu){
 		this.screenWidth = screenWidth;
@@ -204,7 +197,7 @@ public class Menu {
 
     public VBox loadMenu(Stage primaryStage){
     	
-		Image image = new Image(resourceImg);
+		Image image = new Image(RESOURCEIMG);
 		ImageView menuImage = new ImageView();
 		menuImage.setImage(image);
 
@@ -224,7 +217,7 @@ public class Menu {
         Button backBtn = new Button();
         Button btn = new Button();
         setButton(btn, "resources/images/LoadPressed.png", "resources/images/LoadNormal.png");
-        setButton(backBtn, resourceImgBackPressed, resourceImgBackNormal);
+        setButton(backBtn, RESOURCEIMGBACKPRESSED, RESOURCEIMGBACKNORMAL);
 
         buttonBox.getChildren().add(backBtn);
         stackPane.getChildren().addAll(menuImage, root, btn);
@@ -263,9 +256,7 @@ public class Menu {
             		newGameManager.showNextTypingScene();
 
                 }
-                else {
-                	System.err.println("User did not choose file");
-                }
+                else {}
             }
         });
 
@@ -274,16 +265,16 @@ public class Menu {
 
     public VBox optionMenu(Stage primaryStage){
 		/* for background */
-		Image image = new Image(resourceImg);
+		Image image = new Image(RESOURCEIMG);
 		ImageView menuImage = new ImageView();
 		menuImage.setImage(image);
 
 		/* text for options */
 		Text volumeTitle = new Text("Volume");
-		volumeTitle.setFont(Font.font(textStyleTahoma, FontWeight.NORMAL, 30));
+		volumeTitle.setFont(Font.font(TEXTSTYLETAHOMA, FontWeight.NORMAL, 30));
 		volumeTitle.setFill(Color.WHITE);
 		Text scrolTitle = new Text("Scroll Speed");
-		scrolTitle.setFont(Font.font(textStyleTahoma, FontWeight.NORMAL, 30));
+		scrolTitle.setFont(Font.font(TEXTSTYLETAHOMA, FontWeight.NORMAL, 30));
 		scrolTitle.setFill(Color.WHITE);
 
     	/* configuration for grid holding slider and percentages */
@@ -323,7 +314,7 @@ public class Menu {
 
     	/* button setup */
         Button backBtn = new Button();
-        setButton(backBtn, resourceImgBackPressed, resourceImgBackNormal);
+        setButton(backBtn, RESOURCEIMGBACKPRESSED, RESOURCEIMGBACKNORMAL);
         Button tutBtn = new Button();
         setButton(tutBtn, "resources/images/TutorialPressed.png", "resources/images/TutorialNormal.png");
 
@@ -400,7 +391,7 @@ public class Menu {
     	root.setBottom(buttonBox);
 
         Button btn = new Button();
-        setButton(btn, resourceImgBackPressed, resourceImgBackNormal);
+        setButton(btn, RESOURCEIMGBACKPRESSED, RESOURCEIMGBACKNORMAL);
 
         buttonBox.getChildren().add(btn);
         stackPane.getChildren().addAll(menuImage, root);
@@ -435,7 +426,7 @@ public class Menu {
     	root.setBottom(buttonBox);
 
         Button btn = new Button();
-        setButton(btn, resourceImgBackPressed, resourceImgBackNormal);
+        setButton(btn, RESOURCEIMGBACKPRESSED, RESOURCEIMGBACKNORMAL);
 
         buttonBox.getChildren().add(btn);
         stackPane.getChildren().addAll(menuImage, root);
@@ -452,15 +443,15 @@ public class Menu {
 
     public VBox pauseMenu(Stage primaryStage){
 		/* for background */
-		Image image = new Image(resourceImg);
+		Image image = new Image(RESOURCEIMG);
 		ImageView menuImage = new ImageView();
 		menuImage.setImage(image);
  		/* text for options */
 		Text volumeTitle = new Text("Volume");
-		volumeTitle.setFont(Font.font(textStyleTahoma, FontWeight.NORMAL, 30));
+		volumeTitle.setFont(Font.font(TEXTSTYLETAHOMA, FontWeight.NORMAL, 30));
 		volumeTitle.setFill(Color.WHITE);
 		Text scrolTitle = new Text("Scroll Speed");
-		scrolTitle.setFont(Font.font(textStyleTahoma, FontWeight.NORMAL, 30));
+		scrolTitle.setFont(Font.font(TEXTSTYLETAHOMA, FontWeight.NORMAL, 30));
 		scrolTitle.setFill(Color.WHITE);
      	/* configuration for grid holding slider and percentages */
     	GridPane grid = new GridPane();
@@ -492,7 +483,7 @@ public class Menu {
 		scrollSpeedSlider.setValue(scrollSpeed);
      	/* button setup */
         Button backBtn = new Button();
-        setButton(backBtn, resourceImgBackPressed, resourceImgBackNormal);
+        setButton(backBtn, RESOURCEIMGBACKPRESSED, RESOURCEIMGBACKNORMAL);
         Button saveBtn = new Button();
         setButton(saveBtn, "resources/images/SavePressed.png", "resources/images/SaveNormal.png");
         Button tutBtn = new Button();
@@ -512,7 +503,6 @@ public class Menu {
         backBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	//backBtn.getScene().setRoot(mMenu(primaryStage));
             	gameManager.showCurrentTypingScene();
             }
         });
