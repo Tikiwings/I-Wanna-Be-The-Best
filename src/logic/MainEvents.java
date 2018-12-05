@@ -15,12 +15,12 @@ public class MainEvents {
 	}
 	
 	public void initMainEvents(GameManager gameManager){
-		Scanner lineScan;
+		Scanner lineScan = null;
+		Scanner wordScan = null;
 		list = new ArrayList<>();
 		try {
 			lineScan = new Scanner(new File(System.getProperty("user.dir") + "/src/resources/events/MainEvents.txt"));
 			lineScan.useDelimiter("\n");
-			Scanner wordScan;
 			int numTexts;
 			int numButtons;
 			String[] strArray;
@@ -66,6 +66,12 @@ public class MainEvents {
 		}
 		catch (FileNotFoundException e) {
 				e.printStackTrace();
+		}
+		finally 
+		{
+			lineScan.close();
+			wordScan.close();
+			
 		}
 	}
 }

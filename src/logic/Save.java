@@ -3,6 +3,7 @@ package logic;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import javafx.stage.FileChooser;
 
@@ -18,10 +19,11 @@ public class Save {
 		FileChooser fileChooser = new FileChooser();
     	fileChooser.setTitle("Open Save File");
     	File file = fileChooser.showSaveDialog(null);
+    	BufferedWriter bw = null;
 		
 	    if (file != null) {
 	        try {
-	        	BufferedWriter bw = new BufferedWriter(new FileWriter(file +".txt"));
+	        	bw = new BufferedWriter(new FileWriter(file +".txt"));
 	            bw.write(player.getCurClass());
 	            bw.newLine();
 	            bw.write(player.getInt().toString());
@@ -40,8 +42,17 @@ public class Save {
 	            	bw.write(randEventOrder.get(i).toString());
 	            }
 	            bw.close();
-	        } catch (Exception ex) {
+	        } 
+	        catch (Exception ex) {
 	            ex.printStackTrace();
+	        }
+	        finally
+	        {
+	        	try {
+					bw.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 	        }
 	    }
 	}

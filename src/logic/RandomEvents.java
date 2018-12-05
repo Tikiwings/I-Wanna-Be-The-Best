@@ -14,12 +14,12 @@ public class RandomEvents {
 	private ArrayList<Integer> randomList = new ArrayList<>();
 
 	public void initRandomEvents(GameManager gameManager){
-		Scanner lineScan;
+		Scanner lineScan = null;
+		Scanner wordScan = null;
 		list = new ArrayList<>();
 		try {
 			lineScan = new Scanner(new File(System.getProperty("user.dir") + "/src/resources/events/RandomEvents.txt"));
 			lineScan.useDelimiter("\n");
-			Scanner wordScan;
 			int numTexts;
 			int numButtons;
 			String[] strArray;
@@ -63,7 +63,12 @@ public class RandomEvents {
 			lineScan.close();
 		}
 		catch (FileNotFoundException e) {
-				e.printStackTrace();
+			e.printStackTrace();
+		}
+		finally
+		{
+			lineScan.close();
+			wordScan.close();
 		}
 	}
 	//ArrayList<TypingScene>
