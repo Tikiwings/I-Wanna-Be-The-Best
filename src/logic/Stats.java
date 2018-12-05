@@ -15,6 +15,6 @@ public class Stats {
 	
 	@Override
     public String toString() { 
-        return String.format("HP: " + hp + " MP: " + mp + " Intelligence: " + intelligence + " Charisma: " + charisma); 
+        return String.format("HP: %d MP: %d Intelligence: %d Charisma: %d",hp,mp,intelligence,charisma); 
     } 
 }

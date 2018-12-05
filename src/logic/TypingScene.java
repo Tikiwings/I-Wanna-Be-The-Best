@@ -333,14 +333,14 @@ public class TypingScene {
 			player = new MediaPlayer(media);
 			player.setVolume(volume);
 			player.play();
-			//return true;
+			
 		}
 		catch(MediaException e){
 			Media media = new Media(new File("src/resources/songs/"+"YeaPoly.mp3").toURI().toString());
 			player = new MediaPlayer(media);
 			player.setVolume(volume);
 			player.play();
-			//return true;
+			
 		}
 	}
 
